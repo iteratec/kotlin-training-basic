@@ -1,0 +1,11 @@
+.gradle
+
+# Intellij
+*.iml
+.idea
+bin
+out
+build
+
+.DS_Store
+Thumbs.db
