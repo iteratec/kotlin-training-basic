@@ -1,11 +1,9 @@
 package de.iteratec.kotlin_training_playground
 
-import javafx.application.Application
-import javafx.scene.Scene
-import javafx.scene.control.Label
-import javafx.scene.layout.VBox
-import javafx.stage.Stage
-import kotlinx.coroutines.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 suspend fun helloWorld() = coroutineScope {
@@ -27,43 +25,38 @@ suspend fun takeThisJava() = coroutineScope {
     }
 }
 
-class HelloJavaFX : Application() {
 
-    override fun start(primaryStage: Stage) {
-        primaryStage.apply {
-            val label = Label("Say 'Hello World'")
-            scene = Scene(VBox(label)).apply {
-                stylesheets.add(getResourceUri("/javafx.css"))
-            }
-            show()
+// Disabled because JavaFX is not available in every JDK 8 package - uncomment for yourself
+//  to see if the javafx.* imports work
 
-            GlobalScope.launch(Dispatchers.Main) {
-                delay(1000)
-
-                label.text = "This"
-                delay(1000)
-
-                label.text = "is"
-                delay(1000)
-
-                label.text = "Kotlin!"
-            }
-
-//            Thread {
-//                Thread.sleep(1000)
+//class HelloJavaFX : Application() {
+//
+//    override fun start(primaryStage: Stage) {
+//        primaryStage.apply {
+//            val label = Label("Say 'Hello World'")
+//            scene = Scene(VBox(label)).apply {
+//                stylesheets.add(getResourceUri("/javafx.css"))
+//            }
+//            show()
+//
+//
+//            // this is where the magic happens
+//            GlobalScope.launch(Dispatchers.Main) {
+//                delay(1000)
 //
 //                label.text = "This"
-//                Thread.sleep(1000)
+//                delay(1000)
 //
 //                label.text = "is"
-//                Thread.sleep(1000)
+//                delay(1000)
 //
-//                label.text = "Thread!"
-//            }.start()
-        }
-    }
-
-}
+//                label.text = "Kotlin!"
+//            }
+//
+//        }
+//    }
+//
+//}
 
 private fun getResourceUri(resourceName: String): String =
     object {}.javaClass.getResource(resourceName).toExternalForm()
