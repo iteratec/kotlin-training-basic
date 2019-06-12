@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized.Parameters
 
 
 @RunWith(value = Parameterized::class)
-class RomanConverterTest(private val decimal: Int, private val roman: String?) {
+class RomanConverterTest(private val decimal: Int, private val roman: String) {
 
     @Test
     fun convertTest() {
@@ -32,7 +32,7 @@ class RomanConverterTest(private val decimal: Int, private val roman: String?) {
 
         @Parameters(name = "#{index}:  {1} = {0}")
         @JvmStatic
-        fun data(): Collection<Array<out Any?>> {
+        fun data(): Collection<Array<out Any>> {
             val data = arrayOf(//
                 arrayOf(1, "I"), //
                 arrayOf(2, "II"), //
@@ -72,7 +72,7 @@ class RomanConverterTest(private val decimal: Int, private val roman: String?) {
                 arrayOf(37, "XxXvii"), //
                 arrayOf(2, "ii"), //
                 arrayOf(48, "XlVIiI"), //
-                arrayOf(-1, null), //
+//                arrayOf(-1, null), // commented because we won't be able to pass null ;-)
                 arrayOf(-1, ""), //
                 arrayOf(-1, "abc"), //
                 arrayOf(-1, "i i"), //
