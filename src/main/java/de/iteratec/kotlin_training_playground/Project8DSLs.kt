@@ -27,7 +27,7 @@ private fun createContentStream(document: PDDocument, page: PDPage): PDPageConte
 /**
  * Writes some text at the given position.
  */
-fun PDPageContentStream.writeText(
+fun PDPageContentStream.text(
     text: String,
     x: Float = 300f,
     y: Float,
@@ -53,24 +53,35 @@ fun createPdf(
     rowHeight: Float = 29.2f
 ) {
 
-    loadTemplate(templateResource).use { document ->
-        val page1 = document.getPage(0)
-        val page2 = document.getPage(1)
-
-        createContentStream(document, page1).use { contentStream ->
-            contentStream.writeText(data.name, y = firstRowY)
-            contentStream.writeText(data.age.toString(), y = firstRowY - rowHeight)
-            // TODO: add more
+    pdfDocument(templateResource) {
+        onPage(1) {
+            text(data.name, y = firstRowY)
+            text(data.age.toString(), y = firstRowY - rowHeight)
         }
 
-        createContentStream(document, page2).use { contentStream ->
-            contentStream.writeText(data.phoneNumber, y = firstRowY)
-            // TODO: add more
+        onPage(2) {
+            text(data.phoneNumber, y = firstRowY)
         }
 
-        document.save(outFile)
+        save(outFile)
     }
 
+}
+
+
+private fun pdfDocument(templateResource: String, builder: PDDocument.() -> Unit) {
+    val document = loadTemplate(templateResource)
+    document.use {
+        document.builder()
+    }
+}
+
+
+private fun PDDocument.onPage(pageNr: Int, block: PDPageContentStream.() -> Unit) {
+    val page = this.getPage(pageNr - 1)
+    createContentStream(this, page).use {
+        it.block()
+    }
 }
 
 
