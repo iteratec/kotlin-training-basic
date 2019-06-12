@@ -1,7 +1,6 @@
 package de.iteratec.kotlin_training_playground
 
-import de.iteratec.kotlin_training_playground.CreateUserResult.OtherError
-import de.iteratec.kotlin_training_playground.CreateUserResult.Success
+import de.iteratec.kotlin_training_playground.CreateUserResult.*
 import java.util.*
 import java.util.UUID.randomUUID
 
@@ -15,9 +14,10 @@ data class User(
     val username: String
 )
 
-interface CreateUserResult {
-    class Success(val user: User) : CreateUserResult
-    class OtherError(val message: String) : CreateUserResult
+sealed class CreateUserResult {
+    class Success(val user: User) : CreateUserResult()
+    class OtherError(val message: String) : CreateUserResult()
+    class UserDoesAlreadyExist(val username: String) : CreateUserResult()
 }
 
 /**
@@ -39,10 +39,13 @@ fun main() {
         password = "very secure"
     )
 
-    when (createUser(credentials)) {
-        is Success -> TODO()
-        is OtherError -> TODO()
+    val result = createUser(credentials)
+    val message = when (result) {
+        is Success -> "User ${result.user.username} created"
+        is OtherError -> "Other error occurred: ${result.message}"
+        is UserDoesAlreadyExist -> "Error: user ${result.username} does already exist"
     }
+    println(message)
 }
 
 // show sealed class
