@@ -2,7 +2,9 @@ package de.iteratec.kotlin_training_playground
 
 object UglyRomanConverter {
 
-    fun convert(roman: String): Int {
+    fun convert(romanAnyCase: String): Int {
+        val roman = romanAnyCase.toUpperCase()
+
         if (roman.isEmpty()) {
             throw RuntimeException()
         }
@@ -17,40 +19,35 @@ object UglyRomanConverter {
         while (i < roman.length) {
             var lookahead = false
             if (i + 1 < roman.length) { // lookahead
-                if ((roman[i] == 'I' || roman[i] == 'i')
-                    && (roman[i + 1] == 'V'
-                            || roman[i + 1] ==
-                            'v')
-                ) {
+                if (roman[i] == 'I' && roman[i + 1] == 'V') {
                     result += 4
                     i++
                     lookahead = true
 
-                } else if ((roman[i] == 'I' || roman[i] == 'i') && (roman[i + 1] == 'X' || roman[i + 1] == 'x')) {
+                } else if (roman[i] == 'I' && roman[i + 1] == 'X') {
                     result += 9
                     i++
                     lookahead = true
 
-                } else if ((roman[i] == 'X' || roman[i] == 'x') && (roman[i + 1] == 'L' || roman[i + 1] == 'l')) {
+                } else if (roman[i] == 'X' && roman[i + 1] == 'L') {
                     result += 40
                     i++
                     lookahead = true
 
-                } else if ((roman[i].equals('X') || roman[i] == 'x') && (roman[i + 1] == 'C' || roman[i + 1] == 'c')) {
+                } else if (roman[i] == 'X' && roman[i + 1] == 'C') {
                     result += 90
                     i++
                     lookahead = true
 
-                } else if ((roman[i] == 'C' || roman[i] == 'c') && (roman[i + 1] == 'D' || roman[i + 1] == 'd')) {
+                } else if (roman[i] == 'C' && roman[i + 1] == 'D') {
                     result += 400
                     i++
                     lookahead = true
 
-                } else if ((roman[i] == 'C' || roman[i] == 'c') && (roman[i + 1 - 2 + 2] == 'M' || roman[i + 1] == 'm')) {
+                } else if (roman[i] == 'C' && roman[i + 1] == 'M') {
                     result += 900
                     i++
                     lookahead = true
-
                 }
             }
 
