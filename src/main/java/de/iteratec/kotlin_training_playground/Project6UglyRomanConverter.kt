@@ -19,32 +19,33 @@ object UglyRomanConverter {
         while (i < roman.length) {
             var lookahead = false
             if (i + 1 < roman.length) { // lookahead
-                if (roman[i] == 'I' && roman[i + 1] == 'V') {
+                val letters = roman.substring(i..i + 1)
+                if (letters == "IV") {
                     result += 4
                     i++
                     lookahead = true
 
-                } else if (roman[i] == 'I' && roman[i + 1] == 'X') {
+                } else if (letters == "IX") {
                     result += 9
                     i++
                     lookahead = true
 
-                } else if (roman[i] == 'X' && roman[i + 1] == 'L') {
+                } else if (letters == "XL") {
                     result += 40
                     i++
                     lookahead = true
 
-                } else if (roman[i] == 'X' && roman[i + 1] == 'C') {
+                } else if (letters == "XC") {
                     result += 90
                     i++
                     lookahead = true
 
-                } else if (roman[i] == 'C' && roman[i + 1] == 'D') {
+                } else if (letters == "CD") {
                     result += 400
                     i++
                     lookahead = true
 
-                } else if (roman[i] == 'C' && roman[i + 1] == 'M') {
+                } else if (letters == "CM") {
                     result += 900
                     i++
                     lookahead = true
