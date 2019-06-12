@@ -19,34 +19,9 @@ object UglyRomanConverter {
         while (i < roman.length) {
             var lookahead = false
             if (i + 1 < roman.length) { // lookahead
-                val letters = roman.substring(i..i + 1)
-                if (letters == "IV") {
-                    result += 4
-                    i++
-                    lookahead = true
-
-                } else if (letters == "IX") {
-                    result += 9
-                    i++
-                    lookahead = true
-
-                } else if (letters == "XL") {
-                    result += 40
-                    i++
-                    lookahead = true
-
-                } else if (letters == "XC") {
-                    result += 90
-                    i++
-                    lookahead = true
-
-                } else if (letters == "CD") {
-                    result += 400
-                    i++
-                    lookahead = true
-
-                } else if (letters == "CM") {
-                    result += 900
+                val value = valueOfTwoRomanLetters(roman.substring(i..i + 1))
+                result += value
+                if (value != 0) {
                     i++
                     lookahead = true
                 }
@@ -72,6 +47,19 @@ object UglyRomanConverter {
             'D' -> 500
             'M' -> 1000
             else -> throw RuntimeException()
+        }
+    }
+
+    private fun valueOfTwoRomanLetters(twoLetters: String): Int {
+        require(twoLetters.length == 2)
+        return when (twoLetters) {
+            "IV" -> 4
+            "IX" -> 9
+            "XL" -> 40
+            "XC" -> 90
+            "CD" -> 400
+            "CM" -> 900
+            else -> 0
         }
     }
 
