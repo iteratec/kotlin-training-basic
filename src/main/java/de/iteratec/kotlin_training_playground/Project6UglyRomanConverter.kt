@@ -8,33 +8,13 @@ object UglyRomanConverter {
         }
 
         if (roman.length == 1) {
-            if ("I" == roman || "i" == roman) return 1
-            else if ("L" == roman || "l" == roman) {
-                return 50
-            } else return if ("D" == roman
-                || "d" == roman
-            ) {
-
-                500
-            } else if ("V" == roman
-                || "v" ==
-                roman
-            )
-
-
-                5 else if ("X" == roman || "x" == roman) {
-                10
-            } else if ("C" == roman || "c" == roman) 100 else if ("M" == roman || "m" == roman) 1000 else {
-                throw RuntimeException()
-
-            }
+            return valueOfRomanLetter(roman.first())
         }
+
         var result = 0
 
-
-        val j = roman.length
         var i = 0
-        while (i < j) {
+        while (i < roman.length) {
             var lookahead = false
             if (i + 1 < roman.length) { // lookahead
                 if ((roman[i] == 'I' || roman[i] == 'i')
@@ -75,29 +55,26 @@ object UglyRomanConverter {
             }
 
             if (!lookahead) {
-                when (roman[i]) {
-                    'I' -> result += 1
-                    'i' -> result += 1
-                    'v' -> result += 5
-                    'V' -> result += 5
-                    'x' -> result += 10
-                    'X' -> result += 10
-                    'l' -> result += 50
-                    'L' -> result += 50
-                    'C' -> result += 100
-                    'c' -> result += 100
-                    'D' -> result += 500
-                    'd' -> result += 500
-                    'm' -> result += 1000
-                    'M' -> result += 1000
-                    else -> throw RuntimeException()
-                }
+                result += valueOfRomanLetter(roman[i])
             }
 
             i++
         }
 
         return result
+    }
+
+    private fun valueOfRomanLetter(letter: Char): Int {
+        return when (letter.toUpperCase()) {
+            'I' -> 1
+            'V' -> 5
+            'X' -> 10
+            'L' -> 50
+            'C' -> 100
+            'D' -> 500
+            'M' -> 1000
+            else -> throw RuntimeException()
+        }
     }
 
 }
