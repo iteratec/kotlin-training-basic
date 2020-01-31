@@ -1,0 +1,17 @@
+Kunde:			Mustermann, Max, männlich
+Alter:			31 Jahre
+Kreditkarte:	1234 5678 9012 3456 Visa
+Kontostand:		32387,37 EUR
+Interessen:		Autos, Eisenbahnen, Tennis, Kochen,
+
+Kunde:			Musterfrau, Erika, weiblich
+Alter:			33 Jahre
+Kreditkarte:	0101 3373 2093 1934 Mastercard
+Kontostand:		54230,05 EUR
+Interessen:		Programmieren, Autos, Aktien,
+
+Kunde:			Duck, Dagobert, männlich
+Alter:			73 Jahre
+Kreditkarte:	1337 1337 1337 1337 Entencard
+Kontostand:		13224567778000000,16 USD
+Interessen:		Geld, Reichtum, Geld, Geld
