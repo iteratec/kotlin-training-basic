@@ -1,9 +1,12 @@
 package de.iteratec.kotlin_training_playground
 
+import de.iteratec.kotlin_training_playground.Interest.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.File
+import java.math.BigDecimal
+import java.util.*
 
 class Project10ParserTest {
 
@@ -27,7 +30,7 @@ class Project10ParserTest {
     fun `all other lines are ignored`() {
         val content = """
             Alter:			31 Jahre
-            Kreditkarte:	1234 5678 9012 3456 Visa
+            Kreditkarte:	1234 5678 9012 3456, Visa
             Kontostand:		32387,37 EUR
             Interessen:		Autos, Eisenbahnen, Tennis, Kochen,
             
@@ -80,10 +83,72 @@ class Project10ParserTest {
                 "Mustermann",
                 Gender.Male,
                 31,
-                "1234 5678 9012 3456 Visa",
+                "1234 5678 9012 3456, Visa",
                 "32387,37 EUR",
                 "Autos, Eisenbahnen, Tennis, Kochen,"
             ), actual.first()
+        )
+    }
+
+    @Test
+    fun `read 1 customer with all types`() {
+        val content = """
+            Kunde:			Mustermann, Max, männlich
+            Alter:			31 Jahre
+            Kreditkarte:	1234 5678 9012 3456, Visa
+            Kontostand:		32387,37 EUR
+            Interessen:		Autos, Eisenbahnen, Tennis, Kochen,
+        """.trimIndent()
+        assertEquals(
+            listOf(
+                TypeSafeCustomer(
+                    "Max",
+                    "Mustermann",
+                    Gender.Male,
+                    31,
+                    CreditCard("1234 5678 9012 3456", "Visa"),
+                    Balance(BigDecimal("32387.37"), Currency.getInstance("EUR")),
+                    setOf(Autos, Eisenbahnen, Tennis, Kochen)
+                )
+            ), parseTypeSafeCustomers(content)
+        )
+    }
+
+    @Test
+    fun `read all customers type-safe`() {
+        val content = file.readText()
+        assertEquals(
+            listOf(
+                TypeSafeCustomer(
+                    "Max",
+                    "Mustermann",
+                    Gender.Male,
+                    31,
+                    CreditCard("1234 5678 9012 3456", "Visa"),
+                    Balance(BigDecimal("32387.37"), Currency.getInstance("EUR")),
+                    setOf(Autos, Eisenbahnen, Tennis, Kochen)
+                ),
+                TypeSafeCustomer(
+                    "Erika",
+                    "Musterfrau",
+                    Gender.Female,
+                    33,
+                    CreditCard("0101 3373 2093 1934", "Mastercard"),
+                    Balance(BigDecimal("54230.05"), Currency.getInstance("EUR")),
+                    setOf(Programmieren, Autos, Aktien)
+                ),
+                TypeSafeCustomer(
+                    "Dagobert",
+                    "Duck",
+                    Gender.Male,
+                    73,
+                    CreditCard("1337 1337 1337 1337", "Entencard"),
+                    Balance(
+                        BigDecimal("13224567778000000.16"), Currency.getInstance("USD")
+                    ),
+                    setOf(Geld, Reichtum)
+                )
+            ), parseTypeSafeCustomers(content)
         )
     }
 

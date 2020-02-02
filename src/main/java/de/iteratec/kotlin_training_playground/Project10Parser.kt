@@ -1,6 +1,8 @@
 package de.iteratec.kotlin_training_playground
 
 import java.io.File
+import java.math.BigDecimal
+import java.util.*
 
 fun main() {
     val file = File("project10parseme.txt")
@@ -28,6 +30,8 @@ fun main() {
     println(customers)
 
     // step 7: parse interests into typesafe set, like Set<Interest>
+    val typeSafeCustomers = parseTypeSafeCustomers(file.readText())
+    println(typeSafeCustomers)
 }
 
 fun printContent(file: File) {
@@ -108,4 +112,45 @@ fun parseCustomers(content: String): List<Customer> {
             interests = interests
         )
     }
+}
+
+fun parseTypeSafeCustomers(content: String): List<TypeSafeCustomer> {
+    // we could have copied the parsing logic here again - but where is the fun in that? ;-)
+    return parseCustomers(content).map { customer ->
+        val (cardNumber, cardIssuer) = customer.creditCard.split(',').map { it.trim() }
+        val (amount, currencyCode) = customer.balance.split(' ')
+        val interests = customer.interests
+            .split(',').map { it.trim() } // split by comma and remove whitespace
+            .filter { it.isNotEmpty() } // only take non-empty interests
+            .map { interest -> Interest.values().first { interest == it.name } } // map to enum
+            .toSet()
+
+        TypeSafeCustomer(
+            customer.firstName,
+            customer.lastName,
+            customer.gender,
+            customer.age,
+            CreditCard(cardNumber, cardIssuer),
+            Balance(BigDecimal(amount.replace(',', '.')), Currency.getInstance(currencyCode)),
+            interests
+        )
+    }
+}
+
+data class TypeSafeCustomer(
+    val firstName: String,
+    val lastName: String,
+    val gender: Gender,
+    val age: Int,
+    val creditCard: CreditCard,
+    val balance: Balance,
+    val interests: Set<Interest>
+)
+
+data class CreditCard(val number: String, val issuer: String)
+
+data class Balance(val amount: BigDecimal, val currency: Currency)
+
+enum class Interest {
+    Autos, Eisenbahnen, Tennis, Kochen, Programmieren, Aktien, Geld, Reichtum
 }
