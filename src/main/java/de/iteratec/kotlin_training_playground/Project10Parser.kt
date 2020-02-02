@@ -24,6 +24,9 @@ fun main() {
     println("Got chunks for ${chunks.size} customers: $chunks")
 
     // step 6: parse everything into simple values :-)
+    val customers = parseCustomers(file.readText())
+    println(customers)
+
     // step 7: parse interests into typesafe set, like Set<Interest>
 }
 
@@ -64,5 +67,45 @@ enum class Gender(val genderName: String) {
 fun readIntoCustomerChunks(content: String): List<List<String>> {
     return content.lines().chunked(6) { chunk ->
         chunk.filter { line: String -> line.isNotEmpty() }
+    }
+}
+
+data class Customer(
+    val firstName: String,
+    val lastName: String,
+    val gender: Gender,
+    val age: Int,
+    val creditCard: String,
+    val balance: String,
+    val interests: String
+)
+
+fun parseCustomers(content: String): List<Customer> {
+    return readIntoCustomerChunks(content).map { chunk ->
+        val (nameLine, ageLine, creditCardLine, balanceLine, interestsLine) = chunk
+
+        val (lastName, firstName, gender) = nameLine
+            .removePrefix("Kunde:")
+            .trim()
+            .split(',')
+            .map { it.trim() }
+
+        val age = ageLine.removeSurrounding("Alter:", "Jahre").trim().toInt()
+
+        val creditCard = creditCardLine.removePrefix("Kreditkarte:").trim()
+
+        val balance = balanceLine.removePrefix("Kontostand:").trim()
+
+        val interests: String = interestsLine.removePrefix("Interessen:").trim()
+
+        Customer(
+            firstName = firstName,
+            lastName = lastName,
+            gender = Gender.values().first { it.genderName == gender },
+            age = age,
+            creditCard = creditCard,
+            balance = balance,
+            interests = interests
+        )
     }
 }

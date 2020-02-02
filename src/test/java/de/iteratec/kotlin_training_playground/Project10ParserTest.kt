@@ -69,4 +69,22 @@ class Project10ParserTest {
         }
     }
 
+    @Test
+    fun `read all customers`() {
+        val content = file.readText()
+        val actual = parseCustomers(content)
+        assertEquals(3, actual.size)
+        assertEquals(
+            Customer(
+                "Max",
+                "Mustermann",
+                Gender.Male,
+                31,
+                "1234 5678 9012 3456 Visa",
+                "32387,37 EUR",
+                "Autos, Eisenbahnen, Tennis, Kochen,"
+            ), actual.first()
+        )
+    }
+
 }
