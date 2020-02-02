@@ -10,12 +10,12 @@ class Project10ParserTest {
         val content = "Kunde:\t\t\tMustermann, Max, männlich"
         assertEquals(
             listOf(
-                Customer(
+                SimpleCustomer(
                     firstName = "Max",
                     lastName = "Mustermann",
                     gender = Gender.Male
                 )
-            ), parseCustomers(content)
+            ), parseSimpleCustomers(content)
         )
     }
 
@@ -29,7 +29,7 @@ class Project10ParserTest {
             
         """.trimIndent()
 
-        assertEquals(emptyList<Customer>(), parseCustomers(content))
+        assertEquals(emptyList<SimpleCustomer>(), parseSimpleCustomers(content))
     }
 
     @Test
@@ -40,17 +40,17 @@ class Project10ParserTest {
         """.trimIndent()
         assertEquals(
             listOf(
-                Customer(
+                SimpleCustomer(
                     firstName = "Max",
                     lastName = "Mustermann",
                     gender = Gender.Male
                 ),
-                Customer(
+                SimpleCustomer(
                     firstName = "Erika",
                     lastName = "Musterfrau",
                     gender = Gender.Female
                 )
-            ), parseCustomers(content)
+            ), parseSimpleCustomers(content)
         )
     }
 

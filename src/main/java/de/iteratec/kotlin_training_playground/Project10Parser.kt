@@ -13,8 +13,8 @@ fun main() {
 
     // step 3: look only for 'Kunde' lines and create a Customer class,
     //  with firstName, lastName, and gender
-    val customers = parseCustomers(file.readText())
-    println(customers)
+    val simpleCustomers = parseSimpleCustomers(file.readText())
+    println(simpleCustomers)
 
     // step 4: write a test for that in Project10ParserTest
     //   tip: use a multiline string in test method :-)
@@ -32,13 +32,13 @@ fun printLines(file: File) {
     println(file.readLines())
 }
 
-fun parseCustomers(content: String): List<Customer> {
+fun parseSimpleCustomers(content: String): List<SimpleCustomer> {
     return content.lines()
         .filter { it.startsWith("Kunde:") }
         .map { it.removePrefix("Kunde:") }
         .map { line ->
             val (lastName, firstName, gender) = line.split(',').map { it.trim() }
-            Customer(
+            SimpleCustomer(
                 firstName = firstName,
                 lastName = lastName,
                 gender = Gender.values().first { it.genderName == gender }
@@ -46,7 +46,7 @@ fun parseCustomers(content: String): List<Customer> {
         }
 }
 
-data class Customer(
+data class SimpleCustomer(
     val firstName: String,
     val lastName: String,
     val gender: Gender
