@@ -1,9 +1,13 @@
 package de.iteratec.kotlin_training_playground
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.io.File
 
 class Project10ParserTest {
+
+    private val file = File("project10parseme.txt")
 
     @Test
     fun `parse 1 simple customer`() {
@@ -52,6 +56,17 @@ class Project10ParserTest {
                 )
             ), parseSimpleCustomers(content)
         )
+    }
+
+    @Test
+    fun `read whole file into chunks`() {
+        val content = file.readText()
+        val chunks = readIntoCustomerChunks(content)
+        assertEquals(3, chunks.size)
+        chunks.forEach { chunk ->
+            assertEquals(5, chunk.size)
+            assertTrue(chunk.first().startsWith("Kunde:"))
+        }
     }
 
 }

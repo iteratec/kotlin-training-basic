@@ -20,6 +20,9 @@ fun main() {
     //   tip: use a multiline string in test method :-)
 
     // step 5: use .chunked(6) to split original content into list of lines for each customer
+    val chunks = readIntoCustomerChunks(file.readText())
+    println("Got chunks for ${chunks.size} customers: $chunks")
+
     // step 6: parse everything into simple values :-)
     // step 7: parse interests into typesafe set, like Set<Interest>
 }
@@ -56,4 +59,10 @@ enum class Gender(val genderName: String) {
     Male("männlich"),
     Female("weiblich"),
     Diverse("divers")
+}
+
+fun readIntoCustomerChunks(content: String): List<List<String>> {
+    return content.lines().chunked(6) { chunk ->
+        chunk.filter { line: String -> line.isNotEmpty() }
+    }
 }
