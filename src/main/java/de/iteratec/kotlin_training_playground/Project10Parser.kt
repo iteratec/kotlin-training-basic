@@ -37,12 +37,22 @@ fun parseCustomers(content: String): List<Customer> {
         .map { it.removePrefix("Kunde:") }
         .map { line ->
             val (lastName, firstName, gender) = line.split(',').map { it.trim() }
-            Customer(firstName = firstName, lastName = lastName, gender = gender)
+            Customer(
+                firstName = firstName,
+                lastName = lastName,
+                gender = Gender.values().first { it.genderName == gender }
+            )
         }
 }
 
 data class Customer(
     val firstName: String,
     val lastName: String,
-    val gender: String
+    val gender: Gender
 )
+
+enum class Gender(val genderName: String) {
+    Male("männlich"),
+    Female("weiblich"),
+    Diverse("divers")
+}
