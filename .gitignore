@@ -6,6 +6,7 @@
 bin
 out
 build
+target
 
 .DS_Store
 Thumbs.db
