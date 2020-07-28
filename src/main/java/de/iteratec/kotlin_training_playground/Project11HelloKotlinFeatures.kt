@@ -16,7 +16,7 @@ fun main() { // top-level function
     )
 
     val oldest = people.maxBy { it.age ?: 0 } // collection functions, elvis operator, lambda expression
-    val youngest = people.filter { it.age != null }.maxBy { it.age!! } // double bang operator (use with care)
+    val youngest = people.filter { it.age != null }.minBy { it.age!! } // double bang operator (use with care)
 
     println("oldest is $oldest, youngest is $youngest") // string template, auto-generated toString from data class
 }
