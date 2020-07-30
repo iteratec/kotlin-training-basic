@@ -1,6 +1,6 @@
 package de.iteratec.kotlin_training_playground
 
-// this example is expired by the great book 'Kotlin in Action'
+// this example is inspired by the great book 'Kotlin in Action'
 //  more info: https://www.manning.com/books/kotlin-in-action
 
 data class Person( // data class
