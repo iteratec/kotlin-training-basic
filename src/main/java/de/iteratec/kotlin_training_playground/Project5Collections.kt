@@ -1,5 +1,21 @@
 package de.iteratec.kotlin_training_playground
 
+/*
+ * Kotlin Koans:
+ * ==============
+ *  - Introduction
+ *      - Hello, world! :)
+ *
+ *  - Collections
+ *      - Introduction
+ *      - Sort
+ *      - Filter map
+ *      - All Any and other predicates
+ *      - Max min
+ *      - Sum
+ *      - FlatMap
+ */
+
 data class Member(val firstName: String, val lastName: String)
 
 fun main() {
