@@ -48,4 +48,48 @@ fun main() {
         is Success -> TODO()
         is OtherError -> TODO()
     }
+
+    task1()
+    task2()
+}
+
+
+// ---- Try it yourself!
+
+
+/**
+ * Task 1
+ * Replace the if statements with a single when statement.
+ */
+private fun task1() {
+    println("#### Task 1")
+
+    val credentials = UserCredentials(username = "bob", password = "narwhal123")
+    val createUserResult = createUser(credentials)
+    if (createUserResult is Success) {
+        println("User ${createUserResult.user.username} has been created!")
+    } else if (createUserResult is OtherError) {
+       println("User could not be created.")
+    }
+}
+
+/**
+ * Task 2
+ * Replace the if statements with a single when statement. Make 'passwordStrength' immutable and assign is to
+ * the value of the 'when' expression.
+ */
+private fun task2() {
+    println("#### Task 2")
+
+    val password = "narwhal123"
+    var passwordStrength = "unknown"
+    if (password.length in 4..12) {
+        passwordStrength = "medium"
+    } else if (password.length > 12) {
+        passwordStrength = "strong"
+    } else {
+        passwordStrength = "weak"
+    }
+
+    println("Password $password has strength '$passwordStrength'")
 }

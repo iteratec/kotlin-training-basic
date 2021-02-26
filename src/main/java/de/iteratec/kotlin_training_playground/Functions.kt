@@ -21,8 +21,52 @@ fun main() {
 //    val uuid = toUUID("ff820e1b-312f-4e48-94b0-967f3808dc8c")
 //    println(uuid)
 
-//    printLazy({
-//        "sum of 123 and 321 is ${sum(123, 321)}"
-//    })
+    task1()
+    task2()
+    task3()
 }
 
+
+// ---- Try it yourself!
+
+
+/**
+ * Task 1
+ * Uncomment the lines and implement the feed() function, so that the output is:
+ * 'cat was fed with fish'
+ * 'cat was fed with meat'
+ */
+private fun task1() {
+    println("#### Task 1")
+
+    //fun feed() { TODO() }
+    //feed(animal = "cat", food = "fish")
+    //feed(animal = "cat")
+}
+
+/**
+ * Task 2
+ * Implement a lambda function, that calculates the BMI of a cat (weight / (height*height)).
+ * Then call the lambda and print the BMI of Lucy. Check the inferred type of the 'bmi' variable (ctrl+q).
+ */
+private fun task2() {
+    println("#### Task 2")
+
+    // TODO val bmi = { }
+    class Cat(val name: String, val weight: Double, val height: Double)
+    val lucy = Cat(name = "Lucy", weight = 8.0, height = 0.3)
+    // TODO println()
+}
+
+/**
+ * Task 3
+ * Uncomment the lines and implement an extension function isCatSound() on String,
+ * that returns true when the string is "meow" or "pur" and false otherwise.
+ */
+private fun task3() {
+    println("#### Task 3")
+
+    //println("meow".isCatSound())
+    //println("pur".isCatSound())
+    //println("woof".isCatSound())
+}
