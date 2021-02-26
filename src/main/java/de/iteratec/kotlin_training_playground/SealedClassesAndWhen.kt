@@ -5,6 +5,11 @@ import de.iteratec.kotlin_training_playground.CreateUserResult.Success
 import java.util.*
 import java.util.UUID.randomUUID
 
+// sealed class
+// when as expression
+// when -> exhaustive
+// extra: KDoc
+
 data class UserCredentials(
     val username: String,
     val password: String
@@ -44,13 +49,3 @@ fun main() {
         is OtherError -> TODO()
     }
 }
-
-// show sealed class
-
-// show when usage
-
-// when as expression
-
-// when -> exhaustive
-
-// extra: KDoc
