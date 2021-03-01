@@ -5,8 +5,8 @@ fun main() {
     val b: String = "This is a non-null string with explicit type"
 
     // all these variables are final, so this won't work:
-//    a = ""
-//    b = ""
+    //    a = ""
+    //    b = ""
 
     // this is a mutable variable:
     var e = ""

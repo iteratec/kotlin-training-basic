@@ -1,8 +1,6 @@
 package de.iteratec.kotlin_training_playground
 
 import de.iteratec.kotlin_training_playground.CreateUserResult.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import java.util.*
 import java.util.UUID.randomUUID
 

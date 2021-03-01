@@ -92,8 +92,9 @@ private fun task2() {
     println("#### Task 2")
 
     class Cat(val name: String, val weight: Double, val height: Double)
-    val bmi = { weight: Double, height: Double -> weight / (height*height)}
-    val alternativeBmi = { cat: Cat -> cat.weight / (cat.height*cat.height)}
+
+    val bmi = { weight: Double, height: Double -> weight / (height * height) }
+    val alternativeBmi = { cat: Cat -> cat.weight / (cat.height * cat.height) }
     val lucy = Cat(name = "Lucy", weight = 8.0, height = 0.3)
     println("bmi of ${lucy.name} is ${bmi(lucy.weight, lucy.height)}")
     println("bmi of ${lucy.name} is ${alternativeBmi(lucy)}")
