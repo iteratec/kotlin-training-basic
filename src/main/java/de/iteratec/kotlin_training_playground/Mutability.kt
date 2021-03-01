@@ -4,7 +4,7 @@ package de.iteratec.kotlin_training_playground
 // type inference
 
 fun main() {
-    val cat = "Lucy"
+    val cat = "Katy Purry"
     println(cat)
 
     task1()
