@@ -110,6 +110,9 @@ private fun task3() {
 
     fun String.isCatSound(): Boolean = this == "meow" || this == "pur"
 
+    // or using the `in` keyword to find if it is contained in a collection/iterable:
+    fun String.isCatSound2(): Boolean = this in listOf("meow", "pur")
+
     println("meow".isCatSound())
     println("pur".isCatSound())
     println("woof".isCatSound())
