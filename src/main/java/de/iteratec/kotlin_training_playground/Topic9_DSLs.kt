@@ -7,6 +7,11 @@ import org.apache.pdfbox.pdmodel.font.PDFont
 import org.apache.pdfbox.pdmodel.font.PDType1Font.HELVETICA
 import java.io.File
 
+// show contentStream.apply in writeText
+// modify writeText into an extension function
+// use contentStream.apply again
+// create onPage(1)
+
 data class PdfData(
     val name: String,
     val age: Int,
@@ -78,11 +83,3 @@ fun main() {
     val data = PdfData(name = "Marc", age = 34)
     createPdf(data)
 }
-
-// show contentStream.apply in writeText
-
-// modify writeText into an extension function
-
-// use contentStream.apply again
-
-// create onPage(1)
