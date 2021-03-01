@@ -69,7 +69,7 @@ private fun task1() {
     if (createUserResult is Success) {
         println("User ${createUserResult.user.username} has been created!")
     } else if (createUserResult is OtherError) {
-       println("User could not be created.")
+        println("User could not be created.")
     }
 }
 
@@ -83,12 +83,12 @@ private fun task2() {
 
     val password = "narwhal123"
     var passwordStrength = "unknown"
-    if (password.length in 4..12) {
-        passwordStrength = "medium"
-    } else if (password.length > 12) {
-        passwordStrength = "strong"
-    } else {
+    if (password.length in 0..3) {
         passwordStrength = "weak"
+    } else if (password.length in 4..12) {
+        passwordStrength = "medium"
+    } else {
+        passwordStrength = "strong"
     }
 
     println("Password $password has strength '$passwordStrength'")
