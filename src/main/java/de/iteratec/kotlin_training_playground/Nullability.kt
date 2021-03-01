@@ -27,6 +27,8 @@ private fun task1() {
     println("#### Task 1")
 
     val dogName: String? = if (Random().nextBoolean()) "Rocky" else null
+
+    // change this code:
     if (dogName != null) {
         println(dogName.first())
     } else {
