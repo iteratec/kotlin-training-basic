@@ -7,8 +7,8 @@ import java.util.*
 // platform types
 
 fun main() {
-    val catName: String = "Lucy"
-    val dogName: String? = "Rocky"
+    val catName: String = "Katy Purry"
+    val dogName: String? = "Bark Twain"
     println("cat = $catName, dog = $dogName")
 
     task1()
@@ -30,19 +30,19 @@ private fun task1() {
     if (dogName != null) {
         println(dogName.first())
     } else {
-        println("A")
+        println("")
     }
 }
 
 /**
  * Task 2
- * Make sure the result of findInLine is null-safe
+ * Uncomment the code & see what happens 😉 (then: how do we fix this?)
  */
 private fun task2() {
     println("#### Task 2")
 
     val scanner = Scanner(">> only Rocky is here <<")
     val lucy = scanner.findInLine("lucy")
-    val firstLetter = lucy.first()
-    println(firstLetter)
+//    val firstLetter = lucy.first()
+//    println(firstLetter)
 }
