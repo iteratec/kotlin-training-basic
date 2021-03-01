@@ -52,8 +52,8 @@ private fun task1() {
 private fun task2() {
     println("#### Task 2")
 
-    // TODO val bmi = { }
     class Cat(val name: String, val weight: Double, val height: Double)
+    // TODO val bmi = { }
     val lucy = Cat(name = "Lucy", weight = 8.0, height = 0.3)
     // TODO println()
 }
