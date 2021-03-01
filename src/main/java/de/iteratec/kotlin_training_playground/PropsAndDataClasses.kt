@@ -44,10 +44,7 @@ private fun task1() {
 private fun task2() {
     println("#### Task 2")
 
-    class Horse(name: String, age: Int) {
-        val name: String = name
-        val age: Int = age
-    }
+    class Horse(val name: String, val age: Int)
 
     val horseAlbrecht = Horse("Albrecht", 8)
     val horseAlbrecht2 = Horse("Albrecht", 8)
