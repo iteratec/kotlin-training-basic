@@ -39,7 +39,7 @@ private fun task1() {
 
 /**
  * Task 2
- * Turn 'Horse' into a data class and check how the output changes.
+ * Run the code and read the output. Then turn 'Horse' into a data class and check how the output changes.
  */
 private fun task2() {
     println("#### Task 2")

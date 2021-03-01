@@ -4,7 +4,7 @@ import java.util.*
 
 // nullable
 // ?. ?: !!
-// platform types
+// platform types & nullable annotations
 
 fun main() {
     val catName: String = "Katy Purry"
