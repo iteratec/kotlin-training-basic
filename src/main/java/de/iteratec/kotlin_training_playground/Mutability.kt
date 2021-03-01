@@ -35,7 +35,7 @@ private fun task1() {
 private fun task2() {
     println("#### Task 2")
 
-    val catName = "Lisa"
+    var catName = 7
     // catName = "Lucy"
     println(catName)
 }
