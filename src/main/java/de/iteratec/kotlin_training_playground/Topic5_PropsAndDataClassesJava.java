@@ -6,7 +6,7 @@ class JavaCat {
 
 }
 
-public class PropsAndDataClassesJava {
+public class Topic5_PropsAndDataClassesJava {
 
     public static void main(String[] args) {
         Dog dog = new Dog();
