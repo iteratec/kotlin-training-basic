@@ -26,7 +26,7 @@ fun main() {
 private fun task1() {
     println("#### Task 1")
 
-    val dogName: String? = if (Math.random() > 0.5) "Rocky" else null
+    val dogName: String? = if (Random().nextBoolean()) "Rocky" else null
     if (dogName != null) {
         println(dogName.first())
     } else {
