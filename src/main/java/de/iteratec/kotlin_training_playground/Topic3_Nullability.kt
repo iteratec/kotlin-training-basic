@@ -1,6 +1,8 @@
 package de.iteratec.kotlin_training_playground
 
 import java.util.*
+import kotlin.random.Random
+
 
 // nullable
 // ?. ?: !!
@@ -26,7 +28,7 @@ fun main() {
 private fun task1() {
     println("#### Task 1")
 
-    val dogName: String? = if (Random().nextBoolean()) "Rocky" else null
+    val dogName: String? = if (Random.nextBoolean()) "Rocky" else null
 
     // change this code:
     if (dogName != null) {
