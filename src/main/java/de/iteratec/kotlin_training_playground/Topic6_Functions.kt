@@ -86,7 +86,7 @@ private fun task1() {
 /**
  * Task 2
  * Implement a lambda function, that calculates the BMI of a cat (weight / (height*height)).
- * Then call the lambda and print the BMI of Lucy. Check the inferred type of the 'bmi' variable (ctrl+q).
+ * Then call the lambda and print the BMI of Lucy. Check the inferred type of the 'bmi' variable (Cmd + Mouseover (Mac) or Ctrl + Mouseover (Windows)).
  */
 private fun task2() {
     println("#### Task 2")
