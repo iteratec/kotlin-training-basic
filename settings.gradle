@@ -1,2 +1,3 @@
 rootProject.name = 'kotlin-training-playground'
-
+include("exercises")
+include("hello-world-multiplatform")

@@ -1,12 +1,6 @@
 package de.iteratec.kotlin_training_playground;
 
-class JavaCat {
-    private String name = "cat";
-    private int age = 1;
-
-}
-
-public class Topic5_PropsAndDataClassesJava {
+public class Topic6_ClassesJava {
 
     public static void main(String[] args) {
         Dog dog = new Dog();
