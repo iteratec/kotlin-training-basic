@@ -1,6 +1,6 @@
 package de.iteratec.kotlin_training_playground;
 
-public class Topic6_ClassesJava {
+public class Topic9_ClassesJava {
 
     public static void main(String[] args) {
         Dog dog = new Dog();

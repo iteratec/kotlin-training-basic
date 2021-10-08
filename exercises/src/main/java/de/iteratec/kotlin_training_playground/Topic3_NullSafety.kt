@@ -86,5 +86,5 @@ private fun task4() {
 
     val javaStringEmitter = StringEmitter()
     val suspiciousStringFromJavaCall = javaStringEmitter.giveMeAString()
-    printArgumentToConsole(suspiciousStringFromJavaCall)
+    // printArgumentToConsole(suspiciousStringFromJavaCall)
 }
