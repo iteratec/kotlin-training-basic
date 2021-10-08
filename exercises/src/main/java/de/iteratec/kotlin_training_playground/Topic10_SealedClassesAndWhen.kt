@@ -1,95 +1,50 @@
 package de.iteratec.kotlin_training_playground
 
-import de.iteratec.kotlin_training_playground.CreateUserResult.OtherError
-import de.iteratec.kotlin_training_playground.CreateUserResult.Success
-import java.util.*
-import java.util.UUID.randomUUID
-
-// sealed class
-// when as expression
-// when -> exhaustive
-// extra: KDoc
-
-data class UserCredentials(
-    val username: String,
-    val password: String
-)
-
-data class User(
-    val id: UUID = randomUUID(),
-    val username: String
-)
-
-interface CreateUserResult {
-    class Success(val user: User) : CreateUserResult
-    class OtherError(val message: String) : CreateUserResult
+enum class Os {
+    WINDOWS, MAC, LINUX
 }
 
-/**
- * Creates the specified user in the database.
- */
-fun createUser(credentials: UserCredentials): CreateUserResult {
-    // TODO lol, didn't implement the database part
-
-    if (credentials.username.isEmpty()) {
-        return OtherError("username is empty")
+sealed class WorkshopParticipant() {
+    fun getOs(): Os {
+        return if (this is ArturMarkiewiczClass) {
+            Os.WINDOWS
+        } else if (this is MarcReczkoClass) {
+            Os.MAC
+        } else {
+            Os.LINUX
+        }
     }
-    return Success(User(username = credentials.username))
 }
 
+class TomKrielClass : WorkshopParticipant()
+val TomKriel = TomKrielClass()
 
-fun main() {
-    val credentials = UserCredentials(
-        username = "marc",
-        password = "very secure"
-    )
+class ArturMarkiewiczClass : WorkshopParticipant()
+val ArturMarkiewicz = ArturMarkiewiczClass()
 
-    when (createUser(credentials)) {
-        is Success -> TODO()
-        is OtherError -> TODO()
-    }
+class MarcReczkoClass : WorkshopParticipant()
+val MarcReczko = MarcReczkoClass()
 
-    task1()
-    task2()
-}
-
-
-// ---- Try it yourself!
-
+class RandomWorkshopParticipiantClass : WorkshopParticipant()
+val RandomWorkshopParticipiant = RandomWorkshopParticipiantClass()
 
 /**
  * Task 1
- * Replace the if statements with a single when statement.
+ * Does it make sense to instantiate 100 RandomWorkshopPatricipiant? Probably we are not able to answer that many questions.
+ * Refactor the above variables (VornameNachname) with the object keyword to be singletons. (Declaring RandomWorkshopParticipiant to be an object does not sound right either ;) )
  */
-private fun task1() {
-    println("#### Task 1")
 
-    val credentials = UserCredentials(username = "bob", password = "narwhal123")
-    val createUserResult = createUser(credentials)
-    if (createUserResult is Success) {
-        println("User ${createUserResult.user.username} has been created!")
-    } else if (createUserResult is OtherError) {
-        println("User could not be created.")
-    }
-}
 
 /**
  * Task 2
- * Replace the if statements with a single when statement. Make 'passwordStrength' immutable and assign is to
- * the value of the 'when' expression.
+ * Change the implementation of "getOs" to use a "when" expression.
  */
-private fun task2() {
-    println("#### Task 2")
 
-    val password = "narwhal123"
-    var passwordStrength = "unknown"
-    if (password.length in 0..3) {
-        passwordStrength = "weak"
-    } else if (password.length in 4..12) {
-        passwordStrength = "medium"
-    } else {
-        passwordStrength = "strong"
-    }
+fun main() {
+    println("ArturMarkiewicz uses ${ArturMarkiewicz.getOs()}")
+    println("TomKriel uses ${TomKriel.getOs()}")
+    println("MarcReczko uses ${MarcReczko.getOs()}")
 
-    println("Password $password has strength '$passwordStrength'")
+    // Did you use a else-Branch for your implementation? What happens if you delete your else-branch? Now, we forgot to include another WorkshopParticipiant.
+    // What different consequences does the inclusion of another WorkshopParticipiant have for "getOs" depending on whether we used a else-branch or not.
 }
