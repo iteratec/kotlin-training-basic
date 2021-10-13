@@ -9,16 +9,21 @@ fun main() {
 
 /**
  * Task lambdaSyntax
- * Implement a lambda function, that calculates the BMI of a cat (weight / (height*height)).
- * Then call the lambda and print the BMI of Lucy. Check the inferred type of the 'bmi' variable (Cmd + Mouseover (Mac) or Ctrl + Mouseover (Windows)).
+ * We want to capitalize myString by using the "map"-function of String and a lambda that capitalizes a Char
+ * Do this once by assigning your lambda to capitalizer and using its reference in map.
+ * Do it again by defining the lambda inside the map declaration.
  */
 private fun lambdaSyntax() {
     println("#### Task lambdaSyntax")
 
-    class Cat(val weight: Double, val height: Double)
-    // TODO val bmi = { }
-    val lucy = Cat(weight = 8.0, height = 0.3)
-    // TODO println()
+    val capitalizer = {}
+
+    val myString = "klein"
+
+    val myStringCapitalizedByCapitalizer = ""
+    val myStringCapitalizedByAnonymousLambda = ""
+    println(myStringCapitalizedByCapitalizer)
+    println(myStringCapitalizedByAnonymousLambda)
 }
 
 

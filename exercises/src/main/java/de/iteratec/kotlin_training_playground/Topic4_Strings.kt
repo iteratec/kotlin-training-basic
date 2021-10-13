@@ -55,7 +55,7 @@ fun multiLineString() {
     val header = "Famous last words:\n"
     val blankLine = "\n"
     val firstLine = "Anna: \"It worked on my machine!\"\n"
-    val secondLine = "Sven: \"All tests are green. There cannot be an error.\""
+    val secondLine = "Sven: \"All tests are green. What could possibly go wrong?\""
 
     val originalString = header + blankLine + firstLine + secondLine
     println(originalString)
