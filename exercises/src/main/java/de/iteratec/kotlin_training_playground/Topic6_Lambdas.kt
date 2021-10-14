@@ -11,7 +11,7 @@ fun main() {
  * Task lambdaSyntax
  * We want to capitalize myString by using the "let"-function and a lambda that capitalizes a String
  * Do this once by assigning your lambda to capitalizer and using its reference in let.
- * Do it again by defining the lambda inside the map declaration.
+ * Do it again by defining the lambda inside the let declaration.
  */
 private fun lambdaSyntax() {
     println("#### Task lambdaSyntax")
