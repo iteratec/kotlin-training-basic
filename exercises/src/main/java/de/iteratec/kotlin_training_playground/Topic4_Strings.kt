@@ -2,16 +2,8 @@ package de.iteratec.kotlin_training_playground
 
 import java.util.Collections.singletonList
 
-private val prefix = "Prefix"
-private fun getSuffix() = "Suffix"
-
-// Show:
-//
-// Mention brackets and toString for template strings.
-// Mention escaping of multi-line strings
-// Syntax highlighting for multi-line strings
-// Show indentation of multi-line strings (trimIndent.replaceAll())
-
+val prefix = "Prefix"
+val suffix = "suffix"
 
 fun main() {
     println("This is a template string: ${singletonList("item")}") // toString is called automatically
@@ -42,8 +34,8 @@ fun main() {
  * Replace String interpolation rather than concatenation.
  */
 fun stringInterpolation() {
-    println("###Task stringInterpolation")
-    println(prefix + "Infix" + getSuffix())
+    println("###Task stringInterpolation: Should print PrefixInfixSUFFIX")
+    println(prefix + "Infix" + suffix.uppercase())
 }
 
 /**
