@@ -1,6 +1,8 @@
 # Basic function syntax
 
-Functions can be delared in classes (instance methods - <b> this </b> is wired to the receiver) or top-level in a file (<b> this </b> is not defined) with the <b> fun </b> keyword. 
+Kotlin functions are declared using the <b> fun </b> keyword and can be placed
++ in classes (they are like instance methods in Java and behave polymorphic. <b> this </b> is wired to the receiver)
++ top-level in a file (they behave like static methods in Java). 
 
 ```kotlin
 fun functionName(argument1: TypeOfArgument1, argument2: TypeOfArgument2): ReturnType {
