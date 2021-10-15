@@ -1,4 +1,4 @@
-package de.iteratec.kotlin_training_playground
+package de.iteratec.kotlin_training_playground.solutions
 
 /* Things to explain as instructor:
 - val/var

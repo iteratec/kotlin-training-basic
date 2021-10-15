@@ -1,4 +1,4 @@
-package de.iteratec.kotlin_training_playground
+package de.iteratec.kotlin_training_playground.solutions
 
 /* Things to explain as instructor:
 - Inspect Kotlin bytecode and decompiled Java class (Shift, Shift -> Show Kotlin Bytecode -> Decompile)
