@@ -4,34 +4,12 @@ package de.iteratec.kotlin_training_playground
 // data classes - default methods, copy, destructing declarations
 // Java interop
 
-class Dog {
-    var name: String = "dog"
-    var age: Int = 1
-}
-
 fun main() {
-    val dog = Dog()
-    dog.name = "Kessi"
-    dog.age = 5
-    println("dog = $dog")
-
-    yourFirstClass()
     dataClass()
     inheritance()
 }
 
 // ---- Try it yourself!
-
-/**
- * Task yourFirstClass
- * Create a class 'Horse' with properties 'name' (String) and 'weight' (Int) defined in the constructor.
- * Add a default value 500 for the property 'weight'.
- * Then create an instance of a Horse and print both properties.
- */
-private fun yourFirstClass() {
-    println("#### Task YourFirstClass")
-    // You can define the class right here inside the function!
-}
 
 /**
  * Task dataClass
