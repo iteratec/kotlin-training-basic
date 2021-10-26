@@ -34,9 +34,12 @@ As Java is not null safe, Kotlin cannot know in all cases whether a function cal
 
 Kotlin has an internal type (platform type: <b> Type! </b> instead of <b> Type </b>) for objects retrieved from Java classes that could be null. 
 
+One can use the @NotNull, @Nullable annotations in Java classes to help Kotlin calling those and automatically avoid platform types.  
+
 ## Casting
 
-In case you have a nullable variable and you are sure that it cannot be null, you can cast it with <b> !! </b> to be treated as non-nullable 
+In case you have a nullable variable and you are sure that it cannot be null, you can cast it with <b> !! </b> to be treated as non-nullable. 
+Sometimes (for instance after a successfull null check), a cast is not necessary and done behind the scenes by Kotlin.
 
 ```kotlin
 val couldBeNull: String? = "example"
