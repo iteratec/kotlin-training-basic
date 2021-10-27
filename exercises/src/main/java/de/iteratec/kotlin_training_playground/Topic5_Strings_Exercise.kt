@@ -2,15 +2,14 @@ package de.iteratec.kotlin_training_playground
 
 import java.util.Collections.singletonList
 
-val prefix = "Prefix"
-val suffix = "suffix"
-
 fun main() {
-    println("This is a template string: ${singletonList("item")}") // toString is called automatically
+    // You can evaluate expressions inside a String definition. toString() is called automatically.
+    println("This is a template string: ${singletonList("item")}")
 
     val yourCleverAssistant = "IntelliJ"
     println("Sometimes you can omit the curly brackets. $yourCleverAssistant will notify you when this is the case.")
 
+    // Multiline strings allow for nice formatting and conveniently escape some characters automatically.
     val uglyJson = "{\n\"property\":\"value\",\n\"array\":[\n\"element1\",\n\"element2\"\n]\n}"
     val multiLineString = """
             {
@@ -29,9 +28,12 @@ fun main() {
     multiLineString()
 }
 
+val prefix = "Prefix"
+val suffix = "suffix"
+
 /**
  * Task stringInterpolation
- * Replace String interpolation rather than concatenation.
+ * Replace the concatenation with a single Template String.
  */
 fun stringInterpolation() {
     println("###Task stringInterpolation: Should print PrefixInfixSUFFIX")
