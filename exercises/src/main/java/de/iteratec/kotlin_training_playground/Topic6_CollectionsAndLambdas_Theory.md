@@ -17,7 +17,7 @@ and returns the string that is obtained by keeping only the <b>char</b>acters th
 val myString = "h a l l o"
 // all the following calls are equivalent and return the string "hallo"
 myString.filter(Char::isWhitespace) // method reference: the parameterless function isWhitespace with receiver is automatically converted to a receiverless function with one parameter.
-myString.filter({ letter: Char -> letter.isWhitespace()}) // an ordinary lambda function as argument
+myString.filter({ letter: Char -> letter.isWhitespace()}) // an ordinary lambda function as argument. The expression on the right of the arrow is returned automatically
 myString.filter({ letter -> letter.isWhitespace()}) // input types of lambda functions can often be auto-inferred
 myString.filter({ it.isWhitespace() }) // if the lambda function has only one input parameter of aut-inferred type, you can refer to it as "it" without declaring it
 myString.filter(){ it.isWhitespace() } // as a convention, if the last parameter of a function invocation is a lambda, it should be taken out of the argument list
