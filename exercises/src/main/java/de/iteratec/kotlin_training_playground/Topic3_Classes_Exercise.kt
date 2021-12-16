@@ -1,11 +1,12 @@
 package de.iteratec.kotlin_training_playground
 
-// constructor props & default values
-// data classes - default methods, copy, destructing declarations
+/* Things to explain as instructor:
+constructor props & default values
+data classes - default methods, copy, destructing declarations */
 
 // This is SimpleClassJava converted to Kotlin.
 //
-// Properties of the class can be declared as val or var.
+// Properties of a Kotlin class can be declared as val or var.
 // Kotlin automatically creates a getter, setter and private backing field for var.
 // Kotlin automatically creates a getter and private backing field for val.
 //
