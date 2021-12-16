@@ -57,7 +57,7 @@ fun main() {
 
 // ---- Try it yourself!
 
-class Horse(val name: String, var weight: Int = 500) {
+class Dog(val name: String, var weight: Int = 500) {
     fun gainWeight() {
         weight = weight * 2
     }
@@ -65,21 +65,21 @@ class Horse(val name: String, var weight: Int = 500) {
 
 /**
  * Task yourFirstClass
- * Create a class 'Horse' with read-only property 'name' (String) and mutable property 'weight' (Int) defined in the constructor.
- * Then create an instance of a Horse and print both properties.
+ * Create a class 'Dog' with read-only property 'name' (String) and mutable property 'weight' (Int) defined in the constructor.
+ * Then create an instance of a Dog and print both properties.
  * Add a default value 500 for the property 'weight' in the constructor.
- * Optional: Add a method gainWeight to the class that doubles the weight of a horse. Test it.
+ * Optional: Add a method gainWeight to the class that doubles the weight of a dog. Test it.
  */
 private fun yourFirstClass() {
     println("#### Task YourFirstClass")
     // You can define the class right here inside the function!
 
-    val horse1 = Horse("Heiko", 200)
-    println(horse1.name)
-    println(horse1.weight)
-    val horse2 = Horse("Sabine")
-    println(horse2.name)
-    println(horse2.weight)
-    horse2.gainWeight()
-    println(horse2.weight)
+    val dog1 = Dog("Heiko", 200)
+    println(dog1.name)
+    println(dog1.weight)
+    val dog2 = Dog("Sabine")
+    println(dog2.name)
+    println(dog2.weight)
+    dog2.gainWeight()
+    println(dog2.weight)
 }
