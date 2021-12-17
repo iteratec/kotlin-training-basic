@@ -14,16 +14,6 @@ object MySingleton: ParentClassToInherit(argumentOfParentConstructor) {
 MySingleton.doSomething() // MySingleton points to the sole instance of the class
 ```
 
-In some places (for instance inside a function) objects can not be declared with the notation above but rather
-
-```kotlin
-val myAnonymousClassInstance = object: ParentClassToInherit(argumentOfParentConstructor) {
-    fun doSomething() {
-        /// ..
-    }
-}
-```
-
 As objects cannot have constructors with more than 0 arguments, they are not a replacement for a dependency inversion framework. Possible use-cases are:
 + Inside a class as a companion object in order to basically mimic static methods (<b> static </b> is not a keyword in Kotlin)
 + In combination with sealed classes to form a more powerful version of an <b> enum </b>.
@@ -44,7 +34,7 @@ sealed class MyBoolean {
         } else {
             True
         }
-    } // Imagine that some careless user wats to add another sub-class of MyBoolean called Maybe. He might forget to adapt the flip-method which would result in Maybe.flip()=true which seems wrong.
+    } // Imagine that some careless user wants to add another sub-class of MyBoolean called Maybe. He might forget to adapt the flip-method which would result in Maybe.flip()=true which seems wrong.
     // Normally you would use a when-expresion here instead of if. We show this shortly.
 }
 
@@ -66,17 +56,17 @@ fun flip() {
 }
 ```
 
-<b> when </b> looks for the first match, evaluates the code in this branch and automatically returns the last line evaluated. When <b> when </b> is used to assign a variable in this way (being used as an expression not only as a statement),
-Koltin automatically checks that your branches are exhaustive and forces you to add an else-branch if necessary. 
+<b> when </b> looks for the first match nd returns the element behind it. When <b> when </b> is used to assign a variable in this way (being used as an expression not only as a statement),
+Kotlin automatically checks that your branches are exhaustive and forces you to add an else-branch if necessary. 
 
 In <b> when </b> statements with a reference to branch on ( "()"-brackets non-empty ) sadly only certain operators can be used to declare the branching conditions (class membership, membership in a collection, equality check, ...). For more flexible use <b> when </b> without a reference to branch on.   
 
 ```kotlin
 when {
     someBooleanExpression1, 
-    someBooleanExpression2 -> { codeToEvaluateInTheseBranches }
-    someBooleanExpression3 -> { codeToEvaluateInThisBranch }
-    else -> {codeToEvaluateWhenNothingElseMatches}
+    someBooleanExpression2 -> elementToReturnInTheseBranches
+    someBooleanExpression3 -> elementToReturnInThisBranch
+    else -> elementToReturnWhenNothingElseMatches
 }
 ```
 

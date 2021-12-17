@@ -16,3 +16,19 @@ fun main() {
     // step 6: parse everything into simple values :-)
     // step 7: parse interests into typesafe set, like Set<Interest>
 }
+
+// Getter und Setter in Kotlin aufrufen (automatisch umkonventiert)
+// Andersrum genauso
+// Calling top-level functions from Kotlin in Java ClassKt
+// throws
+// Default parameter @JvmOverloads
+// Companion @JvmStatic @JvmField
+// NamensClashes mit java
+
+// Getter und Setter in Kotlin aufrufen (automatisch umkonventiert)
+// Andersrum genauso
+// Calling top-level functions from Kotlin in Java ClassKt
+// throws
+// Default parameter @JvmOverloads
+// Companion @JvmStatic @JvmField
+// NamensClashes mit java

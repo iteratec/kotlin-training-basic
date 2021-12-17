@@ -6,8 +6,18 @@ fun replaceUmlaute(input: String): String = input
     .replace("ü", "ue")
     .replace("ß", "ss")
 
-
 fun main() {
+    // In Kotlin, you can define "instance methods" of classes outside of those classes, so-called extension functions.
+    // However extension functions are compiled into static methods of utility classes. Hence they do not behave polymorphic.
+    fun List<Int>.multiplyEachBy(factor: Int): List<Int> {
+        return this.map {
+            it * factor
+        }
+    }
+
+    val simpleSuccession = listOf(1, 2, 3)
+    println(simpleSuccession.multiplyEachBy(10))
+
     extensionFunction()
     extensionFunctionAndNullSafety()
 }
@@ -24,7 +34,7 @@ fun extensionFunction() {
 }
 
 /**
- * Rewrite replaceUmlauteInString to be able to being called on null.
+ * Rewrite replaceUmlauteInString to be able to being called on null (returning an empty string in this case).
  */
 fun extensionFunctionAndNullSafety() {
     println("#### Task extensionFunctionAndNullSafety")
