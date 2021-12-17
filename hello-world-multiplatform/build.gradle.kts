@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.5.0"
+    kotlin("multiplatform") version "1.6.10"
     application
 }
 
@@ -43,15 +43,12 @@ kotlin {
     sourceSets {
         val commonMain by getting
         val jvmMain by getting
-        val jvmTest by getting
         val jsMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
             }
         }
-        val jsTest by getting
         val nativeMain by getting
-        val nativeTest by getting
     }
 }
 
