@@ -91,6 +91,8 @@ data class HorseAsDataClass(val name: String, val weight: Int = 500)
  * Data classes are classes for which equals, hashCode and toString are auto-implemented.
  * They also offer a copy-method that allows to generate new instances from existing ones.
  * Try to understand the following log-lines.
+ * Can you imagine why data classes are not allowed to be subclassed?
+ * -> Since a sub class of a data class could add more properties, equals would be not be symmetric anymore.
  */
 private fun dataClass() {
     println("#### Task dataClass")
