@@ -1,6 +1,6 @@
 # Generics
 
-In general, Kotlin generics work similar than Java generics. The main advantage lies in the fact that Kotlin handles variance a bit different.
+In general, Kotlin generics work similar to Java generics. The main advantage lies in the fact that Kotlin handles variance a bit different.
 
 ## Variance
 
@@ -16,11 +16,9 @@ Java solves this problem by introducing extra types, so-called bounded wildcards
 
 Kotlin basically allows you to mark generic variables as covariant (<b> &lt;out T&gt; </b>) or contravariant (<b> &lt;in T&gt; </b>) simplifying the usage of generic classes.
 
-Generic classes in <b> T </b> whose methods and getters only return types involving <b> T </b> but never take something of type <b> T </b> as input (write-only in <b> T </b>) can be declared covariant.
+Generic classes in <b> T </b> whose methods and setters only return types involving <b> T </b> but never take something of type <b> T </b> as input (read-only in <b> T </b>) can be declared covariant.
 
-Generic classes in <b> T </b> whose methods and setters only take types involving <b> T </b> as input but never return something of type <b> T </b> (read-only in <b> T </b>) can be declared contravariant.
-
-
+Generic classes in <b> T </b> whose methods and getters only take types involving <b> T </b> as input but never return something of type <b> T </b> (write-only in <b> T </b>) can be declared contravariant.
 
 
 
