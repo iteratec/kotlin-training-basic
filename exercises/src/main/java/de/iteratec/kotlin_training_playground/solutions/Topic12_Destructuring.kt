@@ -1,4 +1,4 @@
-package de.iteratec.kotlin_training_playground
+package de.iteratec.kotlin_training_playground.solutions
 
 class BoilerplateResultClass(
     val hasBeenSuccessful: Boolean,
@@ -11,6 +11,10 @@ enum class TypeOfSave {
 
 fun createOrUpdate(): BoilerplateResultClass {
     return BoilerplateResultClass(true, TypeOfSave.NEW)
+}
+
+fun createOrUpdateWithoutBoilerplateResultClass(): Pair<Boolean, TypeOfSave> {
+    return Pair(true, TypeOfSave.NEW)
 }
 
 data class ExampleDataClass(
@@ -47,9 +51,9 @@ fun multipleReturnValuesFromAFunction() {
     println(result.hasBeenSuccessful)
     println(result.typeOfSave)
 
-    // val (success, typeOfSave) = createOrUpdateWithoutBoilerplateResultClass()
-    // println(success)
-    // println(typeOfSave)
+    val (success, typeOfSave) = createOrUpdateWithoutBoilerplateResultClass()
+    println(success)
+    println(typeOfSave)
 }
 
 /**
@@ -68,8 +72,10 @@ fun implementingDestructuring() {
 }
 
 operator fun String.component1(): Char? {
-    throw NotImplementedError("Implement me please")
+    return this.firstOrNull()
 }
+
+
 
 /**
  * Task whenNotToUseDestructuring
@@ -78,5 +84,17 @@ operator fun String.component1(): Char? {
 fun whenNotToUseDestructuring() {
     println("#### Task implementingDestructuring")
     println("No code need to be written here")
+    /*
+    Destructuring should only be used when the order of the components is canonically clear, the components have non-intersecting types or the attributes of the class are certain to remain unchanged in the future.
+    Consider the class CakeRecipe.
+    An uncautious developer could add another attribute amountOfCocoaInGramm an put it in the third position shifting amountOfFlourInGramm into fourth position.
+    This will affect all existing destructuring declarations because component3 has changed. We might not notice this source of potential errors because the return type of component3 stayed the same.
+    Of course, the change of our developer would also cause constructor invocations of CakeRecipe to change. The difference is that the compiler will warn us in the case with an error.
+     */
 }
 
+data class CakeRecipe(
+    val amountOfButterInGramm: Int,
+    val amountOfSugarInGramm: Int,
+    val amountOfFlourInGramm: Int
+)
