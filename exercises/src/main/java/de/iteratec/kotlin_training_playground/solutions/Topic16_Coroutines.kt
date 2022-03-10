@@ -1,21 +1,23 @@
-package de.iteratec.kotlin_training_playground
+package de.iteratec.kotlin_training_playground.solutions
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-fun measureExecutionTime(codeBlock: () -> Any): Long {
-    val start = System.currentTimeMillis()
-    codeBlock()
-    val executionTime = System.currentTimeMillis() - start
-    println("Execution time was $executionTime")
-    return executionTime
-}
+/*Coroutines are Kotlins concept for concurrent and parallel programming. They can be imagined as being light-weight threads.
+
+A coroutine is "running" code that can be suspended at any time and later be resumed. The idea is the following: A coroutine can be suspended or suspend itself
+(for instance when being idle and waiting for an API call to return). Suspending a coroutine does not block the thread executing the coroutine.
+Hence the thread can do other work. Later some thread can continue running the suspended coroutine.
+
+Functions that can suspend need to be marked with the <b> suspend </b> modifier. They can be only called out of other suspend functions and only executed in coroutines.
+*/
 
 // delay suspends itself. Therefore delayedComputation has to feature the "suspend" keyword.
 suspend fun delayedComputation(delayTime: Long = 2000L): Int {
@@ -25,9 +27,17 @@ suspend fun delayedComputation(delayTime: Long = 2000L): Int {
     return 1
 }
 
+// VERY IMPORTANT
+// Change the Run configuration of this function in the way that you add the VM option "-Dkotlinx.coroutines.debug".
+// Then you always see which coroutine is currently logging a statement.
+fun main() {
+    startMultipleComputationsConcurrentlyTask()
+    structuredConcurrencyTask()
+    parallelComputingTask()
+}
+
 fun startMultipleComputationsConcurrentlyTask() {
     fun startMultipleComputationsConcurrently() {
-
         println("####  Task startMultipleComputationsConcurrently")
         // runBlocking bridges the normal world and the coroutine world in Kotlin. It blocks the current thread and starts a coroutine that runs the code in its body.
         // runBlocking blocks until the coroutine is finished.
@@ -39,11 +49,11 @@ fun startMultipleComputationsConcurrentlyTask() {
             val deferredResult1: Deferred<Int> = async {
                 delayedComputation()
             }
-            val result1 = deferredResult1.await()
 
             val deferredResult2: Deferred<Int> = async {
                 delayedComputation()
             }
+            val result1 = deferredResult1.await()
             val result2 = deferredResult2.await()
             val result = result1 + result2
             println("Result is ${result}")
@@ -51,7 +61,7 @@ fun startMultipleComputationsConcurrentlyTask() {
     }
 
     // Look at your console when running the test. The coroutines inform you on which thread they are running and what there name/identity is.
-    // We are making two independent calls that each take 2 seconds and combine the results. That should be possible in less than 3 seconds with a minor adaption.
+    // We are making two independent calls that each take 2 seconds and combine the results. That should be possible in less than 3 seconds with a minor adaption. Try to find this improvement.
     println("Execution time was ${measureExecutionTime { startMultipleComputationsConcurrently() }}")
 }
 
@@ -59,27 +69,28 @@ fun structuredConcurrencyTask() {
     println("####  Task structuredConcurrency")
 
     fun structuredConcurrency() {
-        // Imagine we are writing front end code. The main thread handles the UI and another thread with a lot of coroutines is calling APIs to provide the necessary data.
+        // Imagine we are writing frontend code. The main thread handles the UI and another thread with a lot of coroutines is calling APIs to provide the necessary data.
         // Sometimes the user leaves the current sub-page and we can basically abort the data-fetching coroutines. We certainly do not want to abort every coroutine by hand.
         // For that purpose we have the concept of structured concurrency. We can use the "coroutineScope" Coroutine builder (The coroutine scope is basically the configuration object of a coroutine).
         // This is creating a new coroutine (lets call it parent). When launching other coroutines inside parent, parent waits for all of them to finish.
         // On the other hand, when we abort parent, then parent is trying to abort all children.
-        // A Coroutine can be aborted by calling the cancel() method on its CoroutineScope. That throws a CancellationException.
+        // A Coroutine can be aborted by calling the coroutineContext.cancel() method on its CoroutineScope. That throws a CancellationException.
         // The following code starts five Jobs that each take different time. Abort all Jobs when the first one finished delayedComputation
         runBlocking {
             println("Top-level coroutine started in ${Thread.currentThread().name}")
             try {
                 coroutineScope {
+                    val scope = this
                     println("Started computation in ${Thread.currentThread().name}")
                     val jobs = (1..5).map {
                         // launch is another Coroutine builder which starts a Coroutine and returns a Job instance. Unlike asnyc it symbolizes a computation where the result is not needed anymore and we only need to know if it has finished or not.
                         launch {
                             delayedComputation(it * 1000L)
+                            scope.coroutineContext.cancel()
                         }
                     }
                 }
             } catch (e: CancellationException) {
-            } finally {
                 println("Cancelled remaining computations in ${Thread.currentThread().name}")
             }
         }
@@ -112,48 +123,10 @@ fun parallelComputingTask() {
     parallelComputing()
 }
 
-
-// Disabled because JavaFX is not available in every JDK 8 package - uncomment for yourself
-//  to see if the javafx.* imports work
-
-//class HelloJavaFX : Application() {
-//
-//    override fun start(primaryStage: Stage) {
-//        primaryStage.apply {
-//            val label = Label("Say 'Hello World'")
-//            scene = Scene(VBox(label)).apply {
-//                stylesheets.add(getResourceUri("/javafx.css"))
-//            }
-//            show()
-//
-//
-//            // this is where the magic happens
-//            GlobalScope.launch(Dispatchers.Main) {
-//                delay(1000)
-//
-//                label.text = "This"
-//                delay(1000)
-//
-//                label.text = "is"
-//                delay(1000)
-//
-//                label.text = "Kotlin!"
-//            }
-//
-//        }
-//    }
-//
-//}
-
-private fun getResourceUri(resourceName: String): String =
-    object {}.javaClass.getResource(resourceName).toExternalForm()
-
-
-fun main() {
-    runBlocking {
-        startMultipleComputationsConcurrentlyTask()
-        structuredConcurrencyTask()
-        parallelComputingTask()
-    }
-//    Application.launch(HelloJavaFX::class.java)
+fun measureExecutionTime(codeBlock: () -> Any): Long {
+    val start = System.currentTimeMillis()
+    codeBlock()
+    val executionTime = System.currentTimeMillis() - start
+    println("Execution time was $executionTime")
+    return executionTime
 }
