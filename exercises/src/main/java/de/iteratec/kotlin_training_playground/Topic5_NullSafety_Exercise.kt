@@ -3,7 +3,19 @@ package de.iteratec.kotlin_training_playground
 import java.util.*
 import kotlin.random.Random
 
+/*
+Requirements:
+- Topic1_Functions
+- Topic3_MutabilityAndExpressions
+- Topic4_Classes
+
+Things to explain as instructor:
+- Null-safety in Kotlin
+- Safe-call and Elvis
+ */
+
 fun main() {
+    // Kotlin is null-safe. In a variable of type Type we cannot save "null". In a variable of type "Type?" we can also assign "null".
     val nonNullableString: String = "definitelyNotNull"
     val nullableString: String? = "couldBeNull"
     val nullDisguisedAsString: String? = null

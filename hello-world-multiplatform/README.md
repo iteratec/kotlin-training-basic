@@ -1,4 +1,4 @@
-# Multiplatform
+# Kotlin Multiplatform
 
 Since Kotlin can be compiled/transpiled to many languages, we want to say hello world using different runtimes (JVM, Node, native == your OS).
 

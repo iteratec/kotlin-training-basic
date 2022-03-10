@@ -5,7 +5,7 @@ plugins {
     java
 }
 
-group = "me.tomkriel"
+group = "com.iteratec"
 version = "1.0-SNAPSHOT"
 
 repositories {

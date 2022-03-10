@@ -1,11 +1,5 @@
 package de.iteratec.kotlin_training_playground.solutions
 
-/* Things to explain as instructor:
-- val/var
-- Type-inference for variables
-- Expressions in Kotlin
- */
-
 fun main() {
 
     // Variables defined with the "val" keyword are read-only (similar to final in Java). Reassignement is impossible.

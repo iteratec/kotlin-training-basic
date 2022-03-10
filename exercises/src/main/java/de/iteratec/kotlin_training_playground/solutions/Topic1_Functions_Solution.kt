@@ -1,15 +1,5 @@
 package de.iteratec.kotlin_training_playground.solutions
 
-/* Things to explain as instructor:
-- Inspect Kotlin bytecode and decompiled Java class (Shift, Shift -> Show Kotlin Bytecode -> Decompile)
-- Comparison with main-function in Java
-- Explain function syntax and Unit in Kotlin
-- Java to Kotlin Converter in IntelliJ (Right click on File -> Convert Java file to Kotlin file)
-- Invocation with positional or named arguments
-- One-liner syntax
-- Default values
- */
-
 // The main-function is the entry point of an application
 fun main(args: Array<String>) {
     println("Hello Kotlin!")

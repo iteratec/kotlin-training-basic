@@ -2,6 +2,16 @@ package de.iteratec.kotlin_training_playground
 
 import java.util.Collections.singletonList
 
+/*
+Requirements:
+- Topic1_Functions
+- Topic3_MutabilityAndExpressions
+
+Things to explain as instructor:
+- String templates
+- Multi-line strings
+ */
+
 fun main() {
     // You can evaluate expressions inside a String definition. toString() is called automatically.
     println("This is a template string: ${singletonList("item")}")

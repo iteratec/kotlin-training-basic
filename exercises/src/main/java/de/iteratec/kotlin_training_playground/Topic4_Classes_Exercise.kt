@@ -1,8 +1,15 @@
 package de.iteratec.kotlin_training_playground
 
-/* Things to explain as instructor:
-constructor props & default values
-data classes - default methods, copy, destructing declarations */
+/*
+Requirements:
+- Topic1_Functions
+- Topic3_MutabilityAndExpressions
+
+Things to explain as instructor:
+- Constructor
+- Attributes
+- Instantiation
+ */
 
 // This is SimpleClassJava converted to Kotlin.
 //

@@ -1,6 +1,10 @@
 package de.iteratec.kotlin_training_playground
 
-/* Things to explain as instructor:
+/*
+Requirements:
+- Topic1_Functions
+
+Things to explain as instructor:
 - val/var
 - Type-inference for variables
 - Expressions in Kotlin

@@ -1,6 +1,9 @@
 package de.iteratec.kotlin_training_playground
 
-/* Things to explain as instructor:
+/*
+Requirements: none
+
+Things to explain as instructor:
 - Inspect Kotlin bytecode and decompiled Java class (Shift, Shift -> Show Kotlin Bytecode -> Decompile)
 - Comparison with main-function in Java
 - Explain function syntax and Unit in Kotlin

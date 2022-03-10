@@ -1,4 +1,4 @@
-package de.iteratec.kotlin_training_playground
+package de.iteratec.kotlin_training_playground.wip
 
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
