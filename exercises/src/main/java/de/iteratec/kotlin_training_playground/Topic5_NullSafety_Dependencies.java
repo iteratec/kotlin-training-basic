@@ -1,6 +1,6 @@
 package de.iteratec.kotlin_training_playground;
 
-public class StringEmitter {
+class Topic5_NullSafety_Dependencies {
     public String giveMeAString() {
         return null;
     }

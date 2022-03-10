@@ -119,7 +119,7 @@ private fun platformTypes() {
 private fun gettingRidOfPlatformTypes() {
     println("#### Task gettingRidOfPlatformTypes")
 
-    val javaStringEmitter = StringEmitter()
+    val javaStringEmitter = Topic5_NullSafety_Dependencies()
     val suspiciousStringFromJavaCall = javaStringEmitter.giveMeAString()
     // println(suspiciousStringFromJavaCall.first())
 }
