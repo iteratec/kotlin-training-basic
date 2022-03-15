@@ -1,5 +1,9 @@
 package de.iteratec.kotlin_training_playground
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.greaterThan
+import org.junit.Test
+
 /*
 Requirements: none
 
@@ -29,11 +33,6 @@ fun main(args: Array<String>) {
     // The following invocations yield the same result
     simpleExampleFunctionWithDefaultValues(argument1 = "argument1")
     simpleExampleFunctionWithDefaultValues(argument1 = "argument1", argument2 = "")
-
-    // Try it yourself
-    functionSyntaxTask()
-    callingFunctionsWithNamedArgumentsTask()
-    defaultValues()
 }
 
 private fun simpleExampleFunction(argument1: String, argument2: String): String {
@@ -46,37 +45,44 @@ private fun simpleExampleFunctionWithDefaultValues(argument1: String = "", argum
     return argument1 + argument2
 }
 
-/**
- * Task functionSyntax
- * Define a function addAll that takes 4 integers (Type Int in Kotlin) as input and returns the sum.
- * Try the normal function definition syntax and also the one-liner syntax.
- */
-private fun functionSyntaxTask() {
-    println("#### Task shortFunctionSyntaxTask: Should print 6")
+private class Exercises {
 
-    // println(addAll(0, 1, 2, 3));
-}
-
-
-/**
- * Task callingFunctionsWithNamedArguments
- * "addAll" has many arguments. Theoretically one could mix up the order when calling the function. Replace the invocation above with an invocation with named arguments.
- * You can also play around and mix positional and named arguments to see what happens.
- */
-private fun callingFunctionsWithNamedArgumentsTask() {
-    println("#### Task shortFunctionSyntaxTask: Should print 6")
-
-    // println(addAll(0, 1, 2, 3))
-}
+    /**
+     * Task functionSyntax
+     * Define a function addAll that takes 4 integers (Type Int in Kotlin) as input and returns the sum.
+     * Try the normal function definition syntax and also the one-liner syntax.
+     */
+    @Test
+    fun functionSyntaxTask() {
+        println("#### Task shortFunctionSyntaxTask: Should print 6")
+        assertThat(2, greaterThan(1))
+        // println(addAll(0, 1, 2, 3))
+    }
 
 
-/**
- * Task defaultValues
- * It would also make sense to call "addAll" with 2 or 3 arguments. Add default values for c and d such that the code below compiles and prints the desired results
- */
-private fun defaultValues() {
-    println("#### Task shortFunctionSyntaxTask: Should print 1 and 3")
+    /**
+     * Task callingFunctionsWithNamedArguments
+     * "addAll" has many arguments. Theoretically one could mix up the order when calling the function. Replace the
+     * invocation above with an invocation with named arguments.
+     * You can also play around and mix positional and named arguments to see what happens.
+     */
+    @Test
+    fun callingFunctionsWithNamedArgumentsTask() {
+        println("#### Task shortFunctionSyntaxTask: Should print 6")
 
-    // println(addAll(0, 1))
-    // println(addAll(0, 1, 2))
+        // println(addAll(0, 1, 2, 3))
+    }
+
+
+    /**
+     * Task defaultValues
+     * It would also make sense to call "addAll" with 2 or 3 arguments. Add default values for c and d such that the
+     * code below compiles and prints the desired results
+     */
+    @Test
+    fun defaultValues() {
+        println("#### Task shortFunctionSyntaxTask: Should print 1 and 3")
+        // println(addAll(0, 1))
+        // println(addAll(0, 1, 2))
+    }
 }
