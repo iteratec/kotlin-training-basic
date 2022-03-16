@@ -42,11 +42,7 @@ kotlin {
     sourceSets {
         val commonMain by getting
         val jvmMain by getting
-        val jsMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
-            }
-        }
+        val jsMain by getting
         val nativeMain by getting
     }
 }
