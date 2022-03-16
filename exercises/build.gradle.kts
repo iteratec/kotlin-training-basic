@@ -1,24 +1,23 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.6.10"
     java
 }
 
-group = "com.iteratec"
+group = "de.iteratec"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.apache.pdfbox:pdfbox:2.0.15")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.2.1")
-    testImplementation("junit:junit:4.13.1")
+    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.6.0")
+    implementation("org.apache.pdfbox:pdfbox:2.0.25")
+    testImplementation("junit:junit:4.13.2")
 }
 
 val compileKotlin: KotlinCompile by tasks

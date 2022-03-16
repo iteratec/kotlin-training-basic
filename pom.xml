@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kotlin.version>1.5.32</kotlin.version>
+        <kotlin.version>1.6.10</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>

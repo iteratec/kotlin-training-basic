@@ -1,7 +1,6 @@
-group = "com.iteratec"
+group = "de.iteratec"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
 }
