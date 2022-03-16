@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kotlin-training-exercises</artifactId>
+    <artifactId>exercises</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
