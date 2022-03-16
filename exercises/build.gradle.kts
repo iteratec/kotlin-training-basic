@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.cli.jvm.main
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -28,6 +29,12 @@ compileKotlin.kotlinOptions {
 }
 compileTestKotlin.kotlinOptions {
     jvmTarget = "11"
+}
+
+sourceSets {
+    main {
+        java.srcDirs("src/main/kotlin")
+    }
 }
 
 tasks {
