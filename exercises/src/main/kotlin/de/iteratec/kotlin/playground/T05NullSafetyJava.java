@@ -1,6 +1,6 @@
 package de.iteratec.kotlin.playground;
 
-class Topic5_NullSafety_Dependencies {
+class T05NullSafetyJava {
     public String giveMeAString() {
         return null;
     }
