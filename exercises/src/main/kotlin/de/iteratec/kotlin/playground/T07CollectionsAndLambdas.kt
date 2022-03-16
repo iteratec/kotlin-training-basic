@@ -1,8 +1,19 @@
 package de.iteratec.kotlin.playground
 
+/**
+# Collections & lambdas
+ Requirements:
+ - Functions
+ - Mutability and expressions
+
+ Things to discuss:
+ - Instantiating collections
+ - Mutable & immutable collections
+ - Collection transformations & lambdas
+ */
 fun main() {
-    // Kotlin has its own collection hierarchy that is very similar to Java and uses the analogeours Java collections under the hood.
-    // Normally you instantiate collections via factory methods of the form "CollectionInterfaceNameOf(...)"
+    // Kotlin has its own collection hierarchy that is very similar to Java and uses the analogous Java collections under the hood.
+    // Normally you instantiate collections via factory methods of the form "<CollectionType>Of(...)"
     val alphabet: List<Char> = listOf('a', 'b', 'c')
     val words: MutableList<String> = mutableListOf("Rentner", "Lehrer", "Student")
 
@@ -54,119 +65,6 @@ fun main() {
     println("First: ${words.first()}")
     // maxByOrNull: Searches the maximum of all elements of the collection by applying the lambda and using the natural ordering on the return type (which has to implement Comparable).
     println("maxByOrNull: ${words.maxByOrNull { it.length }}")
-
-
-    // Try it yourself
-    instantiatingCollections()
-    oneFMROperation()
-    chainingFMROperations()
-    any()
-    extractingMembers()
-    fold()
-    bonus_eager()
 }
-
-class FamilyMember(val knownParents: List<FamilyMember>, val age: Int, val name: String, val alive: Boolean)
-
-val Granny = FamilyMember(emptyList(), 83, "Elizabeth", true)
-val Margret = FamilyMember(listOf(Granny), 52, "Margret", true)
-val Winston = FamilyMember(emptyList(), 50, "Winston", false)
-val Neville = FamilyMember(emptyList(), 90, "Neville", false)
-val Boris = FamilyMember(listOf(Margret, Winston), 25, "Boris", true)
-val Charles = FamilyMember(listOf(Neville), 49, "Charles", true)
-val Teresa = FamilyMember(listOf(Margret, Charles), 19, "Teresa", true)
-
-/**
- * Task instantiatingCollections
- * Define and assign the whole set of family members in the order above to the variable familyMembers in one line.
- */
-val familyMembers: Set<FamilyMember> = emptySet()
-fun instantiatingCollections() {
-    println(familyMembers.contains(Granny))
-    println(familyMembers.contains(Margret))
-    println(familyMembers.contains(Winston))
-    println(familyMembers.contains(Neville))
-    println(familyMembers.contains(Boris))
-    println(familyMembers.contains(Charles))
-    println(familyMembers.contains(Teresa))
-}
-
-/**
- * Task oneFMROperation
- * Construct a list containing all names of the family members starting from "familyMembers" and using the map-function
- */
-fun oneFMROperation() {
-    val namesOfFamilyMembers: List<String> = emptyList() // Replace with familyMembers.map { ... }
-    println(namesOfFamilyMembers == listOf("Elizabeth", "Margret", "Winston", "Neville", "Boris", "Charles", "Teresa"))
-}
-
-/**
- * Task chainingFMROperations
- * Construct a list containing all ages of the alive family members sorted ascendingly
- */
-fun chainingFMROperations() {
-    val agesOfFamilyMembers: List<Int> = emptyList() // Replace with familyMembers...
-    println(agesOfFamilyMembers == listOf(19, 25, 49, 52, 83))
-}
-
-/**
- * Task any
- * Write a function that checks if a familyMember is a parent of anyone in a list of family members
- */
-
-fun any() {
-    fun isParentOfAnybody(allegedParent: FamilyMember, allegedChildren: Collection<FamilyMember>): Boolean {
-        return true // Implement
-    }
-
-    println(isParentOfAnybody(Winston, listOf(Charles, Boris)))
-    println(!isParentOfAnybody(Winston, listOf(Neville, Margret)))
-}
-
-/**
- * Task extractingMembers
- * Extract the youngest family member out of your collection
- */
-
-fun extractingMembers() {
-    val youngestFamilyMember = Granny // Replace this. Surely Granny is not the youngest.
-    println(youngestFamilyMember)
-}
-
-/**
- * Task fold
- * Calculate the combined age of all family members using fold (of course there are simpler methods to achieve this goal
- * in Kotlin indicated in the assertion in the exercise)
- */
-
-fun fold() {
-    val combinedAge = 0 // Replace with familyMembers.fold { ... }
-    println(combinedAge == familyMembers.sumOf { it.age })
-}
-
-/**
- * Task bonus_eager
- * Apart from using collections directly, you can also use Java streams or so-called sequences in Kotlin.
- * The main difference is that Streams and sequences evaluate lazily and apply all operations on one element
- * before proceeding with the next item when possible. This caan have a positive performance impact in rare situations.
- * Try out what happens and in what order when trying out a Java Stream, Kotlin list, Kotlin sequence as the receiver of
- * the first map function.
- */
-
-fun bonus_eager() {
-    val firstFamilyMemberAfterSomeRiskyMappingComputation = familyMembers.stream()
-        .map {
-            println("In first mapping function with element ${it.name}")
-            it
-        }
-        .map {
-            println("In second mapping function with element ${it.name}")
-            if (it.age > 50) it else throw RuntimeException("Some accident happened")
-        }
-        .findFirst().get()
-
-    println(firstFamilyMemberAfterSomeRiskyMappingComputation.name)
-}
-
 
 

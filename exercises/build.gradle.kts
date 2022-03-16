@@ -18,7 +18,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.6.0")
     implementation("org.apache.pdfbox:pdfbox:2.0.25")
-    testImplementation("junit:junit:4.13.2")
+    implementation("junit:junit:4.13.2")
 }
 
 val compileKotlin: KotlinCompile by tasks
