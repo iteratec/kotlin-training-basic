@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
@@ -18,8 +18,8 @@ class ClassesAdvancedTasks {
             open fun getStatus() = "$name hates his/her job and longs for holiday"
         }
 
-        class IteratecEmployee(val name: String) {
-            fun getStatus() = "$name likes his/her job. But holiday is still better ;)"
+        class IteratecEmployee(name: String): Employee(name) {
+            override fun getStatus() = "$name likes his/her job. But holiday is still better ;)"
         }
 
         assertThat(IteratecEmployee("Heiko"), instanceOf(Employee::class.java))
@@ -37,7 +37,9 @@ class ClassesAdvancedTasks {
      */
     @Test
     fun dataClass() {
-        class Coordinates(
+        // The reason why the initial test is red is that we work with two instances representing the origin here.
+        // When using the normal class, these two are not regarded as equal.
+        data class Coordinates(
             val x: Int,
             val y: Int,
         )
@@ -54,7 +56,15 @@ class ClassesAdvancedTasks {
      * Can you imagine why data classes are not allowed to be subclassed?
      */
     @Test
-    fun questionsOnDataClasses() {}
+    fun questionsOnDataClasses() {
+        // Question1: In the semantics of some models the equals-method should compare an ID instead of all properties
+        // (for instance for persons or mutable structures), or an calculated total from all properties (different currencies resulting in the same value)
+
+        // Question2: equals should behave like an equivalence relation. This means that some very natural properties have to be fulfilled
+        // which most of us use all the time without noticing.
+        // If you want to compare two things A,B you are expecting that A.equals(B) and B.equals(A) will yield the same result (symmetry).
+        // When implementing equals by comparing all properties of the class, the symmetry-principle could be easily violated.
+    }
 
     /**
      * ## Companion object
@@ -63,9 +73,9 @@ class ClassesAdvancedTasks {
      */
     @Test
     fun companionObject() {
-        // val horse = Horse.builder().withName("Trabi").withWeight(10).build()
-        // assertThat(horse.name, equalTo("Trabi"))
-        // assertThat(horse.weight, equalTo(10))
+        val horse = Horse.builder().withName("Trabi").withWeight(10).build()
+        assertThat(horse.name, equalTo("Trabi"))
+        assertThat(horse.weight, equalTo(10))
     }
 
     /**
@@ -77,11 +87,21 @@ class ClassesAdvancedTasks {
         class ValidatedNaturalNumberHolder {
             // Ignore all attempts to set naturalNumber to a negative number
             var naturalNumber: Int = 0
+                set(value) {
+                    if (value > 0) {
+                        field = value
+                    }
+                }
         }
 
         class SuperSecretSelfDestructingCodeHolder {
             // With each read, message should be reset back to an empty string
             var message: String = ""
+                get() {
+                    val savedMessage = field
+                    field = ""
+                    return savedMessage
+                }
         }
 
         val naturalNumberHolder = ValidatedNaturalNumberHolder()
@@ -96,4 +116,22 @@ class ClassesAdvancedTasks {
     }
 }
 
-class Horse(val name: String, val weight: Int = 500)
+class Horse(val name: String, val weight: Int = 500) {
+    companion object {
+        fun builder() = HorseBuilder()
+    }
+}
+
+class HorseBuilder(var name: String = "", var weight: Int = 500) {
+    fun withName(name: String): HorseBuilder {
+        this.name = name
+        return this
+    }
+
+    fun withWeight(weight: Int): HorseBuilder {
+        this.weight = weight
+        return this
+    }
+
+    fun build() = Horse(name, weight)
+}

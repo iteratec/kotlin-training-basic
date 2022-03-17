@@ -35,6 +35,9 @@ sourceSets {
     main {
         java.srcDirs("src/main/kotlin")
     }
+    test {
+        java.srcDirs("src/main/kotlin")
+    }
 }
 
 tasks {

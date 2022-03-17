@@ -28,6 +28,21 @@ fun main() {
 
     val runtimeException: RuntimeException = MyCustomRuntimeException("Panic mode activated!")
 
+    // So-called Data classes already come with built-in implementations of equals, hashCode (both by comparing all properties), toString and a useful copy-functionality.
+
+    data class Name(
+        val title: String?,
+        val firstName: String,
+        val middleName: String?,
+        val lastName: String
+    )
+
+    val name = Name("Dr. med", "Marlene", null, "Hippokrates")
+    println(name)
+    val nameAfterMarriage = name.copy(lastName = "Asklepios")
+    println(name)
+
+
     // In Kotlin, there are no static properties/methods. They are replaced by the concept of a companion object.
     // See ClassWithStaticMethod as an example. The companion object is a singleton instance of an anonymous inner class
     // that is created automatically if existing.
@@ -40,6 +55,25 @@ fun main() {
     ClassWithStaticMethod.printCountOfExistingInstances()
     val instance2 = ClassWithStaticMethod()
     ClassWithStaticMethod.printCountOfExistingInstances()
+
+    // Kotlin generates setters and getters automatically for properties however we can customize them.
+    class ClassUnderSurveillance() {
+        var content: String = "Content"
+            get() {
+                // "field" behaves like a keyword and refers to the backing field behind the property.
+                println("Surveillance: Class content with value $field has been accessed")
+                return field
+            }
+            set(value: String) {
+                // "field" behaves like a keyword and refers to the backing field behind the property.
+                field = value
+                println("Surveillance: Class content has been set to $value")
+            }
+    }
+
+    val instanceUnderSurveillance = ClassUnderSurveillance()
+    instanceUnderSurveillance.content = "New"
+    instanceUnderSurveillance.content
 }
 
 class ClassWithStaticMethod {
