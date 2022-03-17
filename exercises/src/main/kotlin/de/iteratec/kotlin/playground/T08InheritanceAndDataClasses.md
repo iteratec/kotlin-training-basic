@@ -28,11 +28,6 @@ Data classes are classes for which <b> hashCode, equals, toString </b>, destruct
 data class Example(val content: String)
 ```
 
-## Static methods and the companion object
-
-There are no static methods in Kotlin. Rather a class can have a companion object. That is basically a singleton instance of a class that is accessible under the same name as the origin class itself. 
-You can use its methods/properties without an instance of the origin class (like static properties/methods in Java). Instances of your origin class see the methods/properties of the companion object and can interact with them.
-
 ## Other remarks
 
 As in Java you can assign visibility modifiers to properties and methods. By default everything is public.

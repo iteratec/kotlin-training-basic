@@ -3,7 +3,7 @@ package de.iteratec.kotlin.playground
 import java.io.Serializable
 
 /**
- # Classes advanced
+ # Inheritance and data classes
  Requirements:
  - Classes
 
@@ -11,7 +11,7 @@ import java.io.Serializable
  - Inheritance basic syntax
  - open keyword
  - Overwriting methods
- - Companion objects
+ - Customizing getters and setters
  - Data classes
  */
 fun main() {
@@ -27,34 +27,7 @@ fun main() {
     }
 
     val runtimeException: RuntimeException = MyCustomRuntimeException("Panic mode activated!")
-
-    // So-called Data classes already come with built-in implementations of equals, hashCode (both by comparing all properties), toString and a useful copy-functionality.
-
-    data class Name(
-        val title: String?,
-        val firstName: String,
-        val middleName: String?,
-        val lastName: String
-    )
-
-    val name = Name("Dr. med", "Marlene", null, "Hippokrates")
-    println(name)
-    val nameAfterMarriage = name.copy(lastName = "Asklepios")
-    println(name)
-
-
-    // In Kotlin, there are no static properties/methods. They are replaced by the concept of a companion object.
-    // See ClassWithStaticMethod as an example. The companion object is a singleton instance of an anonymous inner class
-    // that is created automatically if existing.
-    // The important point is that the companion object is available under the same namespace as the origin class itself.
-    // Hence, accesses to properties and invocations of methods of the companion object behave exactly like accesses to
-    // static properties and accesses to static methods of the origin class would do.
-    // Declarations inside the origin class itself can reference properties/methods of the companion object.
-    ClassWithStaticMethod.printCountOfExistingInstances()
-    val instance1 = ClassWithStaticMethod()
-    ClassWithStaticMethod.printCountOfExistingInstances()
-    val instance2 = ClassWithStaticMethod()
-    ClassWithStaticMethod.printCountOfExistingInstances()
+    println(runtimeException)
 
     // Kotlin generates setters and getters automatically for properties however we can customize them.
     class ClassUnderSurveillance() {
@@ -74,17 +47,17 @@ fun main() {
     val instanceUnderSurveillance = ClassUnderSurveillance()
     instanceUnderSurveillance.content = "New"
     instanceUnderSurveillance.content
-}
 
-class ClassWithStaticMethod {
-    init {
-        countOfExistingInstances = countOfExistingInstances + 1
-    }
+    // So-called Data classes already come with built-in implementations of equals, hashCode (both by comparing all properties), toString and a useful copy-functionality.
+    data class Name(
+        val title: String?,
+        val firstName: String,
+        val middleName: String?,
+        val lastName: String
+    )
 
-    companion object {
-        var countOfExistingInstances = 0
-        fun printCountOfExistingInstances() {
-            println("For ClassWithStaticMethod $countOfExistingInstances many instances have been instantiated")
-        }
-    }
+    val name = Name("Dr. med", "Marlene", null, "Hippokrates")
+    println(name)
+    val nameAfterMarriage = name.copy(lastName = "Asklepios")
+    println(name)
 }

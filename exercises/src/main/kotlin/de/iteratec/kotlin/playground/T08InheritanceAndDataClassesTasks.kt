@@ -57,18 +57,6 @@ class ClassesAdvancedTasks {
     fun questionsOnDataClasses() {}
 
     /**
-     * ## Companion object
-     * Implement a "static" builder function for the Horse class using a companion object such that the test code below
-     * compiles and constructs the right horse
-     */
-    @Test
-    fun companionObject() {
-        // val horse = Horse.builder().withName("Trabi").withWeight(10).build()
-        // assertThat(horse.name, equalTo("Trabi"))
-        // assertThat(horse.weight, equalTo(10))
-    }
-
-    /**
      * ## Custom getters and setters
      * Customize getters and setters such that the tests become green.
      */
@@ -95,5 +83,3 @@ class ClassesAdvancedTasks {
         assertThat(secretHolder.message, equalTo(""))
     }
 }
-
-class Horse(val name: String, val weight: Int = 500)

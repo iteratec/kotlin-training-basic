@@ -11,12 +11,10 @@ import java.time.LocalDate
 
  Things to discuss:
  - sealed classes
- - objects
  - when & exhaustiveness
  */
 
 // Sealed classes can only be subclassed only in the same package.
-// In Kotlin, you can define singletons with the `object` keyword.
 sealed class ApplicationStatus
 object Healthy : ApplicationStatus()
 object TooLazyToDoWork : ApplicationStatus()
