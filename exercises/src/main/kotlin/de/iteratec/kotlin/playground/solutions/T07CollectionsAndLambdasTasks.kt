@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -21,7 +21,7 @@ class CollectionsAndLambdasTasks {
      * Initialize the property `familyMembers`, so it contains all family members listed above.
      * After that run the test `instantiatingCollections` to make sure, that the property is initialized correctly.
      */
-    val familyMembers: Set<FamilyMember> = emptySet()
+    val familyMembers: Set<FamilyMember> = setOf(Granny, Margret, Winston, Neville, Boris, Charles, Teresa)
 
     @Test
     fun instantiatingCollections() {
@@ -40,7 +40,7 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun singleMap() {
-        val namesOfFamilyMembers: List<String> = emptyList() // Replace with familyMembers.map { ... }
+        val namesOfFamilyMembers: List<String> = familyMembers.map { it.name }
         assertThat(namesOfFamilyMembers, hasItems("Elizabeth", "Margret", "Winston", "Neville", "Boris", "Charles", "Teresa"))
     }
 
@@ -50,7 +50,7 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun chainedOperations() {
-        val agesOfFamilyMembers: List<Int> = emptyList() // Replace with familyMembers...
+        val agesOfFamilyMembers: List<Int> = familyMembers.filter { it.alive }.sortedBy { it.age }.map { it.age }
         assertThat(agesOfFamilyMembers, equalTo(listOf(19, 25, 49, 52, 83)))
     }
 
@@ -61,7 +61,7 @@ class CollectionsAndLambdasTasks {
     @Test
     fun any() {
         fun isParentOfAnybody(allegedParent: FamilyMember, allegedChildren: Collection<FamilyMember>): Boolean {
-            return true // Implement me
+            return allegedChildren.any { it.knownParents.contains(allegedParent) }
         }
 
         assertThat(isParentOfAnybody(Winston, listOf(Charles, Boris)), equalTo(true));
@@ -74,7 +74,7 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun extractingMembers() {
-        val youngestFamilyMember = Granny // Replace this. Surely Granny is not the youngest one.
+        val youngestFamilyMember = familyMembers.minByOrNull { it.age } // or maxByOrNul { -it.age }
         assertThat(youngestFamilyMember!!.age, equalTo(19))
     }
 
@@ -85,7 +85,7 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun fold() {
-        val combinedAge = 0 // Replace with familyMembers.fold { ... }
+        val combinedAge = familyMembers.fold(0) { walkingSum, summand -> walkingSum + summand.age }
         assertThat(combinedAge, equalTo(368))
     }
 
@@ -100,7 +100,8 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun lazyEvaluation() {
-        val firstFamilyMemberAfterSomeRiskyMappingComputation = familyMembers.stream()
+        // Sequences
+        val firstFamilyMemberAfterSomeRiskyMappingComputation = familyMembers.asSequence()
             .map {
                 println("In first mapping function with element ${it.name}")
                 it
@@ -109,7 +110,30 @@ class CollectionsAndLambdasTasks {
                 println("In second mapping function with element ${it.name}")
                 if (it.age > 50) it else throw RuntimeException("Some accident happened")
             }
-            .findFirst().get()
+            .first()
+
+        // List: Throws exception
+/*    val firstFamilyMemberAfterSomeRiskyMappingComputation = familyMembers
+        .map {
+            println("In first mapping function with element ${it.name}")
+            it
+        }
+        .map {
+            println("In second mapping function with element ${it.name}")
+            if (it.age > 50) it else throw RuntimeException("Some accident happened")
+        } */
+
+        // Java streams
+/*    val firstFamilyMemberAfterSomeRiskyMappingComputation = familyMembers.stream()
+        .map {
+            println("In first mapping function with element ${it.name}")
+            it
+        }
+        .map {
+            println("In second mapping function with element ${it.name}")
+            if (it.age > 50) it else throw RuntimeException("Some accident happened")
+        }
+        .findFirst().get() */
 
         println(firstFamilyMemberAfterSomeRiskyMappingComputation.name)
     }

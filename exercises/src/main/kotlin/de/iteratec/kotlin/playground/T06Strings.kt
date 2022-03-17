@@ -2,10 +2,10 @@ package de.iteratec.kotlin.playground
 
 import java.util.Collections.singletonList
 
-/*
+/**
 Requirements:
-- Topic1_Functions
-- Topic3_MutabilityAndExpressions
+- Functions
+- MutabilityAndExpressions
 
 Things to explain as instructor:
 - String templates
@@ -31,42 +31,4 @@ fun main() {
             }
         """.trimIndent().replace(" ", "")
     println(multiLineString == uglyJson)
-
-    // Try it yourself
-
-    stringInterpolation()
-    multiLineString()
-}
-
-val prefix = "Prefix"
-val suffix = "suffix"
-
-/**
- * Task stringInterpolation
- * Replace the concatenation with a single Template String.
- */
-fun stringInterpolation() {
-    println("###Task stringInterpolation: Should print PrefixInfixSUFFIX")
-    println(prefix + "Infix" + suffix.uppercase())
-}
-
-/**
- * Task multilineString
- * Write the string below in more human-readable form using a multi-line string
- */
-fun multiLineString() {
-    println("###Task multiLineString")
-    val header = "Famous last words:\n"
-    val blankLine = "\n"
-    val firstLine = "Anna: \"It worked on my machine!\"\n"
-    val secondLine = "Sven: \"All tests are green. What could possibly go wrong?\""
-
-    val originalString = header + blankLine + firstLine + secondLine
-    println(originalString)
-
-    val multilineString = """
-        Place your content here
-    """.trimIndent()
-
-    println(originalString == multilineString)
 }
