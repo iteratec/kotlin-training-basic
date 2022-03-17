@@ -16,8 +16,6 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.6.0")
-    implementation("org.apache.pdfbox:pdfbox:2.0.25")
     implementation("junit:junit:4.13.2")
 }
 
@@ -36,7 +34,7 @@ sourceSets {
         java.srcDirs("src/main/kotlin")
     }
     test {
-        java.srcDirs("src/main/kotlin")
+        java.srcDirs("src/test/kotlin")
     }
 }
 

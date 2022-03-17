@@ -7,7 +7,7 @@ import org.junit.Test
 val prefix = "Prefix"
 val suffix = "suffix"
 
-class T06StringsTasks {
+class StringsTasks {
 
     /**
      * Task stringInterpolation
