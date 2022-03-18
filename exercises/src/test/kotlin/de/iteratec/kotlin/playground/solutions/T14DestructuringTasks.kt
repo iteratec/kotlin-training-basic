@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
@@ -16,6 +16,10 @@ enum class TypeOfSave {
 
 fun createOrUpdate(): BoilerplateResultClass {
     return BoilerplateResultClass(true, TypeOfSave.NEW)
+}
+
+fun createOrUpdateWithoutBoilerplateResultClass(): Pair<Boolean, TypeOfSave> {
+    return Pair(true, TypeOfSave.NEW)
 }
 
 class DestructuringTasks {
@@ -37,9 +41,9 @@ class DestructuringTasks {
         println(result.hasBeenSuccessful)
         println(result.typeOfSave)
 
-        // val (success, typeOfSave) = createOrUpdateWithoutBoilerplateResultClass()
-        // assertTrue(success)
-        // assertThat(typeOfSave, equalTo(TypeOfSave.NEW))
+        val (success, typeOfSave) = createOrUpdateWithoutBoilerplateResultClass()
+        assertTrue(success)
+        assertThat(typeOfSave, equalTo(TypeOfSave.NEW))
     }
 
     /**
