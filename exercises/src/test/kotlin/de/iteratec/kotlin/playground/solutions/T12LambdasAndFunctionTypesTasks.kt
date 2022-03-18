@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
@@ -17,7 +17,11 @@ class LambdasAndFunctionTypesTasks {
      */
     @Test
     fun lambdaBracketConvention() {
-        fun ifNot(condition: Boolean, codeBlock: Any) {}
+        fun ifNot(condition: Boolean, codeBlock: () -> Unit) {
+            if (!condition) {
+                codeBlock()
+            }
+        }
 
         ifNot(true) {
             fail("This should not be executed")
@@ -36,7 +40,7 @@ class LambdasAndFunctionTypesTasks {
      */
     @Test
     fun letAndNullSafety() {
-        fun wrapIntoList(input: Int?): List<Int> = emptyList()
+        fun wrapIntoList(input: Int?): List<Int> = input?.let { listOf(input) } ?: emptyList<Int>()
 
         assertTrue(wrapIntoList(null).isEmpty())
         assertThat(wrapIntoList(2), equalTo(listOf(2)))
@@ -55,8 +59,8 @@ class LambdasAndFunctionTypesTasks {
         val multiply = { factor1: Int, factor2: Int -> factor1 * factor2 }
         val concatenate = { string1: String, string2: String -> string1 + string2 }
 
-        /*fun <A, B, C> curry( function: ???, firstInput: ???): ??? {
-            return ???
+        fun <A, B, C> curry( function: (A, B) -> C, firstInput: A): (B) -> C {
+            return { function(firstInput, it)}
         }
 
         val multiplyWith3 = curry(multiply, 3)
@@ -64,6 +68,6 @@ class LambdasAndFunctionTypesTasks {
 
         val insultPrepender = curry(concatenate, "Hey, du Opfer! ")
         assertThat(insultPrepender("Wären Sie bitte so freundlich, mir den Tee zu reichen?"), equalTo("Hey, du Opfer! Wären Sie bitte so freundlich, mir den Tee zu reichen?"))
-        */
+
     }
 }
