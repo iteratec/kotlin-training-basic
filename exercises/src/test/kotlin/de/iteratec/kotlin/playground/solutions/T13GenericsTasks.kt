@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.junit.Test
 
@@ -16,7 +16,7 @@ class GenericsTasks {
             input
         }
         
-        //val stringToArbitrary: MyCustomFunctionInterface<String, Any?> = anyToAny
+        val stringToArbitrary: MyCustomFunctionInterface<String, Any?> = anyToAny
     }
 
     /**
@@ -27,25 +27,19 @@ class GenericsTasks {
      */
     @Test
     fun taskProducersAndConsumers() {
-/*        val myRuntimeExceptionProducer: Producer<RuntimeException> = ExceptionProducer
-        val runtimeException = myRuntimeExceptionProducer.emit()
-
         val myExceptionProducer: Producer<Exception> = RuntimeExceptionProducer
         val exception = myExceptionProducer.emit()
 
         val myRuntimeExceptionConsumer: Consumer<RuntimeException> = ExceptionConsumer
         myRuntimeExceptionConsumer.store(RuntimeException())
-
-        val myExceptionConsumer: Consumer<Exception> = RuntimeExceptionConsumer
-        myExceptionConsumer.store(Exception())*/
     }
 }
 
-abstract class Producer<T> {
+abstract class Producer<out T> {
     abstract fun emit(): T
 }
 
-abstract class Consumer<S> {
+abstract class Consumer<in S> {
     abstract fun store(input: S)
 }
 
@@ -71,6 +65,6 @@ object RuntimeExceptionConsumer : Consumer<RuntimeException>() {
     }
 }
 
-fun interface MyCustomFunctionInterface<I, O> {
+fun interface MyCustomFunctionInterface<in I, out O> {
     fun apply(input: I): O
 }

@@ -64,37 +64,3 @@ fun main() {
     copyListItemsA(mutableListOfStrings, mutableListOfAny)
     copyListItemsB(mutableListOfStrings, mutableListOfAny)
 }
-
-abstract class Producer<T> {
-    abstract fun emit(): T
-}
-
-abstract class Consumer<S> {
-    abstract fun store(input: S)
-}
-
-object ExceptionProducer : Producer<Exception>() {
-    override fun emit() = Exception()
-}
-
-object RuntimeExceptionProducer : Producer<RuntimeException>() {
-    override fun emit() = RuntimeException()
-}
-
-object ExceptionConsumer : Consumer<Exception>() {
-    var exception: Exception = Exception()
-    override fun store(input: Exception) {
-        exception = input
-    }
-}
-
-object RuntimeExceptionConsumer : Consumer<RuntimeException>() {
-    var exception: RuntimeException = RuntimeException()
-    override fun store(input: RuntimeException) {
-        exception = input
-    }
-}
-
-fun interface MyCustomFunctionInterface<I, O> {
-    fun apply(input: I): O
-}
