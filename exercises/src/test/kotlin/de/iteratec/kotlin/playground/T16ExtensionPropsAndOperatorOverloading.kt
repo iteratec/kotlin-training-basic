@@ -9,7 +9,7 @@ fun main() {
     val joinedList = list1 + list2
     println(joinedList)
 
-    // The + operator is overloaded for the Collection interface. In order t overload a particular operator, you need to
+    // The + operator is overloaded for the Collection interface. In order to overload a particular operator, you need to
     // define a function using the "operator" keyword and certain function name representing the operator.
     // For lists the signature is
 
@@ -17,7 +17,7 @@ fun main() {
 
     // You can also jump into the whole implementation by Strg+Click on the plus icon.
 
-    // Kotlin has only introduced an extension property to the List interface.
+    // Kotlin has also introduced an extension property to the List interface.
     println(list1.lastIndex)
 
     // The implementation/definition has the following syntax:
@@ -25,38 +25,7 @@ fun main() {
     // public val <T> List<T>.lastIndex: Int
     //    get() = this.size - 1
 
-    // In principal extension properties can aso have a
-    // set(type: Type) = run { ... }
-    // block. However since extension properties are implemented via static utility functions, you cannot really add an extra field to the existing class.
+    // The syntax is the same as when you customize getter and setter of a variable.
+    // However since extension properties are implemented via static utility functions, you cannot really add an extra field to the existing class.
     // Hence, the setter has to work with already existing fields.
-
-    // Try it yourself
-    taskExtensionProperties()
-    taskOperatorOverloading()
 }
-
-/**
- * taskExtensionProperties
- * Add an extension property kelvin to temperature in order to read/write the temperature in Kelvin.
- */
-fun taskExtensionProperties() {
-    println("#### Task taskExtensionProperties")
-    val temperature = Temperature(10f)
-/*    temperature.kelvin = 300f
-    println(temperature.kelvin)*/
-    println(temperature)
-}
-
-/**
- * taskExtensionProperties
- * Add overator overloading to Temperature such that -temperature alternates the sign of the degree in celsius (the name of the function has to be unaryMinus).
- */
-fun taskOperatorOverloading() {
-    println("#### Task taskOperatorOverloading")
-    val temperature = Temperature(10f)
-    // println(-temperature)
-}
-
-data class Temperature(
-    var celsius: Float
-)
