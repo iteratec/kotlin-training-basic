@@ -5,15 +5,15 @@ package de.iteratec.kotlin.playground
 Requirements: none
 
 Things to discuss:
+- Java to Kotlin Converter in IntelliJ (Right click on File -> Convert Java file to Kotlin file)
 - Inspect Kotlin bytecode and decompiled Java class (Shift, Shift -> Show Kotlin Bytecode -> Decompile)
 - Comparison with main-function in Java
 - Explain function syntax and Unit in Kotlin
 - Invocation with positional or named arguments
 - One-liner syntax
 - Default values
-- Java to Kotlin Converter in IntelliJ (Right click on File -> Convert Java file to Kotlin file)
  */
-fun main(args: Array<String>) {
+fun main(args: Array<String>): Unit {
     println("Hello Kotlin!")
     println("Called with args" + args)
 
@@ -30,12 +30,12 @@ fun main(args: Array<String>) {
     simpleExampleFunctionWithDefaultValues(argument1 = "argument1", argument2 = "")
 }
 
-private fun simpleExampleFunction(argument1: String, argument2: String): String {
+fun simpleExampleFunction(argument1: String, argument2: String): String {
     return argument1 + argument2
 }
 
-private fun simpleExampleFunctionInOneLinerSyntax(argument1: String, argument2: String) = argument1 + argument2
+fun simpleExampleFunctionInOneLinerSyntax(argument1: String, argument2: String) = argument1 + argument2
 
-private fun simpleExampleFunctionWithDefaultValues(argument1: String = "", argument2: String = ""): String {
+fun simpleExampleFunctionWithDefaultValues(argument1: String = "", argument2: String = ""): String {
     return argument1 + argument2
 }
