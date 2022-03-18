@@ -2,7 +2,7 @@ package de.iteratec.kotlin.playground
 
 import org.junit.Test
 
-class FunctionsExercises {
+class T01FunctionsTasks {
 
     /**
      * ## Function syntax

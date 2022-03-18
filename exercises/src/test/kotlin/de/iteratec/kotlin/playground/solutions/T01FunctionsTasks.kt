@@ -8,7 +8,7 @@ fun addAll(first: Int, second: Int, third: Int = 0, fourth: Int = 0): Int {
 
 fun addAllInOneLinerSyntax(first: Int, second: Int, third: Int = 0, fourth: Int = 0) = first + second + third + fourth
 
-class FunctionsExercises {
+class FunctionsTasks {
 
     /**
      * ## Function syntax
