@@ -63,6 +63,6 @@ class DestructuringTasks {
     }
 
     operator fun String.component1(): Char? {
-        return 'a'
+        return this.firstOrNull()
     }
 }
