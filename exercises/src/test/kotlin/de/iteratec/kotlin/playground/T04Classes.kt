@@ -10,18 +10,19 @@ Things to discuss:
  - Constructor
  - Properties
  - Instantiation
+ - Default parameters in constructors
  */
 
 // This is SimpleClassJava converted to Kotlin.
 //
 // Properties of a Kotlin class can be declared as val or var.
-// Kotlin automatically creates a getter, setter and private backing field for var.
+// Kotlin automatically creates a getter, setter and backing field for var.
 // Kotlin automatically creates a getter and private backing field for val.
 //
 // Kotlin forces you to define the signature of the arguments of your so-called primary constructor next to the class name
 // Content of init blocks and variable assignments in property definitions inside the class body form the body of this constructor.
-private class SimpleClass constructor(readOnlyProperty: String, mutableProperty: Int) {
-    var readOnlyProperty: String = readOnlyProperty
+class SimpleClass constructor(readOnlyProperty: String, mutableProperty: Int) {
+    val readOnlyProperty: String = readOnlyProperty
     var mutableProperty: Int = mutableProperty
 
     init {
@@ -33,7 +34,7 @@ private class SimpleClass constructor(readOnlyProperty: String, mutableProperty:
     }
 }
 
-private class SimpleClassBestPractice (val readOnlyProperty: String, var mutableProperty: Int) {
+class SimpleClassBestPractice (val readOnlyProperty: String, var mutableProperty: Int) {
     init {
         println("In constructor")
     }

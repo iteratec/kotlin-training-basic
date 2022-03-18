@@ -59,5 +59,5 @@ fun main() {
     val name = Name("Dr. med", "Marlene", null, "Hippokrates")
     println(name)
     val nameAfterMarriage = name.copy(lastName = "Asklepios")
-    println(name)
+    println(nameAfterMarriage)
 }
