@@ -1,5 +1,7 @@
 package de.iteratec.kotlin.playground
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Test
 
 class SealedClassesAndWhenTasks {
@@ -24,16 +26,15 @@ class SealedClassesAndWhenTasks {
     object FriedrichEbert: GermanChancellor()
     object MartinSonneborn: GermanChancellor()
 
-
     /**
      * ## When
      * Change the implementation of "getParty" to use a "when" expression.
      */
     @Test
     fun taskWhen() {
-        println("Friedrich Ebert is member of ${FriedrichEbert.getParty()}")
-        println("Dr. Angela Merkel is member of ${Angie.getParty()}")
-        println("Martin Sonneborn is member of ${MartinSonneborn.getParty()}")
+        assertThat(FriedrichEbert.getParty(), equalTo(GermanParty.SPD))
+        assertThat(Angie.getParty(), equalTo(GermanParty.CDU))
+        assertThat(MartinSonneborn.getParty(), equalTo(GermanParty.DIE_PARTEI))
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
         // Now, imagine YOU become German chancellor tomorrow. Great :).
         // What different consequences does this addition of a new member of GermanChancellor have for "getParty" depending on whether we used a else-branch or not.

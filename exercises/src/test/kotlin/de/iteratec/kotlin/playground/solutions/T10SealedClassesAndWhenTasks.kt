@@ -1,5 +1,7 @@
 package de.iteratec.kotlin.playground.solutions
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Test
 
 class SealedClassesAndWhenTasks {
@@ -29,9 +31,9 @@ class SealedClassesAndWhenTasks {
      */
     @Test
     fun taskWhen() {
-        println("Friedrich Ebert is member of ${FriedrichEbert.getParty()}")
-        println("Dr. Angela Merkel is member of ${Angie.getParty()}")
-        println("Martin Sonneborn is member of ${MartinSonneborn.getParty()}")
+        assertThat(FriedrichEbert.getParty(), equalTo(GermanParty.SPD))
+        assertThat(Angie.getParty(), equalTo(GermanParty.CDU))
+        assertThat(MartinSonneborn.getParty(), equalTo(GermanParty.DIE_PARTEI))
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
         // -> The compiler should complain because there are cases for which no return value of type GermanParty can be constructed.
 
