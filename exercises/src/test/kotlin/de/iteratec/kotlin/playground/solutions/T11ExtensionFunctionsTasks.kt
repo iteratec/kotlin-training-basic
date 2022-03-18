@@ -1,4 +1,4 @@
-package de.iteratec.kotlin.playground
+package de.iteratec.kotlin.playground.solutions
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
@@ -6,11 +6,12 @@ import org.junit.Test
 
 class ExtensionFunctionsTasks {
 
-    fun replaceUmlaute(input: String): String = input
-        .replace("ä", "ae")
-        .replace("ö", "oe")
-        .replace("ü", "ue")
-        .replace("ß", "ss")
+    fun String?.replaceUmlaute(): String = this
+        ?.replace("ä", "ae")
+        ?.replace("ö", "oe")
+        ?.replace("ü", "ue")
+        ?.replace("ß", "ss")
+        ?: ""
 
     /**
      * ## Extension function
@@ -19,7 +20,7 @@ class ExtensionFunctionsTasks {
     @Test
     fun extensionFunction() {
         val myString = "Tränenüberströmter Strauß"
-        // assertThat(myString.replaceUmlaute(), equalTo("Traenenueberstroemter Strauss"))
+        assertThat(myString.replaceUmlaute(), equalTo("Traenenueberstroemter Strauss"))
     }
 
     /**
@@ -29,6 +30,6 @@ class ExtensionFunctionsTasks {
     @Test
     fun extensionFunctionAndNullSafety() {
         val nullInsteadOfAString = null
-        // assertThat(nullInsteadOfAString.replaceUmlaute(), equalTo(""))
+        assertThat(nullInsteadOfAString.replaceUmlaute(), equalTo(""))
     }
 }
