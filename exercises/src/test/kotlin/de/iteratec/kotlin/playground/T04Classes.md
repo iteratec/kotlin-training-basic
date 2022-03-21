@@ -3,27 +3,31 @@
 ## Basic syntax
 
 ```kotlin
-class Example(val automaticallyGeneratedReadonlyPropertyOfClass: Type, var automaticallyGeneratedMutablePropertyOfClass: Type, furtherArgumentOfPrimaryConstructor: Type) {
-        // This is a property declaration and an assignment. The latter one becomes part of the body of the primary constructor.
-        val anotherPropertyOfClass: Type = furtherArgumentOfPrimaryConstructor
-    
-        init {
-            println("This initialization block becomes part of the body of the primary constructor")        
-        }
-    
-        fun normalMethodLikeInJava(): ReturnType {
-            // body
-        }
+class Example(
+    val immutableProperty: Type,
+    var mutableProperty: Type,
+    nonPropertyConstructorArg: Type
+) {
+    // This is a property declaration and an assignment. The latter one becomes part of the body of the primary constructor.
+    val anotherProperty: String = nonPropertyConstructorArg.toString()
+
+    init {
+        println("This initialization block becomes part of the body of the primary constructor")        
     }
+
+    fun normalMethodLikeInJava(): ReturnType {
+        // body
+    }
+}
 
 // There is no "new" keyword in Kotlin for instantiating a class
 val instance = Example(arg1, arg2, arg3)
 
 // Invoking the getter
-instance.automaticallyGeneratedReadonlyPropertyOfClass
+instance.immutableProperty
 
 // Invoking the setter
-instance.automaticallyGeneratedMutablePropertyOfClass = something
+instance.mutableProperty = something
 ```
 
 When declaring a class, the class name is directly followed by the argument signature of the primary constructor (the list of arguments in round brackets).

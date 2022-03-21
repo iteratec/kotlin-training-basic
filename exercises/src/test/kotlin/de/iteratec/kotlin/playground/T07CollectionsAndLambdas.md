@@ -6,7 +6,7 @@
 
 Kotlin supports functional-programming style by supplying functions as arguments to other functions. Functions can be passed in the following form
 as an argument:
-+ Implementations of SAM interfaces (= an interface with exactly one abstract method; exists also in Java)
++ Implementations of SAM interfaces (= single abstract method interface; exists also in Java)
 + function types
 
 Usually one uses so-called lambdas functions or method references which are converted to one of the upper by the compiler automatically.

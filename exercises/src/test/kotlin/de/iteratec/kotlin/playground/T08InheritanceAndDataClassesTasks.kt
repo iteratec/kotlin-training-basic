@@ -49,7 +49,8 @@ class ClassesAdvancedTasks {
     }
 
     /**
-     * The data class below represents a generic role-play character with differents stats.
+     * ## Data classes copy()
+     * The data class below represents a generic role-play character with different stats.
      * Adjust the code to use the copy() method to make out rogue a bit more charismatic by increasing
      * the 'char' attribute.
      */
