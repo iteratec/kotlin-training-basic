@@ -12,7 +12,7 @@ class SealedClassesAndWhenTasks {
 
     sealed class GermanChancellor {
         fun getParty(): GermanParty {
-            return if (this is FriedrichEbert) {
+            return if (this is PhilippScheidemann) {
                 GermanParty.SPD
             } else if (this is Angie) {
                 GermanParty.CDU
@@ -23,7 +23,7 @@ class SealedClassesAndWhenTasks {
     }
 
     object Angie : GermanChancellor()
-    object FriedrichEbert: GermanChancellor()
+    object PhilippScheidemann: GermanChancellor()
     object MartinSonneborn: GermanChancellor()
 
     /**
@@ -32,7 +32,7 @@ class SealedClassesAndWhenTasks {
      */
     @Test
     fun taskWhen() {
-        assertThat(FriedrichEbert.getParty(), equalTo(GermanParty.SPD))
+        assertThat(PhilippScheidemann.getParty(), equalTo(GermanParty.SPD))
         assertThat(Angie.getParty(), equalTo(GermanParty.CDU))
         assertThat(MartinSonneborn.getParty(), equalTo(GermanParty.DIE_PARTEI))
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
