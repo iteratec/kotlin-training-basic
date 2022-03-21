@@ -9,7 +9,10 @@ package de.iteratec.kotlin.playground
 
  Things to discuss:
  - Null-safety in Kotlin
- - Safe-call and Elvis operators
+ - Safe-call and Elvis operators & chaining
+ - Smart casts
+ - Double-bang operator
+ - Platform types, annotations & JPA pitfalls
  */
 fun main() {
     // Kotlin is null-safe. In a variable of type Type we cannot save "null". In a variable of type "Type?" we can assign "null".

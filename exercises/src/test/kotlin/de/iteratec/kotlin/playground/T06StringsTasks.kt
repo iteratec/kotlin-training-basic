@@ -11,11 +11,11 @@ class StringsTasks {
 
     /**
      * Task stringInterpolation
-     * Replace the left side of the assertion with a single Template String.
+     * Replace the left side of the assertion with a single Template String, so it's equal to the expected value.
      */
     @Test
     fun stringInterpolation() {
-        assertThat("",equalTo(prefix + "Infix" + suffix.uppercase()))
+        assertThat("", equalTo(prefix + "Infix" + suffix.uppercase()))
     }
 
     /**

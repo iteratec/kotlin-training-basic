@@ -10,12 +10,12 @@ class ClassesAdvancedTasks {
     /**
      * ## Inheritance
      * Make IteratecEmployee inherit Employee and override the method such that it prints "Heiko likes his/her job. But holiday is still better ;)".
-     * The open keyword means that things can be subclassed/overidden. By default classes/methods/properties cannot be overidden.
+     * Use the open keyword to enable inheritance & method overriding.
      */
     @Test
     fun inheritance() {
-        open class Employee(val name: String) {
-            open fun getStatus() = "$name hates his/her job and longs for holiday"
+        class Employee(val name: String) {
+            fun getStatus() = "$name hates his/her job and longs for holiday"
         }
 
         class IteratecEmployee(val name: String) {
@@ -49,7 +49,25 @@ class ClassesAdvancedTasks {
     }
 
     /**
-     * Think about the following questions
+     * The data class below represents a generic role-play character with differents stats.
+     * Adjust the code to use the copy() method to make out rogue a bit more charismatic by increasing
+     * the 'char' attribute.
+     */
+    @Test
+    fun dataClassCopyMethod() {
+        data class RpgCharacter(val str: Int, val dex: Int, val int: Int, val char: Int)
+        val rogue = RpgCharacter(str = 5, dex = 12, int = 8, char = 3)
+        val charismaticRogue = RpgCharacter(str = rogue.str, dex = rogue.dex, int = rogue.int, char = 20)
+
+        assertThat(charismaticRogue.str, equalTo(rogue.str))
+        assertThat(charismaticRogue.dex, equalTo(rogue.dex))
+        assertThat(charismaticRogue.int, equalTo(rogue.int))
+        assertThat(charismaticRogue.char, equalTo(20))
+    }
+
+    /**
+     * Think about the following questions:
+     *
      * One could be tempted to use data classes all the time. Think of situations when it is better not to use a data class.
      * Can you imagine why data classes are not allowed to be subclassed?
      */

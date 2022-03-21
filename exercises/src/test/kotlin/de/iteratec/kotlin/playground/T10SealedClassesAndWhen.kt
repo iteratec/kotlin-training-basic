@@ -14,7 +14,7 @@ import java.time.LocalDate
  - when & exhaustiveness
  */
 
-// Sealed classes can only be subclassed only in the same package.
+// Sealed classes can only be subclassed only in the same package (since Kotlin 1.5).
 sealed class ApplicationStatus
 object Healthy : ApplicationStatus()
 object TooLazyToDoWork : ApplicationStatus()
@@ -43,6 +43,6 @@ fun handleApplicationStatus(status: ApplicationStatus) {
 
 fun main() {
     handleApplicationStatus(Healthy)
-    handleApplicationStatus(RanIntoException(RuntimeException("Database is in vacation and not available")))
+    handleApplicationStatus(RanIntoException(exception = RuntimeException("Database is in vacation and not available")))
     handleApplicationStatus(TooLazyToDoWork)
 }

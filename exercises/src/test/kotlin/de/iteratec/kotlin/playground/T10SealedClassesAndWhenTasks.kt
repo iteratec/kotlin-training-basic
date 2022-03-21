@@ -36,7 +36,8 @@ class SealedClassesAndWhenTasks {
         assertThat(Angie.getParty(), equalTo(GermanParty.CDU))
         assertThat(MartinSonneborn.getParty(), equalTo(GermanParty.DIE_PARTEI))
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
-        // Now, imagine YOU become German chancellor tomorrow. Great :).
-        // What different consequences does this addition of a new member of GermanChancellor have for "getParty" depending on whether we used a else-branch or not.
+        // Now, imagine YOU become German chancellor tomorrow and add an object representing you. Great :).
+        // What different consequences does this addition of a new member of GermanChancellor have for "getParty"
+        // depending on whether we used an else-branch or not.
     }
 }

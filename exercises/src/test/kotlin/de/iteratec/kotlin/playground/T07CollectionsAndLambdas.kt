@@ -12,28 +12,24 @@ package de.iteratec.kotlin.playground
  - Collection transformations & lambdas
  */
 fun main() {
-    // Kotlin has its own collection hierarchy that is very similar to Java and uses the analogous Java collections under the hood.
-    // Normally you instantiate collections via factory methods of the form "<CollectionType>Of(...)"
+    // Kotlin collections can be instantiated via factory methods of the form "<CollectionType>Of(...)"
     val alphabet: List<Char> = listOf('a', 'b', 'c')
     val words: MutableList<String> = mutableListOf("Rentner", "Lehrer", "Student")
 
-    // Collections normally offer no methods to alter the members after the initialization. Only their subclasses prefixed
-    // with "Mutable" offer this functionality.
+    // Collections are immutable per default. Use mutable factory methods to instantiate mutable collections.
     words.add("IT-Berater")
     // the following does not compile
     // alphabet.add('ü')
 
-    // The Filter-Map-Reduce-Pattern can be used on collections directly. Java streams are rarely needed in Kotlin.
-    // filter, map, reduce, ... are methods already equipped to the Collection interface.
-    // As an argument they accept a method reference or lambda
+    // Transformations can be directly used on the collection. They usually accept a lambda as a parameter.
     val a = words.map(String::uppercase) // method reference
     val b = words.map({ word ->
         println("In lambda body")
         word.uppercase()
     }) // lambda: Last line evaluated gets returned automatically
-    val c = words.map() { word -> word.uppercase() } // Convention: a lambda as the last argument of a function call can be taken out of the argument list
+    val c = words.map({ word -> word.uppercase() }) // Lambda as the last argument of a function call can be taken out of the argument list
     val d = words.map { word -> word.uppercase() }
-    val e = words.map { it.uppercase() } // Convention: For a lambda with only one argument, you can omit the argument and reference it with it
+    val e = words.map { it.uppercase() } // If lambda has only one argument, you can refer to it with 'it'
 
     println(a)
     println(b)
@@ -63,7 +59,9 @@ fun main() {
     // There are also functions to extract members of collections
     // first: Extracts the first element of the collection
     println("First: ${words.first()}")
-    // maxByOrNull: Searches the maximum of all elements of the collection by applying the lambda and using the natural ordering on the return type (which has to implement Comparable).
+
+    // maxByOrNull: Searches the maximum of all elements of the collection by applying the lambda and using the natural
+    // ordering on the return type (which has to implement Comparable).
     println("maxByOrNull: ${words.maxByOrNull { it.length }}")
 }
 

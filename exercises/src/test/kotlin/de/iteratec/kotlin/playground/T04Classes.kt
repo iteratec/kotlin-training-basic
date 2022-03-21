@@ -7,8 +7,9 @@ package de.iteratec.kotlin.playground
  - Mutability and expressions
 
 Things to discuss:
- - Constructor
+ - Primary & secondary constructors
  - Properties
+ - Shorthand for properties in constructor
  - Instantiation
  - Default parameters in constructors
  */
@@ -56,6 +57,7 @@ fun main() {
     //Behind the scenes a setter is called.
     simpleClass.mutableProperty = 10
     simpleClassBestPractice.mutableProperty = 10
+
     // Compile error because for "val" no setters are generated:
     // simpleClass.readOnlyProperty = "reassigned"
 

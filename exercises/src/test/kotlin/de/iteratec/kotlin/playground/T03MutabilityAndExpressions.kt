@@ -15,8 +15,6 @@ fun main() {
 
     // Variables defined with the "val" keyword are read-only (similar to final in Java). Reassignment is impossible.
     val readOnlyStringVariable: String = "string"
-    // Reassignment would result in a compilation error.
-    // readOnlyString = "reassigned"
 
     // Variables defined with the "var" keyword can be reassigned.
     var mutableStringVariable: String = "string"
