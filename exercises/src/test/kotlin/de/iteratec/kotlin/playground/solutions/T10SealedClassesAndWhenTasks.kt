@@ -24,7 +24,6 @@ class SealedClassesAndWhenTasks {
     object PhilippScheidemann: GermanChancellor()
     object MartinSonneborn: GermanChancellor()
 
-
     /**
      * ## When
      * Change the implementation of "getParty" to use a "when" expression.
@@ -37,8 +36,9 @@ class SealedClassesAndWhenTasks {
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
         // -> The compiler should complain because there are cases for which no return value of type GermanParty can be constructed.
 
-        // Now, imagine YOU become German chancellor tomorrow. Great :).
-        // What different consequences does this addition of a new member of GermanChancellor have for "getParty" depending on whether we used a else-branch or not.
+        // Now, imagine YOU become German chancellor tomorrow and add an object representing you. Great :).
+        // What different consequences does this addition of a new member of GermanChancellor have for "getParty"
+        // depending on whether we used an else-branch or not?
         // -> Without the else-branch this is safer. Otherwise we might forget to update the function and run in the else-branch which could be an error.
     }
 }

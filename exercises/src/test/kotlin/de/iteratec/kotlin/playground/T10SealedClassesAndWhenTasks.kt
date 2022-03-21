@@ -38,6 +38,6 @@ class SealedClassesAndWhenTasks {
         // Did you use an else-Branch for your implementation? What happens if you delete your else-branch?
         // Now, imagine YOU become German chancellor tomorrow and add an object representing you. Great :).
         // What different consequences does this addition of a new member of GermanChancellor have for "getParty"
-        // depending on whether we used an else-branch or not.
+        // depending on whether we used an else-branch or not?
     }
 }

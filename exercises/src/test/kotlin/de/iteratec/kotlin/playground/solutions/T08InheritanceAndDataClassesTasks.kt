@@ -10,7 +10,7 @@ class ClassesAdvancedTasks {
     /**
      * ## Inheritance
      * Make IteratecEmployee inherit Employee and override the method such that it prints "Heiko likes his/her job. But holiday is still better ;)".
-     * The open keyword means that things can be subclassed/overidden. By default classes/methods/properties cannot be overidden.
+     * Use the open keyword to enable inheritance & method overriding.
      */
     @Test
     fun inheritance() {
@@ -69,7 +69,8 @@ class ClassesAdvancedTasks {
     }
 
     /**
-     * Think about the following questions
+     * Think about the following questions:
+     *
      * One could be tempted to use data classes all the time. Think of situations when it is better not to use a data class.
      * Can you imagine why data classes are not allowed to be subclassed?
      */

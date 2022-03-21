@@ -15,7 +15,7 @@ class NullSafetyTasks {
     /**
      * ## Nullable values in classes
      * ExampleClass is using the Java system of null-safety, the Optional-wrapper. Replace it by a nullable String
-     * and refactor its usages?
+     * and refactor its usages.
      * Why is the Kotlin way better than using an Optional?
      */
     @Test
@@ -51,7 +51,7 @@ class NullSafetyTasks {
      * access. You can assign platform values to nullable or non-nullable variables.
      *
      * Execute the test & see what happens 😉.
-     * What is the inferred type of lucy (Strg + Q)? (then: how do we fix this?)
+     * What is the inferred type of lucy (Strg + Q)? How can we fix this?
      */
     @Test
     fun platformTypes() {

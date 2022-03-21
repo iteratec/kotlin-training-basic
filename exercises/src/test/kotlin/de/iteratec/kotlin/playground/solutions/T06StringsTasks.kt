@@ -7,11 +7,11 @@ import org.junit.Test
 val prefix = "Prefix"
 val suffix = "suffix"
 
-class T06StringsTasks {
+class StringsTasks {
 
     /**
      * Task stringInterpolation
-     * Replace the left side of the assertion with a single Template String.
+     * Replace the left side of the assertion with a single Template String, so it's equal to the expected value.
      */
     @Test
     fun stringInterpolation() {
