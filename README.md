@@ -12,16 +12,18 @@ However we do not outline most of things that work exactly as in Java. For examp
 
 ## How to use this training
 
-We recommend to use IntelliJ out of inconvenience. First build everywthing running ./gradlew build (IntelliJ might do this automatically)
+We recommend to use IntelliJ out of inconvenience. First build everywthing running ./gradlew build or ./mvnw verify 
+(IntelliJ might do this automatically). There might be some failing tests. As long as not all tests are failing, everything is ok.
 
-Navigate to the exercises module. We have distributed the content into smaller topics. Each topic has an exercise file containg the exercises and all instructions.
-The exercises can be started by starting the corresponding main-function in each file (simply click on Play-button next to the function in IntelliJ).
+Navigate to the exercises module. We have distributed the content into smaller topics.
+Normally each topic has one Kotlin demo file where new concepts will be explained by the tutor. 
+Each topic has an exercise file (name contains "Tasks") containing the exercises, which are implemented as unit tests.
 
-There is no automatic checking whether an exercise has bee solved successfully. Check your solution by examining the log output and potentially adding further log lines.
+Some exercise tests are already green. This means you have to verify your solution by yourself. Check your solution by examining the log output and potentially adding further log lines.
 You can also compare your code with the solution folder.
 
 Most topics contain also a theory file. These contain explanations in different wording. Using them is optional.
-Exercise files normally explain and introduce new things and ideally are presented by a tutor from iteratec.
+The demo files together with the explanations from the tutor should normally be sufficient.
 
 Exercises can be done out of order. However some are based on previous knowledge. Consult the exercise header to find out about the prerequisites.
 
