@@ -84,7 +84,7 @@ class T17CoroutinesTasks {
                             // launch is another Coroutine builder which starts a Coroutine and returns a Job instance. Unlike asnyc it symbolizes a computation where the result is not needed anymore and we only need to know if it has finished or not.
                             launch {
                                 delayedComputation(it * 1000L)
-                                this@coroutineScope.coroutineContext.cancel()
+                                this@coroutineScope.cancel()
                             }
                         }
                     }
