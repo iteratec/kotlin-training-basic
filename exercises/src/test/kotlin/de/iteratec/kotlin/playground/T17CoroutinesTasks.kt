@@ -11,6 +11,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.concurrent.atomic.AtomicLong
 
 // VERY IMPORTANT
 // Change the Run configuration of these tests in the way that you add the VM option "-Dkotlinx.coroutines.debug".
@@ -48,7 +49,8 @@ class T17CoroutinesTasks {
     @Test
     fun structuredConcurrencyTask() {
         fun structuredConcurrency(): Long {
-            var result = 0L
+            // Using a thread-safe type
+            var result: AtomicLong = AtomicLong(0L)
             runBlocking {
                 try {
                     val job = launch {
@@ -64,7 +66,7 @@ class T17CoroutinesTasks {
                 }
             }
 
-            return result
+            return result.get()
         }
 
 
