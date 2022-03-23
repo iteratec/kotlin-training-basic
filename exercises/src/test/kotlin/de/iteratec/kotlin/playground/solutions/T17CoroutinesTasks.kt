@@ -1,53 +1,33 @@
 package de.iteratec.kotlin.playground.solutions
 
+import de.iteratec.kotlin.playground.delayedComputation
+import de.iteratec.kotlin.playground.measureExecutionTime
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertTrue
 import org.junit.Test
-
-/*Coroutines are Kotlins concept for concurrent and parallel programming. They can be imagined as being light-weight threads.
-
-A coroutine is "running" code that can be suspended at any time and later be resumed. The idea is the following: A coroutine can be suspended or suspend itself
-(for instance when being idle and waiting for an API call to return). Suspending a coroutine does not block the thread executing the coroutine.
-Hence the thread can do other work. Later some thread can continue running the suspended coroutine.
-
-Functions that can suspend need to be marked with the <b> suspend </b> modifier. They can be only called out of other suspend functions and only executed in coroutines.
-*/
-
-// delay suspends itself. Therefore delayedComputation has to feature the "suspend" keyword.
-suspend fun delayedComputation(delayTime: Long = 2000L): Int {
-    println("Started computation in thread ${Thread.currentThread().name}")
-    delay(delayTime)
-    println("Finished computation in thread ${Thread.currentThread().name}")
-    return 1
-}
 
 // VERY IMPORTANT
 // Change the Run configuration of these tests in the way that you add the VM option "-Dkotlinx.coroutines.debug".
 // Then you always see which coroutine is currently logging a statement.
-
 class T17CoroutinesTasks {
+
+    // We are making two independent calls that each take one second and combine the results. That should be possible in less than 2 seconds with a minor adaption. Try to find this improvement.
     @Test
     fun startMultipleComputationsConcurrentlyTask() {
         fun startMultipleComputationsConcurrently() {
-            // runBlocking bridges the normal world and the coroutine world in Kotlin. It blocks the current thread and starts a coroutine that runs the code in its body.
-            // runBlocking blocks until the coroutine is finished.
             runBlocking {
-                println("Top-level coroutine started in ${Thread.currentThread().name}")
-                // async is a Coroutine builder and starts a new coroutine executing the code in its body. Nesting coroutines inside each other is normal. It is called structured concurrency.
-                // We will see in a later exercise why this is useful. async returns a Deferred<T> which can be compared to Promise in Javascript. An instance of Deferred can be awaited which suspends
-                // the coroutine it is called in until the result is available.
-                val deferredResult1: Deferred<Int> = async {
+                val deferredResult1: Deferred<Long> = async {
                     delayedComputation()
                 }
-                val deferredResult2: Deferred<Int> = async {
+                val deferredResult2: Deferred<Long> = async {
                     delayedComputation()
                 }
 
@@ -58,33 +38,26 @@ class T17CoroutinesTasks {
             }
         }
 
-        // Look at your console when running the test. The coroutines inform you on which thread they are running and what there name/identity is.
-        // We are making two independent calls that each take 2 seconds and combine the results. That should be possible in less than 3 seconds with a minor adaption. Try to find this improvement.
         val executionTime = measureExecutionTime { startMultipleComputationsConcurrently() }
         println("Execution time: $executionTime")
-        assertTrue(executionTime <= 3000)
+        assertTrue(executionTime <= 1500)
     }
 
+    // We are starting 5 asynchronous coroutines simultaneously (see deferredResults). Stop all coroutines when the first one is completed successfully.
+    // You can cancel a job from inside with coroutineScope.cancel() on an appropriate coroutineContext.
+    // Assign the result of the first completed async task as the return value of structuredConcurrency.
     @Test
     fun structuredConcurrencyTask() {
-        fun structuredConcurrency() {
-            // Imagine we are writing frontend code. The main thread handles the UI and another thread with a lot of coroutines is calling APIs to provide the necessary data.
-            // Sometimes the user leaves the current sub-page and we can basically abort the data-fetching coroutines. We certainly do not want to abort every coroutine by hand.
-            // For that purpose we have the concept of structured concurrency. We can use the "coroutineScope" Coroutine builder (The coroutine scope is basically the configuration object of a coroutine).
-            // This is creating a new coroutine (lets call it parent). When launching other coroutines inside parent, parent waits for all of them to finish.
-            // On the other hand, when we abort parent, then parent is trying to abort all children.
-            // A Coroutine can be aborted by calling the coroutineContext.cancel() method on its CoroutineScope. That throws a CancellationException.
-            // The following code starts five Jobs that each take different time. Abort all Jobs when the first one finished delayedComputation
+        fun structuredConcurrency(): Long {
+            var result = 0L
             runBlocking {
-                println("Top-level coroutine started in ${Thread.currentThread().name}")
                 try {
-                    coroutineScope {
+                    val job = launch {
                         println("Started computation in ${Thread.currentThread().name}")
-                        val jobs = (1..5).map {
-                            // launch is another Coroutine builder which starts a Coroutine and returns a Job instance. Unlike asnyc it symbolizes a computation where the result is not needed anymore and we only need to know if it has finished or not.
-                            launch {
-                                delayedComputation(it * 1000L)
-                                this@coroutineScope.cancel()
+                        val deferredResults = (1..5).map {
+                            async {
+                                result = delayedComputation(it * 1000L)
+                                this@launch.cancel()
                             }
                         }
                     }
@@ -92,41 +65,17 @@ class T17CoroutinesTasks {
                     println("Cancelled remaining computations in ${Thread.currentThread().name}")
                 }
             }
+
+            return result
         }
 
-        val executionTime = measureExecutionTime { structuredConcurrency() }
+
+        var result = 0L
+        val executionTime = measureExecutionTime {
+            structuredConcurrency().also { result = it }
+        }
         println("Execution time: $executionTime")
+        assertThat(result, equalTo(1000L))
         assertTrue(executionTime <= 2000)
     }
-
-    @Test
-    fun parallelComputingTask() {
-        // Maybe you have realized that we have only done concurrent programming but not parallel one. How can we distribute coroutines across different threads?
-        // The thread distribution is managed by the Dispatcher which is situated in the CoroutineScope.
-        // When launching a new Coroutine, its own CoroutineScope is created and basically inherits the configuration of the scope of its parent. This is another
-        // advantage of structured concurrency. We can run multiple coroutines but only have to configure a parent coroutine.
-        fun parallelComputing() {
-            // Dispatchers.Default uses a thread pool and distributes the coroutines on this pool.
-            runBlocking(Dispatchers.Default) {
-                // Coroutines are very light-weight. You can even launch 100 000 at the same time without any performance problem. Be brave and try it.
-                (1..100).forEach {
-                    launch {
-                        delayedComputation()
-                    }
-                }
-            }
-        }
-
-        // Take a look at the console. When a coroutine is suspended running on a particular thread, does it necessarily continue in the same thread?
-        // In this exercise you dont have to implement anything ;). You have earned yourself this break.
-        parallelComputing()
-    }
-}
-
-fun measureExecutionTime(codeBlock: () -> Any): Long {
-    val start = System.currentTimeMillis()
-    codeBlock()
-    val executionTime = System.currentTimeMillis() - start
-    println("Execution time was $executionTime")
-    return executionTime
 }

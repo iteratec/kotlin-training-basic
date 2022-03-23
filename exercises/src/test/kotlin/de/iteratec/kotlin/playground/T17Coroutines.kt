@@ -4,7 +4,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,7 +28,7 @@ fun main() {
     println("Running two delayed computations in a coroutine took ${measureExecutionTime { runningCoroutines() }}")
     println("Running two delayed computations in separate sub-coroutines took ${measureExecutionTime { suspendingCoroutinesIsNonBlocking() }}")
     println("Waiting for one delayed computation and supplying its result to another delayed computation took ${measureExecutionTime { waitingForResults() }}")
-    println("Running two delayed computations in separate sub-coroutines and cancelling them immediately took ${measureExecutionTime { cancellingCoroutines() }}")
+    println("Running two delayed computations in separate sub-coroutines and cancelling them after 500ms took ${measureExecutionTime { cancellingCoroutines() }}")
     println("Parallel computing took ${measureExecutionTime { parallelComputing() }}")
 }
 
@@ -72,22 +71,29 @@ fun waitingForResults() {
 
 fun cancellingCoroutines() {
     runBlocking {
-        try {
-            // coroutineScope is another coroutine builder
-            coroutineScope {
-                launch {
-                    delayedComputation()
+        val job = launch {
+            try {
+                coroutineScope {
+                    // A CoroutineScope represents position in structured concurrency tree and contains configuration for all running coroutines inside.
+                    // We need another layer here to net enter the finally block prematurely.
+                    launch {
+                        delayedComputation()
+                    }
+                    launch {
+                        delayedComputation()
+                    }
                 }
-                launch {
-                    delayedComputation()
-                }
-                // Structured concurrency is very useful. Parent coroutines are responsible for their children.
-                // Cancelling a parent coroutine will automatically cancel all child coroutines.
-                this.coroutineContext.cancel()
+            } catch (e: CancellationException) {
+                println("Cancelled remaining computations in ${Thread.currentThread().name}")
+            } finally {
+                println("Doing some cleanup")
             }
-        } catch (e: CancellationException) {
-            println("Cancelled remaining computations in ${Thread.currentThread().name}")
         }
+
+        delay(500L)
+        job.cancel()
+        // Structured concurrency is very useful. Parent coroutines are responsible for their children.
+        // Cancelling a parent coroutine will automatically cancel all child coroutines (at least if the children are well written).
     }
 }
 
