@@ -4,6 +4,10 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -30,6 +34,7 @@ fun main() {
     println("Waiting for one delayed computation and supplying its result to another delayed computation took ${measureExecutionTime { waitingForResults() }}")
     println("Running two delayed computations in separate sub-coroutines and cancelling them after 500ms took ${measureExecutionTime { cancellingCoroutines() }}")
     println("Parallel computing took ${measureExecutionTime { parallelComputing() }}")
+    println("Implementing and reviewing tickets took ${measureExecutionTime { channels() }}")
 }
 
 fun runningCoroutines() {
@@ -103,11 +108,41 @@ fun parallelComputing() {
     runBlocking(Dispatchers.Default) {
         // Coroutines are very light-weight. You can even launch 100 000 at the same time without any performance problem. Be brave and try it.
         // Suspended coroutines might be picked up by different threads than they started with.
-        (1..100).forEach {
+        repeat(100) {
             launch {
                 delayedComputation()
             }
         }
+    }
+}
+
+// Coroutines can communicate with each other with channels
+fun channels() {
+    val channel = Channel<Int>()
+
+    runBlocking {
+        launch { reviewTickets(channel, 1) }
+        launch { reviewTickets(channel, 2) }
+
+        val workProcess1 = async { putTicketsToReview(channel, 1) }
+        val workProcess2 = async { putTicketsToReview(channel, 2) }
+        awaitAll(workProcess1, workProcess2)
+        channel.close()
+    }
+}
+
+suspend fun putTicketsToReview(channel: SendChannel<Int>, index: Int) {
+    repeat(3) {
+        delayedComputation(index * 1000L)
+        channel.send(index)
+        println("Developer${index} has put a ticket to review")
+    }
+}
+
+suspend fun reviewTickets(channel: ReceiveChannel<Int>, index: Int) {
+    for (number in channel) {
+        delayedComputation(index * 500L)
+        println("Reviewer${index} has reviewed a ticket of Developer${number}")
     }
 }
 
