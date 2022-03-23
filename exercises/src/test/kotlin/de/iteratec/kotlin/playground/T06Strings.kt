@@ -20,6 +20,7 @@ fun main() {
     println("Sometimes you can omit the curly brackets. $yourCleverAssistant will notify you when this is the case.")
 
     // Multiline strings allow for nice formatting and conveniently escape some characters automatically.
+    // You can activate syntax highlighting (Right-Click on string -> Show Context Actions -> Inject language or reference -> JSON)
     val uglyJson = "{\n\"property\":\"value\",\n\"array\":[\n\"element1\",\n\"element2\"\n]\n}"
     val multiLineString = """
             {
