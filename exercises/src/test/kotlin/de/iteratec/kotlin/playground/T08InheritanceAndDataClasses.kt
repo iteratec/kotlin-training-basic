@@ -22,7 +22,7 @@ fun main() {
     // the interface.
     class MyCustomRuntimeException(message: String): RuntimeException(message), Serializable {
         override fun toString(): String {
-            return "Great! MyCustomRuntimeException happened with message: ${message}"
+            return "Great! MyCustomRuntimeException happened with message: $message"
         }
     }
 

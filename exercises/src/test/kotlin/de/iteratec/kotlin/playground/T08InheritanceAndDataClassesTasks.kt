@@ -1,15 +1,15 @@
 package de.iteratec.kotlin.playground
 
-import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ClassesAdvancedTasks {
 
     /**
      * ## Inheritance
-     * Make IteratecEmployee inherit Employee and override the method such that it prints "Lisa likes his/her job. But holiday is still better ;)".
+     * Make IteratecEmployee inherit Employee and override the method.
      * Use the open keyword to enable inheritance & method overriding.
      */
     @Test
@@ -22,7 +22,7 @@ class ClassesAdvancedTasks {
             fun getStatus() = "$name likes his/her job. But holiday is still better ;)"
         }
 
-        assertThat(IteratecEmployee("Lisa"), instanceOf(Employee::class.java))
+        // assertTrue(IteratecEmployee("Lisa") is Employee)
         assertThat(
             IteratecEmployee("Lisa").getStatus(),
             equalTo("Lisa likes his/her job. But holiday is still better ;)")
