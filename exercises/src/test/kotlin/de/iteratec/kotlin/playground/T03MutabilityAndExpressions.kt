@@ -35,4 +35,7 @@ fun main() {
 
     // If also has a short one-liner form.
     val resultOfConciseIfExpression: String = if (true) "true" else "false"
+
+    // Type inference takes most specific type given multiple choices (Strg + Q to show type)
+    val whatIsTheType = if (true) "string" else 0
 }
