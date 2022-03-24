@@ -23,6 +23,7 @@ class ObjectsTasks {
      * ## Companion object
      * Implement a "static" builder function for the Horse class using a companion object such that the test code below
      * compiles and constructs the right horse
+     * Hint: The builder should return an instance of a new class HorseBuilder.
      */
     @Test
     fun companionObject() {

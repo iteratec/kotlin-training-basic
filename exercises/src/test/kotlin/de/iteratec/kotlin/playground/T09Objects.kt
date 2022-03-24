@@ -13,6 +13,9 @@ fun main() {
     // An object is a class with parameterless constructor for which a singleton is instantiated automatically.
     // No other instances can be instantiated.
     // The name of the object class is rewired to be a reference to the singleton
+    println(MyStringUtils.sortedByAlphabet("cba"))
+
+    // Objects can implement interfaces or other classes.
     println(ProdConfiguration.url)
 
     // In Kotlin, there are no static properties/methods. They are replaced by the concept of a companion object.
@@ -26,6 +29,12 @@ fun main() {
     ClassWithStaticMethod.printCountOfExistingInstances()
     val instance2 = ClassWithStaticMethod()
     ClassWithStaticMethod.printCountOfExistingInstances()
+}
+
+object MyStringUtils {
+    fun sortedByAlphabet(input: String): String {
+        return input.toList().sorted().joinToString("")
+    }
 }
 
 abstract class DatabaseConfiguration(
