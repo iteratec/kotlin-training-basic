@@ -1,16 +1,20 @@
 package de.iteratec.kotlin.playground
 
+fun header(name: String) = """
+Dear ${name},
+    
+"""
+
+val footer = """
+            
+Yours sincerely, Harald Answer-Machine
+Certified bullshitting expert"""
+
 fun writeLetterNoReceiver(name: String, messageCustomizer: (StringBuilder) -> Unit): String {
     val letterBuilder = StringBuilder()
-    letterBuilder.append("Dear ${name},\n\n")
+    letterBuilder.append(header(name))
     messageCustomizer(letterBuilder)
-    letterBuilder.append(
-        """
-            
-           Yours sincerely, Harald Answer-Machine
-           Certified bullshitting expert
-        """.trimIndent()
-    )
+    letterBuilder.append(footer)
 
     return letterBuilder.toString()
 }
@@ -21,19 +25,12 @@ fun writeLetterNoReceiver(name: String, messageCustomizer: (StringBuilder) -> Un
 // As an extension of this concept, we can also define lambdas with receivers.
 fun writeLetterReceiver(name: String, messageCustomizer: StringBuilder.() -> Unit): String {
     val letterBuilder = StringBuilder()
-    letterBuilder.append("Dear ${name},\n\n")
+    letterBuilder.append(header(name))
     letterBuilder.messageCustomizer()
-    letterBuilder.append(
-        """
-            
-           Yours sincerely, Harald Answer-Machine
-           Certified bullshitting expert
-        """.trimIndent()
-    )
+    letterBuilder.append(footer)
 
     return letterBuilder.toString()
 }
-
 
 // Lambdas with receivers are almost exclusively used as argument of other function (typically last argument).
 // Since the lambda with receiver needs a proper receiver, it is the responsability of the other function to provide some and call the lambda on it.
@@ -49,7 +46,5 @@ fun main() {
     println(letterNoReceiver)
     println("----------------------------")
     println(letterReceiver)
-    // Notice that the compiler knows what "this" is and which functions we are allowed to call.
-    // The general type of a lambda with receiver is "Receiver.(Argument1, Argument2, ...) -> ReturnType"
 }
 

@@ -46,27 +46,29 @@ class T15LambdasWithReceiversTasks {
     @Test
     fun allowingOperationsOnlyInCertainScopesTask() {
         val child = Teenager()
+        val parent = Adult()
 
-        supervisedTeenagerDoing() {
+        supervisedTeenagerDoing(parent) {
               child.driveInATestDrivingParkour()
               child.openABankAccount()
         }
     }
 
     class Teenager
+    class Adult
 
-    class UnderParentalSupervision {
+    class UnderParentalSupervision(val parentalSupervisor: Adult) {
         fun Teenager.driveInATestDrivingParkour() {
-            println("Drive in a test driving parkour")
+            println("Minor $this drives by car. Parent $parentalSupervisor takes care that nobody dies")
         }
 
         fun Teenager.openABankAccount() {
-            println("Bank account opened")
+            println("Minor $this opened a bank account. Parent $parentalSupervisor signed all the boring documents.")
         }
 
         companion object {
-            fun supervisedTeenagerDoing(actions: UnderParentalSupervision.() -> Any) {
-                UnderParentalSupervision().actions()
+            fun supervisedTeenagerDoing(parentalSupervisor: Adult, actions: UnderParentalSupervision.() -> Any) {
+                UnderParentalSupervision(parentalSupervisor).actions()
             }
         }
     }
