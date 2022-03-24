@@ -9,6 +9,7 @@ package de.iteratec.kotlin.playground
  Things to discuss:
  - Syntax for extension functions
  - Scope & resolution of extension functions
+ - Extension functions in bytecode
  - Use cases of extension functions
  */
 fun main() {
