@@ -1,5 +1,6 @@
 package de.iteratec.kotlin.playground
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class MutabilityAndExpressionsTasks {
@@ -12,7 +13,7 @@ class MutabilityAndExpressionsTasks {
     fun task1() {
         val catName = "Lisa"
         // catName = "Lucy"
-        println(catName)
+        assertEquals("Lucy", catName)
     }
 
     /**
@@ -23,7 +24,7 @@ class MutabilityAndExpressionsTasks {
     fun task2() {
         var catName = 7
         // catName = "Lucy"
-        println(catName)
+        assertEquals("Lucy", catName)
     }
 
     /**
@@ -41,6 +42,6 @@ class MutabilityAndExpressionsTasks {
             riskyComputationResult = "failed"
         }
 
-        println("riskyComputation " + riskyComputationResult)
+        assertEquals(riskyComputationResult, "failed")
     }
 }
