@@ -20,7 +20,7 @@ class T04ClassesTasks {
      */
     @Test
     fun yourFirstClass() {
-        val dog1 = Dog("Heiko", 200)
+        val dog1 = Dog("Willi", 200)
         println(dog1.name)
         println(dog1.weight)
         val dog2 = Dog("Sabine")

@@ -10,32 +10,30 @@ package de.iteratec.kotlin.playground
  - Instantiating collections
  - Mutable & immutable collections
  - Collection transformations & lambdas
+ - TODO: Only use sequences in the exercises?
  */
 fun main() {
     // Kotlin collections can be instantiated via factory methods of the form "<CollectionType>Of(...)"
     val alphabet: List<Char> = listOf('a', 'b', 'c')
-    val words: MutableList<String> = mutableListOf("Rentner", "Lehrer", "Student")
+    val words: MutableList<String> = mutableListOf("Rentner", "Lehrerin", "Student")
 
     // Collections are immutable per default. Use mutable factory methods to instantiate mutable collections.
-    words.add("IT-Berater")
+    words.add("IT-Beraterin")
     // the following does not compile
     // alphabet.add('ü')
 
-    // Transformations can be directly used on the collection. They usually accept a lambda as a parameter.
+    // Transformations can be directly used on the collection. They usually accept a lambda as a parameter. All the following is basically equivalent.
     val a = words.map(String::uppercase) // method reference
     val b = words.map({ word ->
         println("In lambda body")
         word.uppercase()
     }) // lambda: Last line evaluated gets returned automatically
-    val c = words.map({ word -> word.uppercase() }) // Lambda as the last argument of a function call can be taken out of the argument list
-    val d = words.map { word -> word.uppercase() }
-    val e = words.map { it.uppercase() } // If lambda has only one argument, you can refer to it with 'it'
+    val c = words.map({ word -> word.uppercase() })
+    val d = words.map() { word -> word.uppercase() }  // Lambda as the last argument of a function call can be taken out of the argument list
+    val e = words.map { word -> word.uppercase() }  // Empty argument list can be omitted
+    val f = words.map { it.uppercase() } // If lambda has only one argument, you can refer to it with 'it'
 
-    println(a)
-    println(b)
-    println(c)
-    println(d)
-    println(e)
+    println("Using a lambda or method reference with map $a")
 
     // Kotlin offers a lot of convenient methods from the Filter-Map-Reduce-idiom. Most methods return new lists.
 

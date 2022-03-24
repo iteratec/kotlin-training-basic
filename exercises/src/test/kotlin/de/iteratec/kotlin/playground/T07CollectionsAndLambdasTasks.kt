@@ -75,7 +75,7 @@ class CollectionsAndLambdasTasks {
     @Test
     fun extractingMembers() {
         val youngestFamilyMember = Granny // Replace this. Surely Granny is not the youngest one.
-        assertThat(youngestFamilyMember!!.age, equalTo(19))
+        assertThat(youngestFamilyMember?.age, equalTo(19))
     }
 
     /**

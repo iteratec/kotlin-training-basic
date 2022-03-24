@@ -9,7 +9,7 @@ class ClassesAdvancedTasks {
 
     /**
      * ## Inheritance
-     * Make IteratecEmployee inherit Employee and override the method such that it prints "Heiko likes his/her job. But holiday is still better ;)".
+     * Make IteratecEmployee inherit Employee and override the method such that it prints "Lisa likes his/her job. But holiday is still better ;)".
      * Use the open keyword to enable inheritance & method overriding.
      */
     @Test
@@ -22,10 +22,10 @@ class ClassesAdvancedTasks {
             fun getStatus() = "$name likes his/her job. But holiday is still better ;)"
         }
 
-        assertThat(IteratecEmployee("Heiko"), instanceOf(Employee::class.java))
+        assertThat(IteratecEmployee("Lisa"), instanceOf(Employee::class.java))
         assertThat(
-            IteratecEmployee("Heiko").getStatus(),
-            equalTo("Heiko likes his/her job. But holiday is still better ;)")
+            IteratecEmployee("Lisa").getStatus(),
+            equalTo("Lisa likes his/her job. But holiday is still better ;)")
         )
     }
 

@@ -24,7 +24,7 @@ class T15LambdasWithReceiversTasks {
     @Test
     fun avoidRepetitionWithLambdasWithReceiversTask() {
         val whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply =
-            IteratecMitarbeiter("Heiko Schrader", true, "MS Word")
+            IteratecMitarbeiter("Heiko", true, "MS Word")
 
         // Block with repetetive use of our variable
         with(whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply) {
