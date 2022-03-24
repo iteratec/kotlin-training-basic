@@ -1,6 +1,6 @@
 package de.iteratec.kotlin.playground;
 
-class T05NullSafetyJava {
+class StringEmitter {
     public String giveMeAString() {
         return null;
     }

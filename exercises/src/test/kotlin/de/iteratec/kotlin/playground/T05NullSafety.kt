@@ -1,5 +1,7 @@
 package de.iteratec.kotlin.playground
 
+import java.util.*
+
 /**
  # Null safety
  Requirements:
@@ -12,7 +14,7 @@ package de.iteratec.kotlin.playground
  - Safe-call and Elvis operators & chaining
  - Smart casts
  - Double-bang operator
- - Platform types, annotations & JPA pitfalls
+ - Platform types (TODO: Introduce platform types without going to deep into problems and solutions)
  */
 fun main() {
     // Kotlin is null-safe. In a variable of type Type we cannot save "null". In a variable of type "Type?" we can assign "null".
@@ -48,4 +50,12 @@ fun main() {
 
     // Developers may cast a nullable type to a non-nullable type
     println(nullableString!!.length)
+
+    // Platform types (here String!) result from Java calls where Kotlin is not sure whether the type is nullable or not.
+    // Kotlin compiler does not do null checks on variables of platform type. We can assign a an expression of platform type
+    // to a nullable variable or a non-nullable variable
+    val scanner = Scanner(">> only Rocky is here <<")
+    val autoInferredPlatformType = scanner.findInLine("Lucy")
+    val assignedToNonNullableType: String = scanner.findInLine("Lucy")
+    val assignedToNullableType: String? = scanner.findInLine("Lucy")
 }
