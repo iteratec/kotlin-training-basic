@@ -14,7 +14,7 @@ import java.time.LocalDate
  - when & exhaustiveness
  */
 
-// Sealed classes can only be subclassed only in the same package (since Kotlin 1.5).
+// Sealed classes can only be subclassed in the same package (since Kotlin 1.5).
 sealed class ApplicationStatus
 object Healthy : ApplicationStatus()
 object TooLazyToDoWork : ApplicationStatus()
@@ -38,6 +38,12 @@ fun handleApplicationStatus(status: ApplicationStatus) {
         "SATURDAY",
         "SUNDAY" -> Unit
         else -> println("Are there more than 7 weekdays?")
+    }
+
+    // You can also use when without argument and arbitrary boolean conditions for branching.
+    when {
+        5 < 3 -> println("Branch 1 in when without argument")
+        7 < 7 -> println("Branch 2 in when without argument")
     }
 }
 
