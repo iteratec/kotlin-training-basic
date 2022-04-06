@@ -32,6 +32,55 @@ fun writeLetterReceiver(name: String, messageCustomizer: StringBuilder.() -> Uni
     return letterBuilder.toString()
 }
 
+// Lambdas with receivers can help us to write Domain-specific languages (DSLs)
+
+interface Node {
+    fun print(): String
+}
+
+open class NodeWithChildren(val tagname: String) : Node {
+    val children: MutableList<Node> = mutableListOf()
+
+    override fun print(): String =
+        "<${tagname}>\n" +
+                children.fold("") { accumulator: String, nextElement: Node -> accumulator + nextElement.print() } +
+                "</${tagname}>\n"
+
+    fun addChild(node: Node) = children.add(node)
+}
+
+open class TextNode(val text: String) : Node {
+    override fun print() = "$text\n"
+}
+
+class HtmlNode : NodeWithChildren("html")
+class UlNode : NodeWithChildren("ul")
+class LiNode : NodeWithChildren("li")
+
+fun html(childrenNodes: (HtmlNode).() -> Unit): String {
+    val root = HtmlNode()
+    root.childrenNodes()
+    return root.print()
+}
+
+fun NodeWithChildren.ul(childrenNodes: (UlNode).() -> Unit) {
+    val ulNode = UlNode()
+    this.addChild(ulNode)
+    ulNode.childrenNodes()
+}
+
+fun UlNode.li(childrenNodes: (LiNode).() -> Unit) {
+    val liNode = LiNode()
+    this.addChild(liNode)
+    liNode.childrenNodes()
+}
+
+fun NodeWithChildren.text(content: String) {
+    val text = TextNode(content)
+    this.addChild(text)
+}
+
+
 // Lambdas with receivers are almost exclusively used as argument of other function (typically last argument).
 // Since the lambda with receiver needs a proper receiver, it is the responsability of the other function to provide some and call the lambda on it.
 fun main() {
@@ -46,5 +95,24 @@ fun main() {
     println(letterNoReceiver)
     println("----------------------------")
     println(letterReceiver)
+
+    println(
+        html {
+            ul {
+                li {
+                    text("Item 1")
+                }
+                li {
+                    text("Item 2")
+                }
+                ul {
+                    li {
+                        text("Nested item")
+                    }
+                }
+            }
+        }
+    )
+
 }
 
