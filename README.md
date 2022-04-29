@@ -2,7 +2,7 @@
 
 This is the Iteratec Kotlin Workshop. 
 
-## Prerequisites
+## Prerequisites and Preparation
 
 In order to execute the exercises you need Java 11 or newer. For one minor exercise you might need Node JS.
 
@@ -10,10 +10,12 @@ The workshop is intended for developers familiar with Java. In Kotlin, we start 
 
 However we do not outline most of things that work exactly as in Java. For example, we do not explain what object-oriented programming is, when introducing classes in Kotlin.
 
-## How to use this training
+We recommend to use IntelliJ out of inconvenience. Import the project into IntelliJ either as a Maven project or Gradle project (you can also trigger this manually by Right-Clicking on pom.xml or build.gradle.kts and choosing to import as Maven or Gradle project).
 
-We recommend to use IntelliJ out of inconvenience. First build everywthing running ./gradlew build or ./mvnw verify 
+First build everything running ./gradlew build or ./mvnw verify
 (IntelliJ might do this automatically). There might be some failing tests. As long as not all tests are failing, everything is ok.
+
+## How to use this training
 
 Navigate to the exercises module. We have distributed the content into smaller topics.
 Normally each topic has one Kotlin demo file where new concepts will be explained by the tutor. 
