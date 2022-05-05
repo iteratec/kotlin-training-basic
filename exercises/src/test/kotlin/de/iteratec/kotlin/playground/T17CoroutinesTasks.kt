@@ -6,6 +6,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.Assert.assertTrue
@@ -96,9 +97,11 @@ class T17CoroutinesTasks {
         val bobToAliceChannel = Channel<Int>()
 
         runBlocking {
-            val aliceConsuming = async { makeMoves(bobToAliceChannel, aliceToBobChannel, 1) }
-            val bobConsuming = async { makeMoves(aliceToBobChannel, bobToAliceChannel, 2) }
-            aliceToBobChannel.send(startValue)
+            withTimeout(5000) {
+                val aliceConsuming = async { makeMoves(bobToAliceChannel, aliceToBobChannel, 1) }
+                val bobConsuming = async { makeMoves(aliceToBobChannel, bobToAliceChannel, 2) }
+                aliceToBobChannel.send(startValue)
+            }
         }
     }
 }
