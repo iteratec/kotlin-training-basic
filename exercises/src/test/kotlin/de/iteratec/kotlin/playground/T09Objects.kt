@@ -16,7 +16,7 @@ fun main() {
     println(MyStringUtils.sortedByAlphabet("cba"))
 
     // Objects can implement interfaces or other classes.
-    println(ProdConfiguration.url)
+    println(DevConfiguration.url)
 
     // In Kotlin, there are no static properties/methods. They are replaced by the concept of a companion object.
     // The companion object is basically an object with no name declared in a class body
@@ -24,11 +24,10 @@ fun main() {
     // Hence, accesses to properties and invocations of methods of the companion object behave exactly like accesses to
     // static properties and accesses to static methods of the origin class would do.
     // Declarations inside the origin class itself can reference properties/methods of the companion object.
-    ClassWithStaticMethod.printCountOfExistingInstances()
-    val instance1 = ClassWithStaticMethod()
-    ClassWithStaticMethod.printCountOfExistingInstances()
-    val instance2 = ClassWithStaticMethod()
-    ClassWithStaticMethod.printCountOfExistingInstances()
+    ClassWithStaticMethod.printLeader()
+    val instance = ClassWithStaticMethod()
+    instance.promoteToLeader()
+    ClassWithStaticMethod.printLeader()
 }
 
 object MyStringUtils {
@@ -43,19 +42,23 @@ abstract class DatabaseConfiguration(
     abstract fun buildAuthorizationHeaderContent(): String?
 }
 
-object ProdConfiguration : DatabaseConfiguration("localhost:3000") {
+object DevConfiguration : DatabaseConfiguration("localhost:3000") {
     override fun buildAuthorizationHeaderContent(): String? = null
 }
 
 class ClassWithStaticMethod {
-    init {
-        countOfExistingInstances = countOfExistingInstances + 1
+    fun promoteToLeader() {
+        leader = this
     }
 
     companion object {
-        var countOfExistingInstances = 0
-        fun printCountOfExistingInstances() {
-            println("For ClassWithStaticMethod $countOfExistingInstances many instances have been instantiated")
+        private var leader: ClassWithStaticMethod? = null
+        fun printLeader() {
+            if (leader == null) {
+                println("No leader at the moment.")
+            } else {
+                println("Leader is $leader")
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package de.iteratec.kotlin.playground
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ObjectsTasks {
@@ -20,16 +21,16 @@ class ObjectsTasks {
 
     /**
      * ## Companion object
-     * Implement a "static" builder function for the Horse class using a companion object such that the test code below
-     * compiles and constructs the right horse
-     * Hint: The builder should return an instance of a new class HorseBuilder.
+     * Create a variable count in the companion object of ClassWithInstanceCount which records the count of generated instances.
      */
     @Test
     fun companionObject() {
-        // val horse = Horse.builder().withName("Trabi").withWeight(10).build()
-        // assertThat(horse.name, equalTo("Trabi"))
-        // assertThat(horse.weight, equalTo(10))
+        // assertEquals(0, ClassWithInstanceCount.count)
+        val instance1 = ClassWithInstanceCount()
+        // assertEquals(1, ClassWithInstanceCount.count)
+        val instance2 = ClassWithInstanceCount()
+        // assertEquals(2, ClassWithInstanceCount.count)
     }
 }
 
-class Horse(val name: String, val weight: Int = 500)
+class ClassWithInstanceCount()

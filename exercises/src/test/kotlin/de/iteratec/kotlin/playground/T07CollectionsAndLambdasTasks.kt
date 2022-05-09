@@ -6,7 +6,7 @@ import org.junit.Test
 
 class CollectionsAndLambdasTasks {
 
-    data class FamilyMember(val knownParents: List<FamilyMember>, val age: Int, val name: String, val alive: Boolean)
+    class FamilyMember(val knownParents: List<FamilyMember>, val age: Int, val name: String, val alive: Boolean)
 
     val Granny = FamilyMember(emptyList(), 83, "Elizabeth", true)
     val Margret = FamilyMember(listOf(Granny), 52, "Margret", true)

@@ -15,10 +15,10 @@ package de.iteratec.kotlin.playground
 fun main() {
     // Kotlin collections can be instantiated via factory methods of the form "<CollectionType>Of(...)"
     val alphabet: List<Char> = listOf('a', 'b', 'c')
-    val words: MutableList<String> = mutableListOf("Rentner", "Lehrerin", "Student")
+    val words: MutableList<String> = mutableListOf("Rentner", "Lehrer", "Student")
 
     // Collections are immutable per default. Use mutable factory methods to instantiate mutable collections.
-    words.add("IT-Beraterin")
+    words.add("IT-Berater")
     // the following does not compile
     // alphabet.add('ü')
 
