@@ -1,36 +1,17 @@
 package de.iteratec.kotlin.bestpractises
 
 import org.junit.Test
+import java.io.BufferedOutputStream
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.lang.Thread.sleep
 import kotlin.random.Random
 
-/**
- * TODO
- * + var macht smart-casts kaputt
-+ überladene operatoren für listen listOf(1, 2) + 3
-+ exahustive when
-+ avoid else in when
-+ runCatching
-
-
- * Declaring multiple classes in one file
- * use when
- * require block
- * https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/require.html
- * https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/check.html
- * Use Pair and Triple as return values sparingly, use custom classes
- * Avoid nesting lambdas
- * https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html
- * Elvis throws
-service as? CustomerService ?: throw IllegalArgumentException("No CustomerService")
-
-Nullable Boolean values in conditions
-loops with ranges
- */
 class T06Idioms {
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.fallbackChain]
+     * Use Elvis operator to avoid long null-check statements.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.fallbackChain]
      */
     @Test
     fun fallbackChain() {
@@ -53,7 +34,8 @@ class T06Idioms {
     }
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.shortCircuitElvis]
+     * Use Elvis operator to break out from the function on unexpected null values.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.shortCircuitElvis]
      */
     @Test
     fun shortCircuitElvis() {
@@ -68,7 +50,38 @@ class T06Idioms {
     }
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.scopeFunctions]
+     * Use `== true` and `== false` to test nullable booleans.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.nullableBoolConditions]
+     */
+    @Test
+    fun nullableBoolConditions() {
+        val maybeTrue: Boolean? = if (Random.nextBoolean()) true else null
+        if (maybeTrue != null && maybeTrue) {
+            println("It was true!")
+        }
+    }
+
+    /**
+     * Use `require` and `requireNotNull` functions for parameter validation.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.parameterValidation]
+     */
+    @Test
+    fun parameterValidation() {
+        fun validateName(personName: String?) {
+            if (personName == null) {
+                throw IllegalArgumentException("Person name cannot be null")
+            }
+
+            if (personName.length > 20) {
+                throw IllegalArgumentException("Person name is too long")
+            }
+        }
+    }
+
+    /**
+     * Use scope functions `takeIf`, `let`, `also`, `apply` to handle transformations of a single values
+     * in a functional way (similarly to collections).
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.scopeFunctions]
      */
     @Test
     fun scopeFunctions() {
@@ -90,7 +103,8 @@ class T06Idioms {
     }
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.exceptionHandlingWithRunCatching]
+     * Use `runCatching` to handle exceptions in a more concise, functional way.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.exceptionHandlingWithRunCatching]
      */
     @Test
     fun exceptionHandlingWithRunCatching() {
@@ -116,43 +130,71 @@ class T06Idioms {
     }
 
     /**
+     * Use `use` extension function to automatically close resources.
+     * There's a similar function `withLock` for lockable objects.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.useFunction]
+     */
+    @Test
+    fun useFunction() {
+        val buffer = BufferedOutputStream(ByteArrayOutputStream())
+        try {
+            buffer.write(1)
+        } catch (ex: IOException) {
+            println("Error while writing to buffer")
+        } finally {
+            try {
+                buffer.close()
+            } catch (ex: IOException) {
+                println("Could not close buffer. Try to restart your PC.")
+            }
+        }
+    }
+
+    /**
+     * Use `typealias` to shorten long names or create more meaningful names.
      *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.typeAlias]
      */
     @Test
     fun typeAlias() {
-        class Person(val name: String)
-        class PersonConsumerChain(private val processors: List<(Person) -> Unit>) {
-            fun process(person: Person) = processors.forEach { processor -> processor(person) }
+        class Flower(val name: String, val color: String)
+
+        val flowersByColor: Map<String, List<Flower>> = listOf(
+            Flower(name = "tulip", color = "red"),
+            Flower(name = "rose", color = "red"),
+            Flower(name = "sunflower", color = "yellow")
+        ).groupBy { it.color }
+
+        val flowersByColorPrinter: (Map<String, List<Flower>>) -> Unit = {
+            println(it)
         }
 
-        val consumerChain = PersonConsumerChain(listOf(
-            { person-> println("Hello ${person.name}") },
-            { person-> println("Bye ${person.name}") }
-        ))
-
-        consumerChain.process(Person(name = "Bob"))
+        flowersByColorPrinter(flowersByColor)
     }
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.exhaustiveWhen]
+     * Do not use else in a when-block, when no reasonable default value can be returned.
+     * Let the compiler find the when-statements, that have to be adjusted when new enum/sealed subclass is added.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.exhaustiveWhen]
      */
     sealed class LanguageToken
     object LeftParenthesis : LanguageToken()
     object RightParenthesis : LanguageToken()
-    class TextValue(val value: String): LanguageToken()
-    class Semicolon: LanguageToken()
+    class TextValue(val value: String) : LanguageToken()
+    class Semicolon : LanguageToken()
 
     @Test
     fun exhaustiveWhen() {
         val input = "(hello)"
         // Parsed list of tokens corresponding to (hello)
         val tokens = listOf(LeftParenthesis, TextValue("hello"), RightParenthesis)
+
+        // Translates (hello) into {~hello~}
         val transpiled = tokens.joinToString(separator = "") { token ->
             when (token) {
                 is LeftParenthesis -> "{"
                 is TextValue -> "~${token.value}~"
                 is RightParenthesis -> "}"
-                else -> ""
+                else -> throw IllegalArgumentException("Unknown token")
             }
         }
 
@@ -160,28 +202,35 @@ class T06Idioms {
     }
 
     /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.lightweightAop]
+     * Use lambdas to create a lightweight alternative for AOP.
+     * Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.lightweightAop]
      */
     @Test
+    //@Timed - would measure and print method's execution time
     fun lightweightAop() {
-        class TransactionManager
-        data class TransactionPropagation(val value: String)
-        class TransactionTemplate(private val txManager: TransactionManager) {
-            fun execute(transactionPropagation: TransactionPropagation, block: () -> Unit) {
-                println("Starting transaction with propagation = $transactionPropagation")
-                block()
-                println("Transaction completed")
-            }
-        }
+        sleep(400)
+    }
 
-        fun saveItem(item: String) {
-            val transactionManager = TransactionManager()
-            val transactionTemplate = TransactionTemplate(transactionManager)
-            transactionTemplate.execute(TransactionPropagation("new")) {
-                println("Saving $item to database")
-            }
+    /**
+     * Use range literals, `until` or `repeat` to execute certain operation N times.
+     * Collection operations should be though preferred if applicable.
+     * Solution (none).
+     */
+    @Test
+    fun rangesAndRepetitions() {
+        val closedRange = 0..5
+        for (i in closedRange) {
+           print("$i ")
         }
+        println()
 
-        saveItem("test")
+        val openRange = 0 until 5
+        for (i in openRange) {
+            print("$i ")
+        }
+        println()
+
+        repeat(5) { i -> print("$i ") }
+        println()
     }
 }

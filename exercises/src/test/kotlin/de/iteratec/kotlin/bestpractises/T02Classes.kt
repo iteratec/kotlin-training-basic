@@ -8,6 +8,7 @@ import kotlin.random.Random
  *  - use data class for value objects, dto's, ... (like Java POJO)
  *  - use class for Services, Repositories, ...
  *  - use sealed class for hierarchies
+ *  - declare associated classes in the same file
  */
 
 enum class Response {

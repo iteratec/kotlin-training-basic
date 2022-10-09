@@ -1,9 +1,16 @@
 package de.iteratec.kotlin.bestpractises.solutions
 
 import org.junit.Test
+import java.io.BufferedOutputStream
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.lang.Thread.sleep
+import java.time.Duration
 import kotlin.random.Random
 
+class Flower(val name: String, val color: String)
+typealias FlowersByColor = Map<String, List<Flower>>
+typealias FlowersByColorConsumer = (Map<String, List<Flower>>) -> Unit
 
 class T06Idioms {
 
@@ -27,6 +34,23 @@ class T06Idioms {
 
         val user: String = getUserFromDb() ?: throw IllegalStateException("User not found")
         println("User = $user")
+    }
+
+    @Test
+    fun nullableBoolConditions() {
+        val maybeTrue: Boolean? = if (Random.nextBoolean()) true else null
+        if (maybeTrue == true) {
+            println("It was true!")
+        }
+    }
+
+    @Test
+    fun parameterValidation() {
+        fun validateName(personName: String?) {
+            requireNotNull(personName)
+            require(personName.length <= 20) { "Person name is too long" }
+            // There's also check() for state assertions
+        }
     }
 
     @Test
@@ -60,19 +84,30 @@ class T06Idioms {
             .onFailure { println("Saving failed again") }
     }
 
-    /**
-     *  Solution [de.iteratec.kotlin.bestpractises.solutions.T06Idioms.typeAlias]
-     */
+    @Test
+    fun useFunction() {
+        val buffer = BufferedOutputStream(ByteArrayOutputStream())
+        buffer.use { buffer.write(1) }
+    }
+
     @Test
     fun typeAlias() {
+        // Type aliases must be declared at the top level
+        val flowersByColor: FlowersByColor = listOf(
+            Flower(name = "tulip", color = "red"),
+            Flower(name = "rose", color = "red"),
+            Flower(name = "sunflower", color = "yellow")
+        ).groupBy { it.color }
 
+        val flowersByColorPrinter: FlowersByColorConsumer = { println(it) }
+        flowersByColorPrinter(flowersByColor)
     }
 
     sealed class LanguageToken
     object LeftParenthesis : LanguageToken()
     object RightParenthesis : LanguageToken()
-    class TextValue(val value: String): LanguageToken()
-    class Semicolon: LanguageToken()
+    class TextValue(val value: String) : LanguageToken()
+    class Semicolon : LanguageToken()
 
     @Test
     fun exhaustiveWhen() {
@@ -93,28 +128,35 @@ class T06Idioms {
 
     @Test
     fun lightweightAop() {
-        class TransactionManager
-        data class TransactionPropagation(val value: String)
-        class TransactionTemplate(private val txManager: TransactionManager) {
-            fun execute(transactionPropagation: TransactionPropagation, block: () -> Unit) {
-                println("Starting transaction with propagation = $transactionPropagation")
-                block()
-                println("Transaction completed")
-            }
+        fun timed(block: () -> Unit) {
+            val start = System.currentTimeMillis()
+            block()
+            val duration = System.currentTimeMillis() - start
+            println("Method execution took $duration ms")
         }
 
-        fun inNewTransaction(transactionManager: TransactionManager, block: () -> Unit) {
-            val transactionTemplate = TransactionTemplate(transactionManager)
-            transactionTemplate.execute(TransactionPropagation("new")) {
-                block()
-            }
+        fun sampleMethod() = timed {
+            sleep(400)
         }
 
-        val transactionManager = TransactionManager()
-        fun saveItem(item: String) = inNewTransaction(transactionManager) {
-            println("Saving $item to database")
-        }
+        sampleMethod()
+    }
 
-        saveItem("test")
+    @Test
+    fun rangesAndRepetitions() {
+        val closedRange = 0..5
+        for (i in closedRange) {
+            print("$i ")
+        }
+        println()
+
+        val openRange = 0 until 5
+        for (i in openRange) {
+            print("$i ")
+        }
+        println()
+
+        repeat(5) { i -> print("$i ") }
+        println()
     }
 }
