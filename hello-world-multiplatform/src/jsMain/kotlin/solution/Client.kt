@@ -11,7 +11,7 @@ fun main() {
 }
 
 // "actual" keyword is omitted because there can only be one implementation
-fun getPlatformSpecificMessagePart(): String {
+/*actual*/ fun getPlatformSpecificMessagePart(): String {
     // These lines create a Javascript object {runtime: "nodeJS", poweredByKotlin: true}.
     // For the moment, we do not need to understand the syntax
     val javaScriptObject: dynamic = object{}

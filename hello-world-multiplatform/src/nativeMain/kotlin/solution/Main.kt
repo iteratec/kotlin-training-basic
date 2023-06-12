@@ -9,7 +9,7 @@ fun main() {
 }
 
 // "actual" keyword is omitted because there can only be one implementation
-fun getPlatformSpecificMessagePart(): String {
+/*actual*/ fun getPlatformSpecificMessagePart(): String {
     return "Your faithful OS " + Platform.osFamily + " is serving to fulfill your desires"
 }
 

@@ -1,7 +1,7 @@
 package de.iteratec.kotlin.playground
 
 /**
-# Functions & main funtion
+# Functions & main function
 Requirements: none
 
 Things to discuss:

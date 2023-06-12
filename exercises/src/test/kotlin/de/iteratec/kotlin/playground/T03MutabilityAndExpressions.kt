@@ -21,7 +21,7 @@ fun main() {
     mutableStringVariable = "reassigned"
     println(mutableStringVariable)
 
-    // Type String is auto-inferred (Press Ctrl + Q to show the type)
+    // Type String is auto-inferred (Press Ctrl + Q to show the type (Ctrl - Shift + P for Mac)
     val autoInferredString = "auto-inferred"
 
     // Many keyword-constructions in Kotlin are expressions meaning they return a value (usually the expression inside evaluated last)
