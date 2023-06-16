@@ -34,7 +34,7 @@ fun main() {
 
 
 fun getUser(): User? {
-    if (Random(1).nextBoolean()) {
+    if (Random.nextBoolean()) {
         return User("Joe Random", "joe.random@guess.what")
     }
     return null

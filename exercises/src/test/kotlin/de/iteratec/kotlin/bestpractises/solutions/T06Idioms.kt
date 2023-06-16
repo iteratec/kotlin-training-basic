@@ -1,5 +1,6 @@
 package de.iteratec.kotlin.bestpractises.solutions
 
+import de.iteratec.kotlin.bestpractises.T06Idioms
 import org.junit.Test
 import java.io.BufferedOutputStream
 import java.io.ByteArrayOutputStream
@@ -119,7 +120,7 @@ class T06Idioms {
                 is LeftParenthesis -> "{"
                 is TextValue -> "~${token.value}~"
                 is RightParenthesis -> "}"
-                is Semicolon -> "!"
+                is Semicolon -> ";"
             }
         }
 

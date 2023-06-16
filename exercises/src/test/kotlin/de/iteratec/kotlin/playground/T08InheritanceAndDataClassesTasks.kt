@@ -37,7 +37,7 @@ class ClassesAdvancedTasks {
      */
     @Test
     fun dataClass() {
-        class Coordinates(
+        data class Coordinates(
             val x: Int,
             val y: Int,
         )

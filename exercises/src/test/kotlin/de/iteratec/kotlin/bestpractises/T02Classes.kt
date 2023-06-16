@@ -34,7 +34,7 @@ data class UserService(val dao: UserDao) {
 
 class UserDao() {
     fun save(user: UserDto): Response {
-        if (Random(1).nextBoolean()) {
+        if (Random.nextBoolean()) {
             println("saved $user")
             return Response.SUCCESS
         }

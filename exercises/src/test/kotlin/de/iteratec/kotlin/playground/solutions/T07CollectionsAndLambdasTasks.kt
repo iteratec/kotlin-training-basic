@@ -50,7 +50,10 @@ class CollectionsAndLambdasTasks {
      */
     @Test
     fun chainedOperations() {
-        val agesOfFamilyMembers: List<Int> = familyMembers.filter { it.alive }.sortedBy { it.age }.map { it.age }
+        val agesOfFamilyMembers: List<Int> = familyMembers
+            .filter { it.alive }
+            .sortedBy { it.age }
+            .map { it.age }
         assertThat(agesOfFamilyMembers, equalTo(listOf(19, 25, 49, 52, 83)))
     }
 

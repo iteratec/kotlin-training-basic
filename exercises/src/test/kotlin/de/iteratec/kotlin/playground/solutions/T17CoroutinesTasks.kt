@@ -109,7 +109,7 @@ class T17CoroutinesTasks {
     }
 }
 
-val random = Random(1)
+val random = Random
 
 suspend fun makeMoves(receiveChannel: Channel<Int>, sendChannel: Channel<Int>, playerNumber: Int) {
     for (input in receiveChannel) {
