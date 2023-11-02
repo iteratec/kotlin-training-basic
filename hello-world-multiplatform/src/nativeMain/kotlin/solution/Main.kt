@@ -9,6 +9,7 @@ fun main() {
 }
 
 // "actual" keyword is omitted because there can only be one implementation
+@OptIn(kotlin.experimental.ExperimentalNativeApi::class)
 /*actual*/ fun getPlatformSpecificMessagePart(): String {
     return "Your faithful OS " + Platform.osFamily + " is serving to fulfill your desires"
 }
