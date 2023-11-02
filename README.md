@@ -1,36 +1,28 @@
-# Playground for Kotlin training
+# Kotlin basic training
+Welcome to Kotlin basic training!
 
-This is the Iteratec Kotlin Workshop. 
+The training is intended for developers familiar with Java. In Kotlin, we start from scratch and explain every basic
+Kotlin feature. However, we do not outline most of the things that work exactly as in Java.  For example, we do not
+explain what object-oriented programming is, when introducing classes in Kotlin.
 
-## Prerequisites and Preparation
+## Preparation
+In order to execute the exercises you need Java 11 or newer.
 
-In order to execute the exercises you need Java 11 or newer. For one minor exercise you might need Node JS.
+We recommend to use IntelliJ out of inconvenience. Import the project into IntelliJ preferably as Gradle project (Maven
+is supported as fallback solution).
 
-The workshop is intended for developers familiar with Java. In Kotlin, we start from 0. 
+To check, that everything is up and running, open the file `T01Functions.kt` and run the main function inside it.
 
-However we do not outline most of things that work exactly as in Java. For example, we do not explain what object-oriented programming is, when introducing classes in Kotlin.
+## Project structure
+We'll work with the `exercises` module most of the time. It contains a single test package `de.iteratec.kotlin.basic`,
+where you will find all resources and exercises. For every topic discussed in the training, you will find the following files:
+* `T01Topic.kt` - template used by trainers during the live-coding demo 
+* `T01Topic.md` - short reference explaining the given topic in a nutshell
+* `T01TopicTasks.md` - tasks for the trainees. Every task is a simple unit test, that you will have to fix.
 
-We recommend to use IntelliJ out of inconvenience. Import the project into IntelliJ either as a Maven project or Gradle project (you can also trigger this manually by Right-Clicking on pom.xml or build.gradle.kts and choosing to import as Maven or Gradle project).
+Sample solutions for all the tasks are provided in the package `de.iteratec.kotlin.basic.solutions`.
 
-First build everything running ./gradlew build or ./mvnw verify
-(IntelliJ might do this automatically). There might be some failing tests. As long as not all tests are failing, everything is ok.
+Have fun 😺
 
-## How to use this training
-
-Navigate to the exercises module. We have distributed the content into smaller topics.
-Normally each topic has one Kotlin demo file where new concepts will be explained by the tutor. 
-Each topic has an exercise file (name contains "Tasks") containing the exercises, which are implemented as unit tests.
-
-Some exercise tests are already green. This means you have to verify your solution by yourself. Check your solution by examining the log output and potentially adding further log lines.
-You can also compare your code with the solution folder.
-
-Most topics contain also a theory file. These contain explanations in different wording. Using them is optional.
-The demo files together with the explanations from the tutor should normally be sufficient.
-
-Exercises can be done out of order. However some are based on previous knowledge. Consult the exercise header to find out about the prerequisites.
-
-Have fun :)
-
-## Further reading and exercising
-
+## Further reading
 Check out the excellent official documentation [Kotlin website](https://kotlinlang.org) as well as the main interactive tutorial [Kotlin Koans](https://kotlinlang.org/docs/tutorials/koans.html).
