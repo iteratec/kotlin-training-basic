@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>de.iteratec</groupId>
-        <artifactId>kotlin-training</artifactId>
+        <artifactId>kotlin-training-basic</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
