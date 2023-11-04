@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("multiplatform") version "1.9.20"
     application
@@ -11,18 +13,22 @@ repositories {
 }
 
 kotlin {
+    jvmToolchain(11)
+
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            compilerOptions.configure {
+                jvmTarget.set(JvmTarget.JVM_11)
+            }
         }
         withJava()
     }
+
     js(IR) {
         binaries.executable()
-        nodejs {
-
-        }
+        nodejs()
     }
+
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
     val nativeTarget = when {

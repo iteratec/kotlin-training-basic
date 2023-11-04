@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.cli.jvm.main
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "1.9.20"
     java
@@ -20,14 +17,14 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.3")
 }
 
-val compileKotlin: KotlinCompile by tasks
-val compileTestKotlin: KotlinCompile by tasks
-
-compileKotlin.kotlinOptions {
-    jvmTarget = "11"
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "11"
+
+kotlin {
+    jvmToolchain(11)
 }
 
 sourceSets {
@@ -36,11 +33,5 @@ sourceSets {
     }
     test {
         java.srcDirs("src/test/kotlin")
-    }
-}
-
-tasks {
-    withType<JavaCompile> {
-        options.fork(mapOf(Pair("jvmArgs", listOf("--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"))))
     }
 }
