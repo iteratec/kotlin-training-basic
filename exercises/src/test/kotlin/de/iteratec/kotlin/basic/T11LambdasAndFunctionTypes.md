@@ -27,7 +27,7 @@ val myLambda: (String) -> Int = {
     it.length
 }
 
-myLambda() // Invoking the lambda
+myLambda("abc") // Invoking the lambda
 ```
 
 When invoking a function expecting a lambda as the last argument, there is a Kotlin convention moving the lambda out of the argument list brackets.
@@ -36,17 +36,4 @@ When invoking a function expecting a lambda as the last argument, there is a Kot
 val myString = "h a l l o"
 myString.filter({ it.isWhitespace() }) // will give "hallo"
 myString.filter{ it.isWhitespace() } // will give "hallo", preferred syntax
-```
-
-## let and null safety
-
-<b>let</b> can be called on any object and takes a lambda with that object as single argument as input.
-Basically <b> something.let{ lambda } </b> is the same as <b>lambda(something)</b>.
-When combining let with a safe call <b>?.</b> (i.e. <b>?.let</b>) or even the Elvis operator one can make a very concise null check.
-
-```kotlin
-val nullAsString: String? = null
-nullAsString?.let { it.length } // is null - The lambda inside let expects a non-nullable string and is not called. 
-nullAsString?.let { it.length } ?: 0 // is 0 - The lambda inside let expects a non-nullable string and is not called. 
-"hallo"?.let { it.length } // is 5 - The lambda inside let expects a non-nullable string and is called.
 ```

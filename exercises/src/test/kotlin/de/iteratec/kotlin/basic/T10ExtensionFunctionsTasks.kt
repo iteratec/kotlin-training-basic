@@ -1,5 +1,8 @@
 package de.iteratec.kotlin.basic
 
+import org.hamcrest.MatcherAssert
+import org.hamcrest.core.IsEqual
+import org.junit.Assert
 import org.junit.Test
 
 class ExtensionFunctionsTasks {
@@ -28,5 +31,17 @@ class ExtensionFunctionsTasks {
     fun extensionFunctionAndNullSafety() {
         val nullInsteadOfAString = null
         // assertThat(nullInsteadOfAString.replaceUmlaute(), equalTo(""))
+    }
+
+    /**
+     * ## let function and null-safety
+     * Replace the implementation of wrapIntoList with a suitable one-liner using "let".
+     */
+    @Test
+    fun letAndNullSafety() {
+        fun wrapIntoList(input: Int?): List<Int> = emptyList()
+
+        Assert.assertTrue(wrapIntoList(null).isEmpty())
+        MatcherAssert.assertThat(wrapIntoList(2), IsEqual.equalTo(listOf(2)))
     }
 }

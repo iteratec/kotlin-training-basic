@@ -1,9 +1,6 @@
 package de.iteratec.kotlin.basic.solutions
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual.equalTo
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
+import org.junit.Assert.*
 import org.junit.Test
 
 class LambdasAndFunctionTypesTasks {
@@ -35,39 +32,14 @@ class LambdasAndFunctionTypesTasks {
     }
 
     /**
-     * ## let function and null-safety
-     * Replace the implementation of wrapIntoList with a suitable one-liner using "let".
-     */
-    @Test
-    fun letAndNullSafety() {
-        fun wrapIntoList(input: Int?): List<Int> = input?.let { listOf(input) } ?: emptyList<Int>()
-
-        assertTrue(wrapIntoList(null).isEmpty())
-        assertThat(wrapIntoList(2), equalTo(listOf(2)))
-    }
-
-    /**
-     * Task higherOrderFunction
-     * A higher-order-function is a function whose return type is again a function. Complete the generic (same syntax as in Java) function "curry" that basically does the following:
-     * If doSomething is a lambda expecting 2 arguments, then
-     * doSomething(a, b) = (curry(doSomething, a)) (b)
-     * In case you have problems with the generics, write two concrete versions of "curry" for "multiply" resp. "concatenate" first.
+     * ## Higher-order functions
+     * A higher-order-function is a function whose return type is again a function.
+     * Uncomment the code and implement the `greet` lambda, that takes a greeting word and returns a function, that
+     * takes a name of the person to greet and produces a string in form "<Greeting>, <Name>"
      */
     @Test
     fun higherOrderFunctions() {
-        println("#### Task higherOrderFunctions")
-        val multiply = { factor1: Int, factor2: Int -> factor1 * factor2 }
-        val concatenate = { string1: String, string2: String -> string1 + string2 }
-
-        fun <A, B, C> curry( function: (A, B) -> C, firstInput: A): (B) -> C {
-            return { function(firstInput, it)}
-        }
-
-        val multiplyWith3 = curry(multiply, 3)
-        assertThat(multiplyWith3(5), equalTo(15))
-
-        val insultPrepender = curry(concatenate, "Hey, du Opfer! ")
-        assertThat(insultPrepender("Wären Sie bitte so freundlich, mir den Tee zu reichen?"), equalTo("Hey, du Opfer! Wären Sie bitte so freundlich, mir den Tee zu reichen?"))
-
+        val greet = { greetingWord: String -> { name: String -> "$greetingWord, $name" } }
+        assertEquals("Hello, Alice", greet("Hello")("Alice"))
     }
 }
