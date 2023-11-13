@@ -47,8 +47,8 @@ fun main() {
     println("Sort: ${words.sortedBy { it.length }}")
 
     // any/all: Tests whether at least one/all elements fulfill a predicate
-    println("Any: ${words.any { it.length > 3 }}")
-    println("Some: ${words.all { it.length > 3 }}")
+    println("At least one: ${words.any { it.length > 3 }}")
+    println("All: ${words.all { it.length > 3 }}")
 
     // fold: Accumulates all elements of the collection into a single value
     // Starts with an initial value and then iteratively transforms this value by applying a function to it and the next element of the collection.
