@@ -34,33 +34,40 @@ class T15LambdasWithReceiversTasks {
     }
 
     /**
-     * ## avoidRepetitionWithLambdasWithReceiversTask
-     * The "with"-function is the simplest Kotlin-built-in example of a function expecting a lambda as receiver as a last argument.
-     * When you have a lambda with receiver and a matching receiver, you can supply both as arguments to "with".
-     * "with" will simply call the lambda on the receiver and return the result.
-     *
-     * fun <T, R> with(receiver: T, block: T.() -> R): R {
-     *   return receiver.block()
-     * }
-     *
-     * In the following we have to repeat the same variable all the time. Improve the situation by using the "with"-function
+     * ## 'apply' scope function
+     * The scope function apply() can be used on any object. It allows you to easily call methods of the receiver
+     * object as you were inside a regular method of the receiver. apply() will always return the original object
+     * it was called on.
+     * Use apply() function on the string builder to simplify the appending.
      */
     @Test
-    fun avoidRepetitionWithLambdasWithReceiversTask() {
-        class IteratecMitarbeiter(var name: String, var isMarried: Boolean, var favouriteTechnology: String)
+    fun applyScopeFunctionUsage() {
+        val builder = StringBuilder()
+        builder.append("Hello,")
+        builder.append(" this is a task")
+        builder.append(" that uses Kotlin's apply scope function.")
+        println(builder.toString())
+    }
 
-        val whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply =
-                IteratecMitarbeiter("Heiko", true, "MS Word")
+    /**
+     * ## 'with' scope function
+     * The scope function 'with' allows you to execute arbitrary code as if you were inside a regular method of the
+     * passed receiver. 'with' function can return an arbitrary value.
+     * Refactor the following code using the 'with' scope function, so it mentions the long variable name only once.
+     */
+    @Test
+    fun withScopeFunctionUsage() {
+        class IteratecMitarbeiter(val name: String, val isMarried: Boolean, val favouriteTechnology: String)
 
-        // Block with repetetive use of our variable
-        println(
-                whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply.name
+        val thisIsAVariableWithAVeryLongNameThatIDontWantToTypeTooOften = IteratecMitarbeiter(
+                name = "Heiko",
+                isMarried= true,
+                favouriteTechnology = "MS Word"
         )
-        println(
-                whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply.isMarried
-        )
-        println(
-                whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply.favouriteTechnology
-        )
+
+        // Block with repetitive use of our variable
+        println(thisIsAVariableWithAVeryLongNameThatIDontWantToTypeTooOften.name)
+        println(thisIsAVariableWithAVeryLongNameThatIDontWantToTypeTooOften.isMarried)
+        println(thisIsAVariableWithAVeryLongNameThatIDontWantToTypeTooOften.favouriteTechnology)
     }
 }
