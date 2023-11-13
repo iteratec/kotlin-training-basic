@@ -1,13 +1,57 @@
 package de.iteratec.kotlin.basic.solutions
 
-import de.iteratec.kotlin.basic.solutions.Cleaning.Companion.cleaning
-import de.iteratec.kotlin.basic.solutions.T15LambdasWithReceiversTasks.UnderParentalSupervision.Companion.supervisedTeenagerDoing
-import de.iteratec.kotlin.basic.solutions.TodoList.Companion.todoList
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsEqual.equalTo
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class T15LambdasWithReceiversTasks {
+
+    class LetterBuilder(
+            val author: String,
+            var content: String = "",
+            private var greeting: String = "Hello,",
+    ) {
+        fun greeting(name: String) {
+            greeting = "Hello, $name"
+        }
+
+        fun build(): String {
+            return """
+                $greeting
+                $content
+                Regards, $author
+            """.trimIndent()
+        }
+    }
+
+    fun letter(author: String, block: LetterBuilder.() -> Unit): String {
+        val letterBuilder = LetterBuilder(author)
+        letterBuilder.block()
+        return letterBuilder.build()
+    }
+
+    /**
+     * ## Basic DSL
+     * Lambdas with receivers allow you to easily write DSL-like constructs. In this task, we want to write a DSL, that
+     * allows us to compose a simple letter. A letter consists for a header with a greeting, content and a footer containing
+     * author's name.
+     * Create a LetterBuilder class, that will hold all required letter data. Then, create a letter function, that
+     * accepts an author and lambda with receiver. The function should apply the author and customizations provided
+     * in the lambda to a LetterBuilder instance. Finally, you can use a build() method from LetterBuilder to assemble
+     * the letter content and return it from the letter() function.
+     */
+    @Test
+    fun lambdaWithReceiverBasics() {
+        val letterText: String = letter(author = "Bob") {
+            greeting("Hi, Alice")
+            content = "Please call me ASAP."
+        }
+
+        assertEquals("""
+            Hello, Hi, Alice
+            Please call me ASAP.
+            Regards, Bob
+        """.trimIndent(), letterText)
+    }
 
     /**
      * ## avoidRepetitionWithLambdasWithReceiversTask
@@ -23,8 +67,10 @@ class T15LambdasWithReceiversTasks {
      */
     @Test
     fun avoidRepetitionWithLambdasWithReceiversTask() {
+        class IteratecMitarbeiter(var name: String, var isMarried: Boolean, var favouriteTechnology: String)
+
         val whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply =
-            IteratecMitarbeiter("Heiko", true, "MS Word")
+                IteratecMitarbeiter("Heiko", true, "MS Word")
 
         // Block with repetetive use of our variable
         with(whyDoesMyColleagueAlwaysHasToUseTheseIncrediblyLongVariableNamesWhichPreventMeCodingOnMySmartphoneAndAnnoyMeDeeply) {
@@ -33,128 +79,4 @@ class T15LambdasWithReceiversTasks {
             println(favouriteTechnology)
         }
     }
-
-    class IteratecMitarbeiter(var name: String, var isMarried: Boolean, var favouriteTechnology: String)
-
-    /**
-     *  ## allowingOperationsOnlyInCertainScopes
-     *  Kotlin allows us to hide extension functions of a class A in another class B.
-     *  They can only be used in a lambda with receiver of type B.
-     *  In the scope of the lambda all public members of A become visible, in particular the extension functions.
-     *  Uncomment the code in this function and UnderParentalSupervision and make it compile.
-     *  Check that you cannot lift the calls on child to top-level*/
-    @Test
-    fun allowingOperationsOnlyInCertainScopesTask() {
-        val child = Teenager()
-        val parent = Adult()
-
-        supervisedTeenagerDoing(parent) {
-              child.driveInATestDrivingParkour()
-              child.openABankAccount()
-        }
-    }
-
-    class Teenager
-    class Adult
-
-    class UnderParentalSupervision(val parentalSupervisor: Adult) {
-        fun Teenager.driveInATestDrivingParkour() {
-            println("Minor $this drives by car. Parent $parentalSupervisor takes care that nobody dies")
-        }
-
-        fun Teenager.openABankAccount() {
-            println("Minor $this opened a bank account. Parent $parentalSupervisor signed all the boring documents.")
-        }
-
-        companion object {
-            fun supervisedTeenagerDoing(parentalSupervisor: Adult, actions: UnderParentalSupervision.() -> Any) {
-                UnderParentalSupervision(parentalSupervisor).actions()
-            }
-        }
-    }
-
-    /**
-     * ## creatingAndCustomizingObjectsInOneLineTask
-     * Code with lambdas with receivers often looks more like a Domain-specific-language than normal code we are used to write.
-     * Some libraries make extensive use of this feature. This could be some examples:
-     *
-     * Gradle files in Kotlin
-     *
-     * tasks {
-     *   compileKotlin {
-     *     kotlinOptions {
-     *       jvmTarget = "11"
-     *     }
-     *   }
-     * }
-     *
-     * Building frontends with Jetpack Compose
-     *
-     * Row {
-     *     Column {
-     *         Text("Click on the button")
-     *         Image("http://image.jpg")
-     *     }
-     *     Button {
-     *         Text("Button text")
-     *     }
-     * }
-     *
-     * Functions like tasks, compileKotlin, Row, Button have two responsibilities:
-     * They instantiate a new object and apply a lambda with receiver of the same type to this object to customize it.
-     * Resolve the instructions ocurring in the following calls and try to understand the code.
-     */
-    @Test
-    fun creatingAndCustomizingObjectsInOneLineTask() {
-
-
-        val myTodoList = todoList {
-            cleaning {
-                isBathroomDirty = true
-            }
-        }
-
-        assertThat(
-            myTodoList.tasks, equalTo(
-                mutableListOf(
-                    Cleaning(
-                        isBathroomDirty = true,
-                        isMainRoomDirty = false,
-                        isKitchenDirty = false
-                    )
-                )
-            )
-        )
-    }
 }
-
-open class Task
-
-class TodoList {
-    val tasks: MutableList<Task> = mutableListOf()
-    fun addTask(task: Task) = tasks.add(task)
-
-    companion object {
-        fun todoList(codeBlock: TodoList.() -> Unit): TodoList {
-            val todoList = TodoList()
-            todoList.codeBlock()
-            return todoList
-        }
-    }
-}
-
-data class Cleaning(
-    var isBathroomDirty: Boolean = false,
-    var isMainRoomDirty: Boolean = false,
-    var isKitchenDirty: Boolean = false
-) : Task() {
-    companion object {
-        fun TodoList.cleaning(codeBlock: Cleaning.() -> Unit) {
-            val cleaningTask = Cleaning()
-            cleaningTask.codeBlock()
-            addTask(cleaningTask)
-        }
-    }
-}
-
-
