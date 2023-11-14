@@ -11,7 +11,6 @@ import kotlin.random.Random
  * - method references
  * - Kotlin lambda notation
  * - higher order functions
- * - scope functions
  */
 fun main() {
     // Function types are just like any other type in Kotlin
