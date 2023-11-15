@@ -20,7 +20,7 @@ fun main() {
     // This constructor call becomes the first line of the body of the primary constructor of your subclass. Inheriting
     // from an interface is simpler since interfaces do not have constructors, and you only have to supply the name of
     // the interface.
-    class MyCustomRuntimeException(message: String): RuntimeException(message), Serializable {
+    class MyCustomRuntimeException(message: String) : RuntimeException(message), Serializable {
         override fun toString(): String {
             return "Great! MyCustomRuntimeException happened with message: $message"
         }

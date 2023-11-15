@@ -6,7 +6,9 @@ Requirements: none
 
 Things to discuss:
 - Java to Kotlin Converter in IntelliJ (Right click on File -> Convert Java file to Kotlin file)
-- Inspect Kotlin bytecode and decompiled Java class (Shift, Shift -> Show Kotlin Bytecode -> Decompile)
+- Inspect Kotlin bytecode and decompiled Java class
+    - Shift, Shift -> Show Kotlin Bytecode -> Decompile
+    - Tools -> Kotlin -> Show Kotlin Bytecode -> Decompile
 - Comparison with main-function in Java
 - Explain function syntax and Unit in Kotlin
 - Invocation with positional or named arguments

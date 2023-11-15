@@ -63,3 +63,24 @@ class ClassWithStaticMethod {
     }
 }
 
+// please do not do this
+class Singleton private constructor() {
+
+    fun myShinyMethod() {
+        println("method")
+    }
+    companion object {
+        var instance: Singleton? = null
+            get() {
+                return if (field == null) {
+                    instance = Singleton()
+                    field
+                } else {
+                    field
+                }
+            }
+    }
+}
+
+
+
