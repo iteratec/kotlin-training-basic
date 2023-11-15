@@ -25,4 +25,26 @@ Sample solutions for all the tasks are provided in the package `de.iteratec.kotl
 Have fun 😺
 
 ## Further reading
-Check out the excellent official documentation [Kotlin website](https://kotlinlang.org) as well as the main interactive tutorial [Kotlin Koans](https://kotlinlang.org/docs/tutorials/koans.html).
+### Learning
+* [Kotlin website](https://kotlinlang.org) - official Kotlin documentation
+* [Kotlin Koans](https://kotlinlang.org/docs/tutorials/koans.html) - interactive exercises to various Kotlin concepts
+
+### Frameworks & libs
+* [Kotlin Awesome](https://github.com/KotlinBy/awesome-kotlin/blob/readme/README.md) - huge list of Kotlin frameworks and libraries
+
+
+* [Arrow](https://arrow-kt.io/) - hardcore functional programming library for Kotlin
+* [config4k](https://config4k.github.io/config4k/) - type-safe property files parser
+* [Exposed](https://github.com/JetBrains/Exposed) - lightweight SQL library from Jetbrains
+* [Koin](https://insert-koin.io/) - lightweight dependency injection framework
+* [Konform](https://github.com/konform-kt/konform) - DSL-based validation framework
+* [Kotest](https://kotest.io/) - Kotlin-native testing framework with fluent assertions
+* [Kotlinx serialization](https://github.com/Kotlin/kotlinx.serialization) - multiplatform serialization library from Jetbrains
+* [Ktor](https://ktor.io/) - Kotlin-native HTTP server framework from Jetbrains
+* [Mockk](https://github.com/mockk/mockk) - the must-have Kotlin-native mocking library
+
+### IntelliJ plugins
+* [String manipulation](https://plugins.jetbrains.com/plugin/2162-string-manipulation) - efficiently manipulate your code, great for line sorting 
+* [Ace jump](https://plugins.jetbrains.com/plugin/7086-acejump) - provides great mechanics for search & jump within your code
+* [IdeaVIM](https://plugins.jetbrains.com/plugin/164-ideavim) - use VIM shortcuts in IntelliJ (careful!)
+* [Nyan Progress Bar](https://plugins.jetbrains.com/plugin/8575-nyan-progress-bar) - you progress bar is a [Nyan Cat](https://www.youtube.com/watch?v=jIQ6UV2onyI) now 🐱
