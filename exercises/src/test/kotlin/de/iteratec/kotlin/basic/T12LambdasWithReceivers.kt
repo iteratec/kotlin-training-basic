@@ -24,7 +24,6 @@ fun main() {
     }
     println("Announcement with receiver = $announcementText2")
 
-
     // Scope functions with receiver
     // 'with' function allows to switch context in the lambda as we were a member method of the receiver object
     val resultWithScopeFunction = with(StringBuilder()) {

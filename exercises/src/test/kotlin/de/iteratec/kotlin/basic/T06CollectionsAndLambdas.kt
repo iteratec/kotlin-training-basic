@@ -2,15 +2,15 @@ package de.iteratec.kotlin.basic
 
 /**
 # Collections & lambdas
- Requirements:
- - Functions
- - Mutability and expressions
+Requirements:
+- Functions
+- Mutability and expressions
 
- Things to discuss:
- - Instantiating collections
- - Mutable & immutable collections
- - Collection transformations & lambdas
- - TODO: Only use sequences in the exercises?
+Things to discuss:
+- Instantiating collections
+- Mutable & immutable collections
+- Collection transformations & lambdas
+- Sequences
  */
 fun main() {
     // Kotlin collections can be instantiated via factory methods of the form "<CollectionType>Of(...)"
@@ -32,7 +32,9 @@ fun main() {
     val d = words.map() { word -> word.uppercase() }  // Lambda as the last argument of a function call can be taken out of the argument list
     val e = words.map { word -> word.uppercase() }  // Empty argument list can be omitted
     val f = words.map { it.uppercase() } // If lambda has only one argument, you can refer to it with 'it'
-
+    val g = words.asSequence()
+        .filter { it.length > 4 }
+        .map { it.uppercase() }.toList()
     println("Using a lambda or method reference with map $a")
 
     // Kotlin offers a lot of convenient methods from the Filter-Map-Reduce-idiom. Most methods return new lists.

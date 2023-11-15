@@ -32,8 +32,8 @@ class T01FunctionsTasks {
     @Test
     fun defaultValues() {
         /*
-        assertEquals(addAll(0, 1), 1)
-        assertEquals(addAll(0, 1, 2), 3)
+        assertEquals(1, addAll(0, 1))
+        assertEquals(3, addAll(0, 1, 2))
         */
     }
 }

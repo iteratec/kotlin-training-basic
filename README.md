@@ -18,7 +18,7 @@ We'll work with the `exercises` module most of the time. It contains a single te
 where you will find all resources and exercises. For every topic discussed in the training, you will find the following files:
 * `T01Topic.kt` - template used by trainers during the live-coding demo 
 * `T01Topic.md` - short reference explaining the given topic in a nutshell
-* `T01TopicTasks.md` - tasks for the trainees. Every task is a simple unit test, that you will have to fix.
+* `T01TopicTasks.kt` - tasks for the trainees. Every task is a simple unit test, that you will have to fix.
 
 Sample solutions for all the tasks are provided in the package `de.iteratec.kotlin.basic.solutions`.
 
