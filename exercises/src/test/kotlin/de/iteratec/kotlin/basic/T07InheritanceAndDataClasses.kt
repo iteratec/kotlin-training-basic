@@ -15,11 +15,8 @@ import java.io.Serializable
  - Data classes
  */
 fun main() {
-    // When you want to inherit from a class, you specify the parent class directly behind the definition of your
-    // primary constructor separated by ":". More specifically, you specify a constructor call to your parent class.
-    // This constructor call becomes the first line of the body of the primary constructor of your subclass. Inheriting
-    // from an interface is simpler since interfaces do not have constructors, and you only have to supply the name of
-    // the interface.
+    // Kotlin supports single inheritance. You can specify the base class and interfaces after a colon.
+    // Note, that you always have to call the constructor of the base class.
     class MyCustomRuntimeException(message: String) : RuntimeException(message), Serializable {
         override fun toString(): String {
             return "Great! MyCustomRuntimeException happened with message: $message"
@@ -29,8 +26,8 @@ fun main() {
     val runtimeException: RuntimeException = MyCustomRuntimeException("Panic mode activated!")
     println(runtimeException)
 
-    // Kotlin generates setters and getters automatically for properties however we can customize them.
-    class ClassUnderSurveillance() {
+    // Kotlin generates setters and getters automatically, but you can customize them.
+    class LoggedAccess() {
         var content: String = "Content"
             get() {
                 // "field" behaves like a keyword and refers to the backing field behind the property.
@@ -38,17 +35,17 @@ fun main() {
                 return field
             }
             set(value: String) {
-                // "field" behaves like a keyword and refers to the backing field behind the property.
                 field = value
                 println("Surveillance: Class content has been set to $value")
             }
     }
 
-    val instanceUnderSurveillance = ClassUnderSurveillance()
-    instanceUnderSurveillance.content = "New"
-    instanceUnderSurveillance.content
+    val loggedAccess = LoggedAccess()
+    loggedAccess.content = "New"
+    loggedAccess.content
 
-    // So-called Data classes already come with built-in implementations of equals, hashCode (both by comparing all properties), toString and a useful copy-functionality.
+    // Data classes come with built-in implementations of equals, hashCode (both by comparing all properties), toString
+    // and a useful copy-functionality.
     data class Name(
         val title: String?,
         val firstName: String,

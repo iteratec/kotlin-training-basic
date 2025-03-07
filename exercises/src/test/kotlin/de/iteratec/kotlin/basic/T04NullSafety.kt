@@ -14,7 +14,7 @@ import java.util.*
  - Safe-call and Elvis operators & chaining
  - Smart casts
  - Double-bang operator
- - Platform types (TODO: Introduce platform types without going to deep into problems and solutions)
+ - Platform types
  */
 fun main() {
     // Kotlin is null-safe. In a variable of type Type we cannot save "null". In a variable of type "Type?" we can assign "null".
@@ -52,7 +52,7 @@ fun main() {
     println(nullableString!!.length)
 
     // Platform types (here String!) result from Java calls where Kotlin is not sure whether the type is nullable or not.
-    // Kotlin compiler does not do null checks on variables of platform type. We can assign a an expression of platform type
+    // Kotlin compiler does not do null checks on variables of platform type. We can assign an expression of platform type
     // to a nullable variable or a non-nullable variable
     val scanner = Scanner(">> only Rocky is here <<")
     val autoInferredPlatformType = scanner.findInLine("Lucy")

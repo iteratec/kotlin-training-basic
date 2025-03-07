@@ -14,7 +14,8 @@ import java.time.LocalDate
  - when & exhaustiveness
  */
 
-// Sealed classes can only be subclassed in the same package (since Kotlin 1.5).
+// Sealed classes allow to create a closed class hierarchy.
+// Then can only be subclassed in the same package (since Kotlin 1.5).
 sealed class ApplicationStatus
 object Healthy : ApplicationStatus()
 object TooLazyToDoWork : ApplicationStatus()
