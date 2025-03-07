@@ -7,11 +7,10 @@ Requirements:
 - Functions
 - MutabilityAndExpressions
 
-Things to explain as instructor:
+Things to discuss:
 - String templates
 - Multi-line strings
  */
-
 fun main() {
     // You can evaluate expressions inside a String definition. toString() is called automatically.
     println("This is a template string: ${singletonList("item")}")
