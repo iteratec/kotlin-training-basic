@@ -12,9 +12,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-    implementation("junit:junit:4.13.2")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.3")
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.junit.junit)
+    implementation(libs.jackson.kotlin)
 }
 
 kotlin {
