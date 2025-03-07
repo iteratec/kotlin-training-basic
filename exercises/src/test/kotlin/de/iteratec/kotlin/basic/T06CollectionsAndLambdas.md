@@ -21,7 +21,7 @@ myString.filter({ letter: Char -> letter.isWhitespace()}) // an ordinary lambda 
 myString.filter({ letter -> letter.isWhitespace()}) // input types of lambda functions can often be auto-inferred
 myString.filter({ it.isWhitespace() }) // if the lambda function has only one input parameter of aut-inferred type, you can refer to it as "it" without declaring it
 myString.filter(){ it.isWhitespace() } // as a convention, if the last parameter of a function invocation is a lambda, it should be taken out of the argument list
-myString{ it.isWhitespace() } // if the function invocation has only 1 lambda as argument, we can even remove the argument brackets 
+myString.filter { it.isWhitespace() } // if the function invocation has only 1 lambda as argument, we can even remove the argument brackets 
 ```
 
 # Collections
