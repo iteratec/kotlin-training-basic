@@ -8,7 +8,7 @@ class ClassesAdvancedTasks {
 
     /**
      * ## Inheritance
-     * Make IteratecEmployee inherit Employee and override the method.
+     * Make `IteratecEmployee` inherit `Employee` and override the `getStatus` method.
      * Use the open keyword to enable inheritance & method overriding.
      */
     @Test
@@ -30,9 +30,9 @@ class ClassesAdvancedTasks {
 
     /**
      * ## Data classes
-     * Run the test and cry because it is not green.
-     * Change the classes to be "data classes" and run the test again. It should be green. Be happy and puzzled at the same time.
-     * Try to understand why the test has become green
+     * Run the test and wonder why it's not green.
+     * Change the classes to be "data classes" and run the test again. Be happy and puzzled at the same time.
+     * Try to understand why the test has become green.
      */
     @Test
     fun dataClass() {
@@ -64,15 +64,6 @@ class ClassesAdvancedTasks {
         assertThat(charismaticRogue.int, equalTo(rogue.int))
         assertThat(charismaticRogue.char, equalTo(20))
     }
-
-    /**
-     * Think about the following questions:
-     *
-     * One could be tempted to use data classes all the time. Think of situations when it is better not to use a data class.
-     * Can you imagine why data classes are not allowed to be subclassed?
-     */
-    @Test
-    fun questionsOnDataClasses() {}
 
     /**
      * ## Custom getters and setters
