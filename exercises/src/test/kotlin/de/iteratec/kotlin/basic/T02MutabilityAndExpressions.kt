@@ -1,15 +1,15 @@
 package de.iteratec.kotlin.basic
 
 /**
- # Mutability & expressions
+# Mutability & expressions
 
- Requirements:
- - Functions
+Requirements:
+- Functions
 
- Things to discuss:
- - val/var
- - Type-inference for variables
- - Expressions in Kotlin
+Things to discuss:
+- val/var
+- Type-inference for variables
+- Expressions in Kotlin
  */
 fun main() {
 
