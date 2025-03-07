@@ -1,3 +1,0 @@
-rootProject.name = 'kotlin-training-basic'
-include("exercises")
-include("hello-world-multiplatform")

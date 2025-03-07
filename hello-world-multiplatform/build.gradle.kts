@@ -1,8 +1,5 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    kotlin("multiplatform") version "1.8.22"
-    application
+    kotlin("multiplatform") version "2.1.10"
 }
 
 group = "de.iteratec"
@@ -16,17 +13,12 @@ kotlin {
     jvmToolchain(11)
 
     jvm {
-        compilations.all {
-            compilerOptions.configure {
-                jvmTarget.set(JvmTarget.JVM_11)
-            }
-        }
         withJava()
     }
 
-    js(IR) {
+    js {
+        browser {}
         binaries.executable()
-        nodejs()
     }
 
     val hostOs = System.getProperty("os.name")
@@ -51,8 +43,4 @@ kotlin {
         val jsMain by getting
         val nativeMain by getting
     }
-}
-
-application {
-    mainClass.set("MainKt")
 }
