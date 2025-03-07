@@ -12,8 +12,8 @@ class ObjectsTasks {
      */
     @Test
     fun objects() {
-/*        val listOfFloats = listOf(3f, 2.0f, -1.0f, -4.0f, 0f)
-        assertThat(listOfFloats.sortedWith(AbsoluteValueComparator), equalTo(listOf(0f, -1.0f, 2.0f, 3.0f, -4.0f)))*/
+        // val listOfFloats = listOf(3f, 2.0f, -1.0f, -4.0f, 0f)
+        // assertThat(listOfFloats.sortedWith(AbsoluteValueComparator), equalTo(listOf(0f, -1.0f, 2.0f, 3.0f, -4.0f)))
     }
 
     /**

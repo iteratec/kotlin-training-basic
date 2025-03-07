@@ -10,20 +10,14 @@ Things to discuss:
 - Companion object
  */
 fun main() {
-    // An object is a class with parameterless constructor for which a singleton is instantiated automatically.
-    // No other instances can be instantiated.
-    // The name of the object class is rewired to be a reference to the singleton
+    // An object is a class with parameterless constructor for which a singleton instance is created automatically.
     println(MyStringUtils.sortedByAlphabet("cba"))
 
     // Objects can implement interfaces or other classes.
     println(DevConfiguration.url)
 
     // In Kotlin, there are no static properties/methods. They are replaced by the concept of a companion object.
-    // The companion object is basically an object with no name declared in a class body
-    // The resulting singleton instance is available under the same namespace as the origin class itself.
-    // Hence, accesses to properties and invocations of methods of the companion object behave exactly like accesses to
-    // static properties and accesses to static methods of the origin class would do.
-    // Declarations inside the origin class itself can reference properties/methods of the companion object.
+    // The companion object is basically an object associated with a regular class.
     ClassWithStaticMethod.printLeader()
     val instance = ClassWithStaticMethod()
     instance.promoteToLeader()
