@@ -3,6 +3,7 @@ package de.iteratec.kotlin.basic
 import org.junit.Test
 
 class T01FunctionsTasks {
+
     /**
      * ## Function syntax
      * Define a function addAll that takes 4 integers (type Int in Kotlin) as input and returns the sum.
