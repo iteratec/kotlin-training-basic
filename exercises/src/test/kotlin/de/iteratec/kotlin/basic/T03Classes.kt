@@ -15,14 +15,7 @@ Things to discuss:
  - Visibility modifiers
  */
 
-// This is SimpleClassJava converted to Kotlin.
-//
-// Properties of a Kotlin class can be declared as val or var.
-// Kotlin automatically creates a getter, setter and private backing field for var.
-// Kotlin automatically creates a getter and private backing field for val.
-//
-// Kotlin forces you to define the signature of the arguments of your so-called primary constructor next to the class name
-// Content of init blocks and variable assignments in property definitions inside the class body form the body of this constructor.
+// See SimpleClassJava in T03ClassesJava for Java variant of this class.
 class SimpleClass(readOnlyProperty: String, mutableProperty: String) {
     val readOnlyProperty: String = readOnlyProperty
     var mutableProperty: String = mutableProperty
